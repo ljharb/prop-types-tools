@@ -1,0 +1,26 @@
+language: node_js
+node_js:
+  - "6"
+  - "5"
+  - "4"
+  - "0.12"
+  - "0.10"
+before_install:
+  - 'if [ "${TRAVIS_NODE_VERSION}" != "0.9" ]; then case "$(npm --version)" in 1.*) npm install -g npm@1.4.28 ;; 2.*) npm install -g npm@2 ;; esac ; fi'
+  - 'if [ "${TRAVIS_NODE_VERSION}" != "0.6" ] && [ "${TRAVIS_NODE_VERSION}" != "0.9" ]; then npm install -g npm; fi'
+before_script:
+  - "sh install-relevant-react.sh"
+script:
+  - 'if [ -n "${LINT-}" ]; then npm run lint; elif [ -n "${REACT-}" ]; then npm run cover; else false ; fi'
+after_script:
+  - 'if [ "${TRAVIS_NODE_VERSION}" = "4" ] || [ "${TRAVIS_NODE_VERSION}" = "0.12" ]; then cat ./coverage/lcov.info | ./node_modules/.bin/coveralls ; fi'
+sudo: false
+matrix:
+  fast_finish: true
+  include:
+   - node_js: "node"
+     env: LINT=true
+  allow_failures:
+env:
+  - REACT=0.14
+  - REACT=15
