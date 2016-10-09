@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Custom React PropType validators that we use at Airbnb.",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "safe-publish-latest": "^1.1.1"
+  },
   "devDependencies": {
     "airbnb-js-shims": "^1.0.1",
     "babel-cli": "^6.16.0",
@@ -17,8 +19,7 @@
     "istanbul": "^1.1.0-alpha.1",
     "mocha": "^3.1.0",
     "react": "^15.3.2",
-    "rimraf": "^2.5.4",
-    "safe-publish-latest": "^1.1.0"
+    "rimraf": "^2.5.4"
   },
   "peerDependencies": {
     "react": "^0.14 || ^15.0.0"
