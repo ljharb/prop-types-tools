@@ -8,16 +8,30 @@ export default function mutuallyExclusiveOfType(propType, ...exclusiveProps) {
   }
 
   const map = exclusiveProps.reduce((acc, prop) => ({ ...acc, [prop]: true }), {});
+  const countProps = (count, prop) => (count + (map[prop] ? 1 : 0));
 
   const validator = function mutuallyExclusiveProps(props, propName, componentName, ...rest) {
-    const exclusivePropCount = Object.keys(props).reduce((count, prop) => (
-      count + (map[prop] ? 1 : 0)
-    ), 0);
+    const exclusivePropCount = Object.keys(props)
+      .filter(prop => props[prop] != null)
+      .reduce(countProps, 0);
     if (exclusivePropCount > 1) {
       return new Error(`A ${componentName} cannot have more than one of these props: ${exclusiveProps.join(', or ')}`);
     }
     return propType(props, propName, componentName, ...rest);
   };
   validator.typeName = `mutuallyExclusiveProps:${exclusiveProps.join(', or ')}`;
+
+  validator.isRequired = function mutuallyExclusivePropsRequired(
+    props,
+    propName,
+    componentName,
+    ...rest
+  ) {
+    const exclusivePropCount = Object.keys(props).reduce(countProps, 0);
+    if (exclusivePropCount > 1) {
+      return new Error(`A ${componentName} cannot have more than one of these props: ${exclusiveProps.join(', or ')}`);
+    }
+    return propType(props, propName, componentName, ...rest);
+  };
   return validator;
 }
