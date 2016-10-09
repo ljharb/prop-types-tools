@@ -1,3 +1,7 @@
+1.1.1 / 2016-10-09
+==================
+  * [Fix] `mutuallyExclusiveProps`: include the “current” prop in the exclusives list
+
 1.1.0 / 2016-10-09
 ==================
   * [Fix] [New] add `isRequired` to `mutuallyExclusiveProps`; ensure `mutuallyExclusiveProps` is not required by default
