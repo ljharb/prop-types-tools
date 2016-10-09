@@ -226,4 +226,34 @@ describe('componentWithName', () => {
     ),
     'children',
   ));
+
+  it('passes when the prop is null', () => assertPasses(
+    componentWithName('SFC'),
+    (
+      <div a={null} />
+    ),
+    'a',
+  ));
+
+  it('passes when the prop is absent', () => assertPasses(
+    componentWithName('SFC'),
+    (
+      <div />
+    ),
+    'a',
+  ));
+
+  describe('when the prop is required', () => {
+    it('fails when the prop is null', () => assertFails(
+      componentWithName('SFC').isRequired,
+      (<div a={null} />),
+      'a',
+    ));
+
+    it('passes when the prop is the right component', () => assertPasses(
+      componentWithName('SFC').isRequired,
+      (<div a={<SFC />} />),
+      'a',
+    ));
+  });
 });

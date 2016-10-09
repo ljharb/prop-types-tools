@@ -24,12 +24,29 @@ function hasName(name, prop, propName, componentName) {
 }
 
 function componentWithName(name) {
-  function validator(props, propName, componentName) {
+  function componentWithNameValidator(props, propName, componentName) {
     const prop = props[propName];
+    if (props[propName] == null) {
+      return null;
+    }
     return hasName(name, prop, propName, componentName);
   }
-  validator.typeName = `componentWithName:${name}`;
-  return validator;
+  componentWithNameValidator.typeName = `componentWithName:${name}`;
+
+  componentWithNameValidator.isRequired = function componentWithNameRequired(
+    props,
+    propName,
+    componentName,
+  ) {
+    const prop = props[propName];
+    if (prop == null) {
+      return new TypeError(`\`${componentName}.${propName}\` requires at least one component named ${name}`);
+    }
+    return hasName(name, prop, propName, componentName);
+  };
+  componentWithNameValidator.isRequired.typeName = `componentWithName:${name}`;
+
+  return componentWithNameValidator;
 }
 
 export default componentWithName;
