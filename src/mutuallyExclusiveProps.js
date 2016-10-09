@@ -3,8 +3,8 @@ export default function mutuallyExclusiveOfType(propType, ...exclusiveProps) {
     throw new TypeError('a propType is required');
   }
 
-  if (exclusiveProps.length < 2) {
-    throw new TypeError('at least two mutually exclusive props are required');
+  if (exclusiveProps.length < 1) {
+    throw new TypeError('at least one prop that is mutually exclusive with this propType is required');
   }
 
   const map = exclusiveProps.reduce((acc, prop) => ({ ...acc, [prop]: true }), {});
@@ -27,7 +27,9 @@ export default function mutuallyExclusiveOfType(propType, ...exclusiveProps) {
     componentName,
     ...rest
   ) {
-    const exclusivePropCount = Object.keys(props).reduce(countProps, 0);
+    const exclusivePropCount = Object.keys(props)
+      .filter(prop => prop === propName || props[prop] != null)
+      .reduce(countProps, 0);
     if (exclusivePropCount > 1) {
       return new Error(`A ${componentName} cannot have more than one of these props: ${exclusiveProps.join(', or ')}`);
     }
