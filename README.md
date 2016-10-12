@@ -10,6 +10,7 @@
 
 Custom React PropType validators that we use at Airbnb.
 
+ - `and`: ensure that all provided propType validators pass
  - `childrenHavePropXorChildren`: ensure that either all children have the indicated prop, all children have children, or all children have neither.
  - `childrenOfType`: restrict the prop to only allow children of the given type.
  - `componentWithName`: restrict the prop to only allow a component with a certain name/displayName.

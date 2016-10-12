@@ -1,3 +1,4 @@
+import and from './and';
 import childrenHavePropXorChildren from './childrenHavePropXorChildren';
 import childrenOfType from './childrenOfType';
 import componentWithName from './componentWithName';
@@ -9,6 +10,7 @@ import range from './range';
 import restrictedProp from './restrictedProp';
 
 module.exports = {
+  and,
   childrenHavePropXorChildren,
   childrenOfType,
   componentWithName,
