@@ -54,4 +54,18 @@ describe('nonNegativeInteger', () => {
   it('fails on negative zero', () => {
     assertFails(nonNegativeInteger, <div a={-0} />, 'a');
   });
+
+  describe('isRequired', () => {
+    it('passes when not required', () => assertPasses(
+      nonNegativeInteger,
+      (<div />),
+      'a',
+    ));
+
+    it('fails when required', () => assertFails(
+      nonNegativeInteger.isRequired,
+      (<div />),
+      'a',
+    ));
+  });
 });
