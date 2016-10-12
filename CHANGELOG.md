@@ -1,3 +1,9 @@
+1.2.0 / 2016-10-11
+==================
+  * [New] add `and` combinator
+  * [New] add `isRequired` to `nonNegativeInteger`
+  * [Dev Deps] update `eslint-plugin-react`, `mocha`
+
 1.1.1 / 2016-10-09
 ==================
   * [Fix] `mutuallyExclusiveProps`: include the “current” prop in the exclusives list
