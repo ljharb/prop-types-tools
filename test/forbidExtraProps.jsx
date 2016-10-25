@@ -41,6 +41,10 @@ describe('forbidExtraProps', () => {
     expect(Object.keys(result)).to.eql(Object.keys(propTypes).concat(zeroWidthSpace));
   });
 
+  it('allows for merging of propTypes that have been processed', () => {
+    expect(() => forbidExtraProps(forbidExtraProps({}))).not.to.throw();
+  });
+
   describe('forbid()', () => {
     const knownProp = 'a';
 
