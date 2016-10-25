@@ -15,7 +15,7 @@ export default function forbidExtraProps(propTypes) {
     [zeroWidthSpace]: function forbid(props) {
       const unknownProps = Object.keys(props).filter(prop => !has(propTypes, prop));
       if (unknownProps.length > 0) {
-        return new TypeError(`Unknown props found: ${Object.keys(unknownProps).join(', ')}`);
+        return new TypeError(`Unknown props found: ${unknownProps.join(', ')}`);
       }
       return null;
     },
