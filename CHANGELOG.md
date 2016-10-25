@@ -1,3 +1,8 @@
+1.3.0 / 2016-10-24
+==================
+  * [New] add `forbidExtraProps`
+  * [Dev Deps] update `babel-cli`
+
 1.2.0 / 2016-10-11
 ==================
   * [New] add `and` combinator
