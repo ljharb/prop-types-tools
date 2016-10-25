@@ -2,6 +2,7 @@ import and from './and';
 import childrenHavePropXorChildren from './childrenHavePropXorChildren';
 import childrenOfType from './childrenOfType';
 import componentWithName from './componentWithName';
+import forbidExtraProps from './forbidExtraProps';
 import mutuallyExclusiveProps from './mutuallyExclusiveProps';
 import nChildren from './nChildren';
 import nonNegativeInteger from './nonNegativeInteger';
@@ -14,6 +15,7 @@ module.exports = {
   childrenHavePropXorChildren,
   childrenOfType,
   componentWithName,
+  forbidExtraProps,
   mutuallyExclusiveProps,
   nChildren,
   nonNegativeInteger,

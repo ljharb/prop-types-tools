@@ -4,6 +4,7 @@
   "description": "Custom React PropType validators that we use at Airbnb.",
   "main": "index.js",
   "dependencies": {
+    "has": "^1.0.1",
     "safe-publish-latest": "^1.1.1"
   },
   "devDependencies": {
