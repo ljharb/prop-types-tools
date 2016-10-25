@@ -1,3 +1,8 @@
+1.3.1 / 2016-10-25
+==================
+  * [Fix] `forbidPropTypes`: allow propTypes to be processed multiple times
+  * [Fix] `forbidPropTypes`: fix unknown props error message
+
 1.3.0 / 2016-10-24
 ==================
   * [New] add `forbidExtraProps`
