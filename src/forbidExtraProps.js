@@ -22,10 +22,10 @@ export default function forbidExtraProps(propTypes) {
   return {
     ...propTypes,
     // eslint-disable-next-line prefer-arrow-callback
-    [zeroWidthSpace]: brand(function forbidUnknownProps(props) {
+    [zeroWidthSpace]: brand(function forbidUnknownProps(props, _, componentName) {
       const unknownProps = Object.keys(props).filter(prop => !has(propTypes, prop));
       if (unknownProps.length > 0) {
-        return new TypeError(`Unknown props found: ${unknownProps.join(', ')}`);
+        return new TypeError(`${componentName}: unknown props found: ${unknownProps.join(', ')}`);
       }
       return null;
     }),
