@@ -8,7 +8,7 @@
 
 [![npm badge][npm-badge-png]][package-url]
 
-Custom React PropType validators that we use at Airbnb.
+Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims](https://npmjs.com/package/airbnb-js-shims) or the equivalent is assumed.
 
  - `and`: ensure that all provided propType validators pass
  - `childrenHavePropXorChildren`: ensure that either all children have the indicated prop, all children have children, or all children have neither.
@@ -21,6 +21,8 @@ Custom React PropType validators that we use at Airbnb.
  - `or`: recursively allows only the provided propTypes, or arrays of those propTypes.
  - `range`: provide a min, and a max, and the prop must be a number in the range `[min, max)`
  - `restrictedProp`: this prop is not permitted to be anything but `null` or `undefined`.
+ - `uniqueArray`: this prop must be an array, and all values must be unique (determined by `Object.is`). Like `PropTypes.array`, but with uniqueness.
+ - `uniqueArrayOf`: `uniqueArray`, with a type validator applied. Like `PropTypes.arrayOf`, but with uniqueness.
 
 ## Tests
 Simply clone the repo, `npm install`, and run `npm test`

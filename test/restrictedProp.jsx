@@ -11,11 +11,11 @@ describe('restrictedProp', () => {
   });
 
   function assertPasses(validator, element, propName) {
-    expect(callValidator(validator, element, propName, '"range" test')).to.equal(null);
+    expect(callValidator(validator, element, propName, '"restrictedProp" test')).to.equal(null);
   }
 
   function assertFails(validator, element, propName) {
-    expect(callValidator(validator, element, propName, '"range" test')).to.be.instanceOf(Error);
+    expect(callValidator(validator, element, propName, '"restrictedProp" test')).to.be.instanceOf(Error);
   }
 
   it('passes on null/undefined', () => {

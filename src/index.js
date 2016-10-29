@@ -9,6 +9,8 @@ import nonNegativeInteger from './nonNegativeInteger';
 import or from './or';
 import range from './range';
 import restrictedProp from './restrictedProp';
+import uniqueArray from './uniqueArray';
+import uniqueArrayOf from './uniqueArrayOf';
 
 module.exports = {
   and,
@@ -22,4 +24,6 @@ module.exports = {
   or,
   range,
   restrictedProp,
+  uniqueArray,
+  uniqueArrayOf,
 };
