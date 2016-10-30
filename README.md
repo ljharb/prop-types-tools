@@ -23,6 +23,7 @@ Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims]
  - `restrictedProp`: this prop is not permitted to be anything but `null` or `undefined`.
  - `uniqueArray`: this prop must be an array, and all values must be unique (determined by `Object.is`). Like `PropTypes.array`, but with uniqueness.
  - `uniqueArrayOf`: `uniqueArray`, with a type validator applied. Like `PropTypes.arrayOf`, but with uniqueness.
+ - `withShape`: takes a PropType and a shape, and allows a shape to be enforced on any non-null/undefined value.
 
 ## Tests
 Simply clone the repo, `npm install`, and run `npm test`
