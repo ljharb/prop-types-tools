@@ -4,7 +4,7 @@ function onlyTypes(types, children, componentName) {
   if (!children.every(child => child && types.find(Type => child.type === Type))) {
     const typeNames = types.map(({ name }) => name).join(', or ');
     return new TypeError(
-      `\`${componentName}\` only accepts children of type ${typeNames}`
+      `\`${componentName}\` only accepts children of type ${typeNames}`,
     );
   }
   return null;

@@ -9,14 +9,14 @@ function hasName(name, prop, propName, componentName) {
 
   if (!React.isValidElement(prop)) {
     return new TypeError(
-      `${componentName}.${propName} is not a valid React element`
+      `${componentName}.${propName} is not a valid React element`,
     );
   }
 
   const { type } = prop;
   if (type.name !== name && type.displayName !== name) {
     return new TypeError(
-      `\`${componentName}.${propName}\` only accepts components named ${name}`
+      `\`${componentName}.${propName}\` only accepts components named ${name}`,
     );
   }
 

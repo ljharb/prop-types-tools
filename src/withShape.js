@@ -24,8 +24,7 @@ export default function withShape(type, shapeTypes) {
             key,
             componentName,
             location,
-            `${propFullName}.${key}`,
-            ...rest
+            ...rest,
           );
           if (error) {
             return error;

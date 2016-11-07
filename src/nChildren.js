@@ -15,7 +15,7 @@ export default function nChildren(n, propType = PropTypes.node) {
 
     if (childrenCount !== n) {
       return new RangeError(
-        `${componentName} expects to receive ${n} children, but received ${childrenCount} children.`
+        `${componentName} expects to receive ${n} children, but received ${childrenCount} children.`,
       );
     }
     return propType(props, propName, componentName, ...rest);
