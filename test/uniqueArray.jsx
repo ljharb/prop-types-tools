@@ -6,8 +6,8 @@ import { uniqueArray } from '../';
 import callValidator from './_callValidator';
 
 describe('uniqueArray', () => {
-  it('is a function', () => {
-    expect(typeof uniqueArray).to.equal('function');
+  it('returns a function', () => {
+    expect(typeof uniqueArray()).to.equal('function');
   });
 
   function assertPasses(validator, element, propName) {
@@ -18,31 +18,31 @@ describe('uniqueArray', () => {
     expect(callValidator(validator, element, propName, '"uniqueArray" test')).to.be.instanceOf(Error);
   }
   it('requires an array', () => assertFails(
-    uniqueArray,
+    uniqueArray(),
     (<div foo="bar" />),
     'foo',
   ));
 
   it('is not required by default', () => assertPasses(
-    uniqueArray,
+    uniqueArray(),
     (<div foo="bar" />),
     'missing',
   ));
 
   it('is required with .isRequired', () => assertFails(
-    uniqueArray.isRequired,
+    uniqueArray().isRequired,
     (<div foo="bar" />),
     'missing',
   ));
 
   it('enforces uniqueness', () => {
     assertFails(
-      uniqueArray,
+      uniqueArray(),
       (<div foo={[3, 1, 2, 3, 4]} />),
       'foo',
     );
     assertPasses(
-      uniqueArray,
+      uniqueArray(),
       (<div foo={[1, 2, 3, 4]} />),
       'foo',
     );
@@ -52,12 +52,12 @@ describe('uniqueArray', () => {
     const arr = [1];
 
     assertFails(
-      uniqueArray,
+      uniqueArray(),
       (<div foo={[[1], arr, arr]} />),
       'foo',
     );
     assertPasses(
-      uniqueArray,
+      uniqueArray(),
       (<div foo={[[1], arr, [1]]} />),
       'foo',
     );

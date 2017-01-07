@@ -6,8 +6,8 @@ import { restrictedProp } from '../';
 import callValidator from './_callValidator';
 
 describe('restrictedProp', () => {
-  it('is a function', () => {
-    expect(typeof restrictedProp).to.equal('function');
+  it('returns a function', () => {
+    expect(typeof restrictedProp()).to.equal('function');
   });
 
   function assertPasses(validator, element, propName) {
@@ -19,19 +19,19 @@ describe('restrictedProp', () => {
   }
 
   it('passes on null/undefined', () => {
-    assertPasses(restrictedProp, (<div foo={null} />), 'foo');
-    assertPasses(restrictedProp, (<div foo={undefined} />), 'foo');
+    assertPasses(restrictedProp(), (<div foo={null} />), 'foo');
+    assertPasses(restrictedProp(), (<div foo={undefined} />), 'foo');
   });
 
   it('fails on any other value', () => {
-    assertFails(restrictedProp, (<div foo={false} />), 'foo');
-    assertFails(restrictedProp, (<div foo />), 'foo');
-    assertFails(restrictedProp, (<div foo={NaN} />), 'foo');
-    assertFails(restrictedProp, (<div foo={[]} />), 'foo');
-    assertFails(restrictedProp, (<div foo={{}} />), 'foo');
-    assertFails(restrictedProp, (<div foo="" />), 'foo');
-    assertFails(restrictedProp, (<div foo="foo" />), 'foo');
-    assertFails(restrictedProp, (<div foo={() => {}} />), 'foo');
-    assertFails(restrictedProp, (<div foo={/a/g} />), 'foo');
+    assertFails(restrictedProp(), (<div foo={false} />), 'foo');
+    assertFails(restrictedProp(), (<div foo />), 'foo');
+    assertFails(restrictedProp(), (<div foo={NaN} />), 'foo');
+    assertFails(restrictedProp(), (<div foo={[]} />), 'foo');
+    assertFails(restrictedProp(), (<div foo={{}} />), 'foo');
+    assertFails(restrictedProp(), (<div foo="" />), 'foo');
+    assertFails(restrictedProp(), (<div foo="foo" />), 'foo');
+    assertFails(restrictedProp(), (<div foo={() => {}} />), 'foo');
+    assertFails(restrictedProp(), (<div foo={/a/g} />), 'foo');
   });
 });

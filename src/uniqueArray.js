@@ -24,4 +24,4 @@ function uniqueArray(props, propName, ...rest) {
 }
 uniqueArray.isRequired = requiredUniqueArray;
 
-export default uniqueArray;
+export default () => uniqueArray;
