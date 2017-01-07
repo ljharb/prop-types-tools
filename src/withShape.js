@@ -9,7 +9,7 @@ export default function withShape(type, shapeTypes) {
   }
   return and([
     type,
-    function universalShape(props, propName, componentName, location, propFullName, ...rest) {
+    function universalShape(props, propName, componentName, location, ...rest) {
       const propValue = props[propName];
       if (propValue == null) {
         return null;
