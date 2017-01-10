@@ -1,3 +1,14 @@
+2.0.0 / 2017-01-09
+==================
+  * [breaking] when `NODE_ENV` is `production`, export mocks instead of real validators
+  * [new] add mocks
+  * [New] add `uniqueArray`/`uniqueArrayOf`
+  * [New] add `withShape`
+  * [Breaking] ensure every export is a function that returns a validator, for consistency (`restrictedProp`)
+  * [Deps] move `safe-publish-latest` to devDeps
+  * [Dev Deps] update `eslint`, `eslint-config-airbnb`, `eslint-plugin-import`, `eslint-plugin-react`, `eslint-plugin-jsx-a11y`, `mocha`, `react`; add missing `babel-register`
+  * [Tests] on `node` `v7`
+
 1.3.2 / 2016-10-27
 ==================
   * [enhancement] `forbidExtraProps`: add the componentName into the error message
