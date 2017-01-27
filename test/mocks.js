@@ -13,4 +13,20 @@ describe('mocks', () => {
     const implementationTypes = Object.values(implementations).map(x => typeof x);
     expect(mockTypes).to.eql(implementationTypes);
   });
+
+  it('provides a thunk for a validator function', () => {
+    Object.entries(mocks).forEach(([name, mock]) => {
+      const validator = mock();
+      const expectedType = name === 'forbidExtraProps' ? 'object' : 'function';
+      expect([name, typeof validator]).to.eql([name, expectedType]);
+    });
+  });
+
+  it('provides a validator with isRequired', () => {
+    Object.entries(mocks).forEach(([name, mock]) => {
+      if (name === 'forbidExtraProps') return;
+      const validator = mock();
+      expect([name, typeof validator.isRequired]).to.eql([name, 'function']);
+    });
+  });
 });

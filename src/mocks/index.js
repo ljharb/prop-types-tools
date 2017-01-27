@@ -1,4 +1,6 @@
-function noopThunk() { return () => {}; }
+function noop() {}
+noop.isRequired = noop;
+function noopThunk() { return noop; }
 
 module.exports = {
   and: noopThunk,
