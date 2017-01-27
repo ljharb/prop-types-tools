@@ -1,3 +1,7 @@
+2.0.1 / 2017-01-27
+==================
+  * [Fix] ensure production mocks have `.isRequired`
+
 2.0.0 / 2017-01-09
 ==================
   * [breaking] when `NODE_ENV` is `production`, export mocks instead of real validators
