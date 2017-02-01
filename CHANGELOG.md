@@ -1,3 +1,8 @@
+2.1.0 / 2017-02-01
+==================
+  * [New] add `mutuallyExclusiveTrueProps`
+  * [Dev Deps] update `babel-cli`, `babel-preset-airbnb`, `babel-register`, `eslint`
+
 2.0.1 / 2017-01-27
 ==================
   * [Fix] ensure production mocks have `.isRequired`
