@@ -4,6 +4,7 @@ import childrenOfType from './childrenOfType';
 import componentWithName from './componentWithName';
 import forbidExtraProps from './forbidExtraProps';
 import mutuallyExclusiveProps from './mutuallyExclusiveProps';
+import mutuallyExclusiveTrueProps from './mutuallyExclusiveTrueProps';
 import nChildren from './nChildren';
 import nonNegativeInteger from './nonNegativeInteger';
 import or from './or';
@@ -20,6 +21,7 @@ module.exports = {
   componentWithName,
   forbidExtraProps,
   mutuallyExclusiveProps,
+  mutuallyExclusiveTrueProps,
   nChildren,
   nonNegativeInteger,
   or,

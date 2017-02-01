@@ -9,6 +9,7 @@ module.exports = {
   componentWithName: noopThunk,
   forbidExtraProps: Object,
   mutuallyExclusiveProps: noopThunk,
+  mutuallyExclusiveTrueProps: noopThunk,
   nChildren: noopThunk,
   nonNegativeInteger: noopThunk,
   or: noopThunk,
