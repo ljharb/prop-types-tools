@@ -1,3 +1,8 @@
+2.1.1 / 2017-02-09
+==================
+  * [Fix] `childrenOfType`: improve the error message
+  * [Dev Deps] update `eslint`, `eslint-config-airbnb`, `eslint-plugin-jsx-a11y`
+
 2.1.0 / 2017-02-01
 ==================
   * [New] add `mutuallyExclusiveTrueProps`
