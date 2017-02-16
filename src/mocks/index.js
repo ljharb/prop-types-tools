@@ -12,6 +12,7 @@ module.exports = {
   mutuallyExclusiveTrueProps: noopThunk,
   nChildren: noopThunk,
   nonNegativeInteger: noopThunk,
+  numericString: noopThunk,
   or: noopThunk,
   range: noopThunk,
   restrictedProp: noopThunk,

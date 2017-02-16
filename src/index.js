@@ -7,6 +7,7 @@ import mutuallyExclusiveProps from './mutuallyExclusiveProps';
 import mutuallyExclusiveTrueProps from './mutuallyExclusiveTrueProps';
 import nChildren from './nChildren';
 import nonNegativeInteger from './nonNegativeInteger';
+import numericString from './numericString';
 import or from './or';
 import range from './range';
 import restrictedProp from './restrictedProp';
@@ -24,6 +25,7 @@ module.exports = {
   mutuallyExclusiveTrueProps,
   nChildren,
   nonNegativeInteger,
+  numericString,
   or,
   range,
   restrictedProp,
