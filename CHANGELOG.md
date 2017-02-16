@@ -1,3 +1,9 @@
+2.2.0 / 2017-02-16
+==================
+  * [New] add `numericString`
+  * [New] add `explicitNull`
+  * [Dev Deps] update `airbnb-js-shims`, `babel-cli`, `babel-register`, `eslint-plugin-react`
+
 2.1.1 / 2017-02-09
 ==================
   * [Fix] `childrenOfType`: improve the error message
