@@ -7,6 +7,7 @@ module.exports = {
   childrenHavePropXorChildren: noopThunk,
   childrenOfType: noopThunk,
   componentWithName: noopThunk,
+  explicitNull: noopThunk,
   forbidExtraProps: Object,
   mutuallyExclusiveProps: noopThunk,
   mutuallyExclusiveTrueProps: noopThunk,
