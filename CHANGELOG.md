@@ -1,3 +1,8 @@
+2.3.0 / 2017-02-23
+==================
+  * [New] add `integer`
+  * [Dev Deps] update `eslint`, `rimraf`
+
 2.2.0 / 2017-02-16
 ==================
   * [New] add `numericString`
