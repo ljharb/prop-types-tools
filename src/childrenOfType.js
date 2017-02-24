@@ -1,5 +1,5 @@
-import React from 'react';
 import getComponentName from './helpers/getComponentName';
+import renderableChildren from './helpers/renderableChildren';
 
 function onlyTypes(types, children, componentName) {
   if (!children.every(child => child && types.find(Type => child.type === Type))) {
@@ -21,15 +21,12 @@ function isRequired(types, children, componentName) {
 
 function childrenOfType(...types) {
   function validator(props, propName, componentName) {
-    const prop = props[propName];
-    const children = React.Children.toArray(prop).filter(child => child === 0 || child);
-    return onlyTypes(types, children, componentName);
+    return onlyTypes(types, renderableChildren(props[propName]), componentName);
   }
   validator.typeName = 'childrenOfType';
 
   validator.isRequired = (props, propName, componentName) => {
-    const prop = props[propName];
-    const children = React.Children.toArray(prop).filter(child => child === 0 || child);
+    const children = renderableChildren(props[propName]);
     return isRequired(types, children, componentName) || onlyTypes(types, children, componentName);
   };
   validator.isRequired.typeName = 'childrenOfType';
