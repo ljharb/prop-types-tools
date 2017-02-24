@@ -1,4 +1,5 @@
 import React from 'react';
+import getComponentName from './helpers/getComponentName';
 
 function hasName(name, prop, propName, componentName) {
   if (Array.isArray(prop)) {
@@ -14,7 +15,7 @@ function hasName(name, prop, propName, componentName) {
   }
 
   const { type } = prop;
-  if (type.name !== name && type.displayName !== name) {
+  if (getComponentName(type) !== name) {
     return new TypeError(
       `\`${componentName}.${propName}\` only accepts components named ${name}`,
     );

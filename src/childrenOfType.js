@@ -1,8 +1,9 @@
 import React from 'react';
+import getComponentName from './helpers/getComponentName';
 
 function onlyTypes(types, children, componentName) {
   if (!children.every(child => child && types.find(Type => child.type === Type))) {
-    const typeNames = types.map(({ displayName, name }) => displayName || name).join(', or ');
+    const typeNames = types.map(getComponentName).join(', or ');
     return new TypeError(
       `\`${componentName}\` only accepts children of type ${typeNames}`,
     );
@@ -12,7 +13,7 @@ function onlyTypes(types, children, componentName) {
 
 function isRequired(types, children, componentName) {
   if (children.length === 0) {
-    const typeNames = types.map(({ displayName, name }) => displayName || name).join(', or ');
+    const typeNames = types.map(getComponentName).join(', or ');
     return new TypeError(`\`${componentName}\` requires at least one node of type ${typeNames}`);
   }
   return null;
