@@ -1,4 +1,5 @@
 import { PropTypes } from 'react';
+import wrapValidator from './helpers/wrapValidator';
 
 export default function or(validators, name = 'or') {
   if (!Array.isArray(validators)) {
@@ -14,12 +15,6 @@ export default function or(validators, name = 'or') {
       ...validators,
     ]),
   ]);
-  validator.typeName = name;
-  validator.isRequired.typeName = name;
 
-  // NOTE: We null out the typechecker because we provide our own name:
-  validator.typeChecker = null;
-  validator.isRequired.typeChecker = null;
-
-  return validator;
+  return wrapValidator(validator, name, validators);
 }

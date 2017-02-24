@@ -1,3 +1,5 @@
+import wrapValidator from './helpers/wrapValidator';
+
 function restrictedProp(props, propName, componentName) {
   if (props[propName] != null) {
     return new TypeError(`The ${propName} prop on ${componentName} is not allowed.`);
@@ -7,4 +9,4 @@ function restrictedProp(props, propName, componentName) {
 }
 restrictedProp.isRequired = restrictedProp;
 
-export default () => restrictedProp;
+export default () => wrapValidator(restrictedProp, 'restrictedProp');

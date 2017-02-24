@@ -1,3 +1,5 @@
+import wrapValidator from './helpers/wrapValidator';
+
 const validator = function nonNegativeInteger(props, propName, componentName) {
   const value = props[propName];
 
@@ -18,4 +20,4 @@ function requiredNonNegativeInteger(props, propName, componentName, ...rest) {
 
 validator.isRequired = requiredNonNegativeInteger;
 
-export default validator;
+export default wrapValidator(validator, 'nonNegativeInteger');

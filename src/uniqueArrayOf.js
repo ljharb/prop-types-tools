@@ -15,7 +15,7 @@ export default function uniqueArrayOfTypeValidator(type, name = 'uniqueArrayOfTy
   validator.isRequired = and([
     arrayValidator.isRequired,
     unique.isRequired,
-  ], `required: ${name}`);
+  ], `${name}.isRequired`);
 
   return validator;
 }

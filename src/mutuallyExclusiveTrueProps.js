@@ -1,4 +1,5 @@
 import { PropTypes } from 'react';
+import wrapValidator from './helpers/wrapValidator';
 
 const { bool } = PropTypes;
 
@@ -10,16 +11,17 @@ export default function mutuallyExclusiveTrue(...exclusiveProps) {
     throw new TypeError('all exclusive true props must be strings');
   }
 
+  const propsList = exclusiveProps.join(', or ');
+
   const validator = function mutuallyExclusiveTrueProps(props, propName, componentName, ...rest) {
     const countProps = (count, prop) => (count + (props[prop] ? 1 : 0));
 
     const exclusivePropCount = exclusiveProps.reduce(countProps, 0);
     if (exclusivePropCount > 1) {
-      return new Error(`A ${componentName} cannot have more than one of these boolean props be true: ${exclusiveProps.join(', or ')}`);
+      return new Error(`A ${componentName} cannot have more than one of these boolean props be true: ${propsList}`);
     }
     return bool(props, propName, componentName, ...rest);
   };
-  validator.typeName = `mutuallyExclusiveTrueProps: ${exclusiveProps.join(', or ')}`;
 
   validator.isRequired = function mutuallyExclusiveTruePropsRequired(
     props,
@@ -31,10 +33,10 @@ export default function mutuallyExclusiveTrue(...exclusiveProps) {
 
     const exclusivePropCount = exclusiveProps.reduce(countProps, 0);
     if (exclusivePropCount > 1) {
-      return new Error(`A ${componentName} cannot have more than one of these boolean props be true: ${exclusiveProps.join(', or ')}`);
+      return new Error(`A ${componentName} cannot have more than one of these boolean props be true: ${propsList}`);
     }
     return bool.isRequired(props, propName, componentName, ...rest);
   };
 
-  return validator;
+  return wrapValidator(validator, `mutuallyExclusiveTrueProps: ${propsList}`, exclusiveProps);
 }

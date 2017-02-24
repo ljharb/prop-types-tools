@@ -1,4 +1,5 @@
 import { PropTypes } from 'react';
+import wrapValidator from './helpers/wrapValidator';
 
 function requiredUniqueArray(props, propName, componentName, ...rest) {
   const result = PropTypes.array.isRequired(props, propName, componentName, ...rest);
@@ -24,4 +25,4 @@ function uniqueArray(props, propName, ...rest) {
 }
 uniqueArray.isRequired = requiredUniqueArray;
 
-export default () => uniqueArray;
+export default () => wrapValidator(uniqueArray, 'uniqueArray');

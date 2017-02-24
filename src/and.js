@@ -1,3 +1,5 @@
+import wrapValidator from './helpers/wrapValidator';
+
 export default function andValidator(validators, name = 'and') {
   if (!Array.isArray(validators)) {
     throw new TypeError('and: 2 or more validators are required');
@@ -14,7 +16,6 @@ export default function andValidator(validators, name = 'and') {
     });
     return firstError == null ? null : firstError;
   };
-  validator.typeName = name;
 
   validator.isRequired = function andIsRequired(...args) {
     let firstError = null;
@@ -24,7 +25,6 @@ export default function andValidator(validators, name = 'and') {
     });
     return firstError == null ? null : firstError;
   };
-  validator.isRequired.typeName = `${name}.isRequired`;
 
-  return validator;
+  return wrapValidator(validator, name, validators);
 }

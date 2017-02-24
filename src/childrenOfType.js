@@ -1,5 +1,6 @@
 import getComponentName from './helpers/getComponentName';
 import renderableChildren from './helpers/renderableChildren';
+import wrapValidator from './helpers/wrapValidator';
 
 function onlyTypes(types, children, componentName) {
   if (!children.every(child => child && types.find(Type => child.type === Type))) {
@@ -23,15 +24,13 @@ function childrenOfType(...types) {
   function validator(props, propName, componentName) {
     return onlyTypes(types, renderableChildren(props[propName]), componentName);
   }
-  validator.typeName = 'childrenOfType';
 
   validator.isRequired = (props, propName, componentName) => {
     const children = renderableChildren(props[propName]);
     return isRequired(types, children, componentName) || onlyTypes(types, children, componentName);
   };
-  validator.isRequired.typeName = 'childrenOfType';
 
-  return validator;
+  return wrapValidator(validator, 'childrenOfType', types);
 }
 
 export default childrenOfType;

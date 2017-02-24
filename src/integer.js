@@ -1,3 +1,5 @@
+import wrapValidator from './helpers/wrapValidator';
+
 function requiredInteger(props, propName, componentName) {
   const value = props[propName];
   if (value == null || !Number.isInteger(value)) {
@@ -18,4 +20,4 @@ const validator = function integer(props, propName, ...rest) {
 
 validator.isRequired = requiredInteger;
 
-export default () => validator;
+export default () => wrapValidator(validator, 'integer');

@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import wrapValidator from './helpers/wrapValidator';
 
 export default function nChildren(n, propType = PropTypes.node) {
   if (typeof n !== 'number' || isNaN(n) || n < 0) {
@@ -20,8 +21,7 @@ export default function nChildren(n, propType = PropTypes.node) {
     }
     return propType(props, propName, componentName, ...rest);
   };
-  validator.typeName = `nChildren:${n}`;
   validator.isRequired = validator;
 
-  return validator;
+  return wrapValidator(validator, `nChildren:${n}`, n);
 }

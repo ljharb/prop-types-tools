@@ -1,5 +1,6 @@
 import React from 'react';
 import getComponentName from './helpers/getComponentName';
+import wrapValidator from './helpers/wrapValidator';
 
 function hasName(name, prop, propName, componentName) {
   if (Array.isArray(prop)) {
@@ -32,7 +33,6 @@ function componentWithName(name) {
     }
     return hasName(name, prop, propName, componentName);
   }
-  componentWithNameValidator.typeName = `componentWithName:${name}`;
 
   componentWithNameValidator.isRequired = function componentWithNameRequired(
     props,
@@ -45,9 +45,8 @@ function componentWithName(name) {
     }
     return hasName(name, prop, propName, componentName);
   };
-  componentWithNameValidator.isRequired.typeName = `componentWithName:${name}`;
 
-  return componentWithNameValidator;
+  return wrapValidator(componentWithNameValidator, `componentWithName:${name}`, name);
 }
 
 export default componentWithName;

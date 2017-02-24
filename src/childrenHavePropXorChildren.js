@@ -1,4 +1,5 @@
 import React from 'react';
+import wrapValidator from './helpers/wrapValidator';
 
 export default function childrenHavePropXorChildren(prop) {
   if (typeof prop !== 'string' && typeof prop !== 'symbol') {
@@ -29,7 +30,7 @@ export default function childrenHavePropXorChildren(prop) {
 
     return new TypeError(`\`${componentName}\` requires children to all have prop “${prop}”, all have children, or all have neither.`);
   };
-  validator.typeName = `childrenHavePropXorChildrenWithProp:${prop}`;
   validator.isRequired = validator;
-  return validator;
+
+  return wrapValidator(validator, `childrenHavePropXorChildrenWithProp:${prop}`, prop);
 }

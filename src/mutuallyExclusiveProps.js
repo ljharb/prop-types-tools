@@ -1,3 +1,5 @@
+import wrapValidator from './helpers/wrapValidator';
+
 export default function mutuallyExclusiveOfType(propType, ...exclusiveProps) {
   if (typeof propType !== 'function') {
     throw new TypeError('a propType is required');
@@ -7,6 +9,8 @@ export default function mutuallyExclusiveOfType(propType, ...exclusiveProps) {
     throw new TypeError('at least one prop that is mutually exclusive with this propType is required');
   }
 
+  const propList = exclusiveProps.join(', or ');
+
   const map = exclusiveProps.reduce((acc, prop) => ({ ...acc, [prop]: true }), {});
   const countProps = (count, prop) => (count + (map[prop] ? 1 : 0));
 
@@ -15,11 +19,10 @@ export default function mutuallyExclusiveOfType(propType, ...exclusiveProps) {
       .filter(prop => props[prop] != null)
       .reduce(countProps, 0);
     if (exclusivePropCount > 1) {
-      return new Error(`A ${componentName} cannot have more than one of these props: ${exclusiveProps.join(', or ')}`);
+      return new Error(`A ${componentName} cannot have more than one of these props: ${propList}`);
     }
     return propType(props, propName, componentName, ...rest);
   };
-  validator.typeName = `mutuallyExclusiveProps:${exclusiveProps.join(', or ')}`;
 
   validator.isRequired = function mutuallyExclusivePropsRequired(
     props,
@@ -31,9 +34,10 @@ export default function mutuallyExclusiveOfType(propType, ...exclusiveProps) {
       .filter(prop => prop === propName || props[prop] != null)
       .reduce(countProps, 0);
     if (exclusivePropCount > 1) {
-      return new Error(`A ${componentName} cannot have more than one of these props: ${exclusiveProps.join(', or ')}`);
+      return new Error(`A ${componentName} cannot have more than one of these props: ${propList}`);
     }
     return propType(props, propName, componentName, ...rest);
   };
-  return validator;
+
+  return wrapValidator(validator, `mutuallyExclusiveProps:${propList}`, exclusiveProps);
 }

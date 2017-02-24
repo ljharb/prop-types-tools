@@ -1,3 +1,5 @@
+import wrapValidator from './helpers/wrapValidator';
+
 function explicitNull(props, propName, componentName) {
   if (props[propName] == null) {
     return null;
@@ -11,4 +13,4 @@ explicitNull.isRequired = function explicitNullRequired(props, propName, compone
   return new TypeError(`${componentName}: prop “${propName}” must be null; received ${typeof props[propName]}`);
 };
 
-export default () => explicitNull;
+export default () => wrapValidator(explicitNull, 'explicitNull');
