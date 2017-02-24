@@ -5,5 +5,6 @@ function restrictedProp(props, propName, componentName) {
 
   return null;
 }
+restrictedProp.isRequired = restrictedProp;
 
 export default () => restrictedProp;

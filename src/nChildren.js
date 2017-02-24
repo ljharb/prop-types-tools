@@ -21,5 +21,7 @@ export default function nChildren(n, propType = PropTypes.node) {
     return propType(props, propName, componentName, ...rest);
   };
   validator.typeName = `nChildren:${n}`;
+  validator.isRequired = validator;
+
   return validator;
 }

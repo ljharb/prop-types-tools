@@ -30,5 +30,6 @@ export default function childrenHavePropXorChildren(prop) {
     return new TypeError(`\`${componentName}\` requires children to all have prop “${prop}”, all have children, or all have neither.`);
   };
   validator.typeName = `childrenHavePropXorChildrenWithProp:${prop}`;
+  validator.isRequired = validator;
   return validator;
 }
