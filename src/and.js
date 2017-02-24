@@ -24,7 +24,7 @@ export default function andValidator(validators, name = 'and') {
     });
     return firstError == null ? null : firstError;
   };
-  validator.isRequired.typeName = name;
+  validator.isRequired.typeName = `${name}.isRequired`;
 
   return validator;
 }
