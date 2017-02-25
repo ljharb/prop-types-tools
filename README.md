@@ -23,7 +23,8 @@ Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims]
  - `mutuallyExclusiveProps`: provide a propType, and a list of props, and only one prop out of the list will be permitted, validated by the given propType.
  - `mutuallyExclusiveTrueProps`: provide a list of props, and all must be booleans, and only one is allowed to be true.
  - `nChildren`: require a specific amount of children.
- - `nonNegativeInteger`: require that the prop be a number, that is 0, or a positive integer.
+ - `nonNegativeInteger`: require that the prop be a number, that is 0, or a finite positive integer.
+ - `nonNegativeNumber`: require that the prop be a number, that is 0, or a finite positive number.
  - `numericString`: require the prop be a string that is conceptually numeric.
  - `object`: same as `PropTypes.object`, but can be called outside of React's propType flow.
  - `or`: recursively allows only the provided propTypes, or arrays of those propTypes.

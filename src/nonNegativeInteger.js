@@ -1,23 +1,5 @@
-import wrapValidator from './helpers/wrapValidator';
+import and from './and';
+import integer from './integer';
+import nonNegativeNumber from './nonNegativeNumber';
 
-const validator = function nonNegativeInteger(props, propName, componentName) {
-  const value = props[propName];
-
-  if (value == null || (Number.isInteger(value) && value >= 0 && !Object.is(value, -0))) {
-    return null;
-  }
-
-  return new RangeError(`${propName} in ${componentName} must be a non-negative integer`);
-};
-
-function requiredNonNegativeInteger(props, propName, componentName, ...rest) {
-  const value = props[propName];
-  if (value == null) {
-    return new RangeError(`${propName} in ${componentName} must be a non-negative integer`);
-  }
-  return validator(props, propName, componentName, ...rest);
-}
-
-validator.isRequired = requiredNonNegativeInteger;
-
-export default wrapValidator(validator, 'nonNegativeInteger');
+export default and([integer(), nonNegativeNumber()], 'nonNegativeInteger');

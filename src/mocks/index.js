@@ -17,6 +17,7 @@ module.exports = {
   mutuallyExclusiveTrueProps: noopThunk,
   nChildren: noopThunk,
   nonNegativeInteger: noopThunk,
+  nonNegativeNumber: noopThunk,
   numericString: noopThunk,
   object: noopThunk,
   or: noopThunk,
