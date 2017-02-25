@@ -1,5 +1,6 @@
 import and from './and';
 import childrenHavePropXorChildren from './childrenHavePropXorChildren';
+import childrenOf from './childrenOf';
 import childrenOfType from './childrenOfType';
 import componentWithName from './componentWithName';
 import elementType from './elementType';
@@ -23,6 +24,7 @@ import withShape from './withShape';
 module.exports = {
   and,
   childrenHavePropXorChildren,
+  childrenOf,
   childrenOfType,
   componentWithName,
   elementType,

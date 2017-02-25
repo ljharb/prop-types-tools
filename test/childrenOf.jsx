@@ -1,18 +1,14 @@
 import { expect } from 'chai';
-import React from 'react';
+import React, { PropTypes } from 'react';
 
-import { childrenOfType } from '../';
+import { childrenOf, elementType, or } from '../';
 
 import callValidator from './_callValidator';
 
 function SFC() {}
 class Component extends React.Component {} // eslint-disable-line react/prefer-stateless-function
 
-describe('childrenOfType', () => {
-  it('throws when not given a type', () => {
-    expect(() => childrenOfType()).to.throw(TypeError);
-  });
-
+describe('childrenOf', () => {
   function assertPasses(validator, element, propName, componentName) {
     expect(callValidator(validator, element, propName, componentName)).to.equal(null);
   }
@@ -21,23 +17,153 @@ describe('childrenOfType', () => {
     expect(callValidator(validator, element, propName, componentName)).to.be.instanceOf(Error);
   }
 
+  it('fails on a non-children prop', () => {
+    const validator = childrenOf(PropTypes.node);
+
+    assertFails(
+      validator,
+      (<div />),
+      'foo',
+      'non-children optional',
+    );
+
+    assertFails(
+      validator.isRequired,
+      (<div />),
+      'foo',
+      'non-children optional',
+    );
+  });
+
+  describe('with no children', () => {
+    it('passes when optional', () => {
+      assertPasses(
+        childrenOf(PropTypes.node),
+        (<div />),
+        'children',
+        'optional empty',
+      );
+
+
+      assertPasses(
+        childrenOf(PropTypes.node),
+        (<div>{[]}</div>),
+        'children',
+        'optional empty array',
+      );
+    });
+
+    it('fails when required', () => assertFails(
+      childrenOf(PropTypes.node).isRequired,
+      (<div />),
+      'children',
+      'optional empty',
+    ));
+  });
+
+  describe('with non-element children', () => {
+    it('passes with multiple numbers', () => assertPasses(
+      childrenOf(PropTypes.number),
+      (
+        <div>
+          {1}
+          {2}
+          {3}
+        </div>
+      ),
+      'children',
+      'numbers',
+    ));
+
+    it('passes with multiple numbers when required', () => assertPasses(
+      childrenOf(PropTypes.number).isRequired,
+      (
+        <div>
+          {1}
+          {2}
+          {3}
+        </div>
+      ),
+      'children',
+      'numbers',
+    ));
+
+    it('passes with multiple strings', () => assertPasses(
+      childrenOf(PropTypes.string),
+      (
+        <div>
+          a
+          b
+          c
+        </div>
+      ),
+      'children',
+      'strings',
+    ));
+
+    it('passes with multiple strings when required', () => assertPasses(
+      childrenOf(PropTypes.string).isRequired,
+      (
+        <div>
+          a
+          b
+          c
+        </div>
+      ),
+      'children',
+      'strings',
+    ));
+
+    it('passes with strings and numbers', () => assertPasses(
+      childrenOf(or([PropTypes.string, PropTypes.number])),
+      (
+        <div>
+          a
+          b
+          c
+          {1}
+          {2}
+          {3}
+        </div>
+      ),
+      'children',
+      'strings + numbers',
+    ));
+
+    it('passes with strings and numbers when required', () => assertPasses(
+      childrenOf(or([PropTypes.string, PropTypes.number])).isRequired,
+      (
+        <div>
+          a
+          b
+          c
+          {1}
+          {2}
+          {3}
+        </div>
+      ),
+      'children',
+      'strings + numbers',
+    ));
+  });
+
   describe('with a single child of the specified type', () => {
     it('passes with a DOM element', () => assertPasses(
-      childrenOfType('span'),
+      childrenOf(elementType('span')),
       (<div><span /></div>),
       'children',
       'span!',
     ));
 
     it('passes with an SFC', () => assertPasses(
-      childrenOfType(SFC),
+      childrenOf(elementType(SFC)),
       (<div><SFC default="Foo" /></div>),
       'children',
       'SFC!',
     ));
 
     it('passes with a Component', () => assertPasses(
-      childrenOfType(Component),
+      childrenOf(elementType(Component)),
       (<div><Component default="Foo" /></div>),
       'children',
       'Component!',
@@ -46,7 +172,7 @@ describe('childrenOfType', () => {
 
   describe('with multiple children of the specified type', () => {
     it('passes with a DOM element', () => assertPasses(
-      childrenOfType('span'),
+      childrenOf(elementType('span')),
       (
         <div>
           <span />
@@ -60,7 +186,7 @@ describe('childrenOfType', () => {
     ));
 
     it('passes with an SFC', () => assertPasses(
-      childrenOfType(SFC),
+      childrenOf(elementType(SFC)),
       (
         <div>
           <SFC default="Foo" />
@@ -74,7 +200,7 @@ describe('childrenOfType', () => {
     ));
 
     it('passes with a Component', () => assertPasses(
-      childrenOfType(Component),
+      childrenOf(elementType(Component)),
       (
         <div>
           <Component default="Foo" />
@@ -90,7 +216,7 @@ describe('childrenOfType', () => {
 
   describe('with children of the specified types passed as an array', () => {
     it('passes with a DOM element', () => assertPasses(
-      childrenOfType('span'),
+      childrenOf(elementType('span')),
       (
         <div>
           {[
@@ -105,7 +231,7 @@ describe('childrenOfType', () => {
     ));
 
     it('passes with an SFC', () => assertPasses(
-      childrenOfType(SFC),
+      childrenOf(elementType(SFC)),
       (
         <div>
           {[
@@ -120,7 +246,7 @@ describe('childrenOfType', () => {
     ));
 
     it('passes with a Component', () => assertPasses(
-      childrenOfType(Component),
+      childrenOf(elementType(Component)),
       (
         <div>
           {[
@@ -137,7 +263,7 @@ describe('childrenOfType', () => {
 
   describe('when an unspecified type is provided as a child', () => {
     it('fails expecting a DOM element', () => assertFails(
-      childrenOfType('span'),
+      childrenOf(elementType('span')),
       (
         <div>
           <span />
@@ -149,7 +275,7 @@ describe('childrenOfType', () => {
     ));
 
     it('fails expecting an SFC', () => assertFails(
-      childrenOfType(SFC),
+      childrenOf(elementType(SFC)),
       (
         <div>
           <SFC default="Foo" />
@@ -161,7 +287,7 @@ describe('childrenOfType', () => {
     ));
 
     it('fails expecting a Component', () => assertFails(
-      childrenOfType(Component),
+      childrenOf(elementType(Component)),
       (
         <div>
           <Component default="Foo" />
