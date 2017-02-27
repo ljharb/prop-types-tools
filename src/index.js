@@ -1,4 +1,5 @@
 import and from './and';
+import between from './between';
 import childrenHavePropXorChildren from './childrenHavePropXorChildren';
 import childrenOf from './childrenOf';
 import childrenOfType from './childrenOfType';
@@ -26,6 +27,7 @@ import withShape from './withShape';
 
 module.exports = {
   and,
+  between,
   childrenHavePropXorChildren,
   childrenOf,
   childrenOfType,

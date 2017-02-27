@@ -1,4 +1,6 @@
-import { PropTypes } from 'react';
+import and from './and';
+import between from './between';
+import integer from './integer';
 import wrapValidator from './helpers/wrapValidator';
 
 function isValidLength(x) {
@@ -12,9 +14,5 @@ export default function range(min, max) {
   if (min === max) {
     throw new RangeError('min and max must not be the same');
   }
-  const possibleSizes = Array.from({ length: (max - min) }, (_, i) => (min + i));
-  if (possibleSizes.indexOf(0) > -1) {
-    possibleSizes.push(-0); // React 15 differentiates properly between -0 and 0. We don't need to.
-  }
-  return wrapValidator(PropTypes.oneOf(possibleSizes), 'range', { min, max });
+  return wrapValidator(and([integer(), between({ gte: min, lt: max })], 'range'), 'range', { min, max });
 }

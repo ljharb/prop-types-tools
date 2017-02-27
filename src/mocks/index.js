@@ -4,6 +4,7 @@ function noopThunk() { return noop; }
 
 module.exports = {
   and: noopThunk,
+  between: noopThunk,
   childrenHavePropXorChildren: noopThunk,
   childrenOf: noopThunk,
   childrenOfType: noopThunk,
