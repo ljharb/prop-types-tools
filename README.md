@@ -30,9 +30,10 @@ Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims]
  - `or`: recursively allows only the provided propTypes, or arrays of those propTypes.
  - `range`: provide a min, and a max, and the prop must be a number in the range `[min, max)`
  - `restrictedProp`: this prop is not permitted to be anything but `null` or `undefined`.
+ - `shape`: takes a shape, and allows it to be enforced on any non-null/undefined value.
  - `uniqueArray`: this prop must be an array, and all values must be unique (determined by `Object.is`). Like `PropTypes.array`, but with uniqueness.
  - `uniqueArrayOf`: `uniqueArray`, with a type validator applied. Like `PropTypes.arrayOf`, but with uniqueness.
- - `withShape`: takes a PropType and a shape, and allows a shape to be enforced on any non-null/undefined value.
+ - `withShape`: takes a PropType and a shape, and allows it to be enforced on any non-null/undefined value.
 
 ## Production
 Since `PropTypes` are typically not included in production builds of React, this library’s functionality serves no useful purpose. As such, when the `NODE_ENV` environment variable is `"production"`, instead of exporting the implementations of all these prop types, we export mock functions - in other words, something that ensures that no exceptions are thrown, but does no validation. When environment variables are inlined (via a browserify transform or webpack plugin), then tools like webpack or uglify are able to determine that only the mocks will be imported - and can avoid including the entire implementations in the final bundle that is sent to the browser. This allows for a much smaller ultimate file size, and faster in-browser performance, without sacrificing the benefits of `PropTypes` themselves.

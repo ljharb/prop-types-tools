@@ -23,6 +23,7 @@ module.exports = {
   or: noopThunk,
   range: noopThunk,
   restrictedProp: noopThunk,
+  shape: noopThunk,
   uniqueArray: noopThunk,
   uniqueArrayOf: noopThunk,
   withShape: noopThunk,
