@@ -27,25 +27,6 @@ describe('between', () => {
     expect(() => between({ lt: {} })).to.throw(TypeError);
     expect(() => between({ gte: {} })).to.throw(TypeError);
     expect(() => between({ lte: {} })).to.throw(TypeError);
-    expect(() => between({ gt() {} })).to.throw(TypeError);
-    expect(() => between({ lt() {} })).to.throw(TypeError);
-    expect(() => between({ gte() {} })).to.throw(TypeError);
-    expect(() => between({ lte() {} })).to.throw(TypeError);
-  });
-
-  it('throws when there are no possible valid values', () => {
-    expect(() => between({ gt: 2, lt: 2 })).to.throw(RangeError);
-    expect(() => between({ gt: 3, lt: 2 })).to.throw(RangeError);
-
-    expect(() => between({ gt: Infinity })).to.throw(RangeError);
-    expect(() => between({ lt: -Infinity })).to.throw(RangeError);
-
-    expect(() => between({ gte: 2, lt: 2 })).to.throw(RangeError);
-    expect(() => between({ gte: 3, lt: 2 })).to.throw(RangeError);
-    expect(() => between({ gt: 2, lte: 2 })).to.throw(RangeError);
-    expect(() => between({ gt: 3, lte: 2 })).to.throw(RangeError);
-
-    expect(() => between({ gte: 2, lte: 1 })).to.throw(RangeError);
   });
 
   function assertPasses(validator, element, propName) {
@@ -91,5 +72,116 @@ describe('between', () => {
     assertFails(between({ gt: 0, lt: 2 }), (<div a={-0} />), 'a');
     assertFails(between({ gt: 0, lt: 2 }), (<div a={0} />), 'a');
     assertFails(between({ gt: -1, lt: 1 }), (<div a={1} />), 'a');
+  });
+
+  it('fails with thunks that return non-numbers', () => {
+    assertFails(
+      between({
+        gt() { return false; },
+        lt() { return []; },
+      }),
+      (<div value={3} />),
+      'value',
+    );
+    assertFails(
+      between({
+        gt() { return false; },
+        lt() { return []; },
+      }).isRequired,
+      (<div value={3} />),
+      'value',
+    );
+  });
+
+  it('works with functions', () => {
+    assertPasses(
+      between({
+        gt({ min }) { return min; },
+        lt({ max }) { return max; },
+      }),
+      (<div min={1} max={3} value={2} />),
+      'value',
+    );
+    assertPasses(
+      between({
+        gt({ min }) { return min; },
+        lt({ max }) { return max; },
+      }).isRequired,
+      (<div min={1} max={3} value={2} />),
+      'value',
+    );
+    assertPasses(
+      between({
+        gte({ min }) { return min; },
+        lte({ max }) { return max; },
+      }),
+      (<div min={1} max={3} value={2} />),
+      'value',
+    );
+    assertPasses(
+      between({
+        gte({ min }) { return min; },
+        lte({ max }) { return max; },
+      }).isRequired,
+      (<div min={1} max={3} value={2} />),
+      'value',
+    );
+    assertPasses(
+      between({
+        gte: 1,
+        lte({ max }) { return max; },
+      }),
+      (<div max={3} value={2} />),
+      'value',
+    );
+
+    assertFails(
+      between({
+        gte({ min }) { return min; },
+        lte({ max }) { return max; },
+      }),
+      (<div min={1} max={3} value={0} />),
+      'value',
+    );
+    assertFails(
+      between({
+        gte({ min }) { return min; },
+        lte({ max }) { return max; },
+      }).isRequired,
+      (<div min={1} max={3} value={0} />),
+      'value',
+    );
+    assertFails(
+      between({
+        gte({ min }) { return min; },
+        lte({ max }) { return max; },
+      }),
+      (<div min={1} max={3} value={4} />),
+      'value',
+    );
+    assertFails(
+      between({
+        gte({ min }) { return min; },
+        lte({ max }) { return max; },
+      }).isRequired,
+      (<div min={1} max={3} value={4} />),
+      'value',
+    );
+    assertFails(
+      between({
+        gt({ min }) { return min; },
+        lt({ max }) { return max; },
+      }),
+      (<div min={1} max={3} value={1} />),
+      'value',
+    );
+    assertFails(
+      between({
+        gt({ min }) { return min; },
+        lt({ max }) { return max; },
+      }),
+      (<div min={1} max={3} value={3} />),
+      'value',
+    );
   });
 });

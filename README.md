@@ -11,7 +11,7 @@
 Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims](https://npmjs.com/package/airbnb-js-shims) or the equivalent is assumed.
 
  - `and`: ensure that all provided propType validators pass
- - `between`: provide an object with an `gt` or `gte` number, and an `lt` or `lte` number (only one item allowed from each pairs; one or both pairs may be provided), and the resulting propType validator will ensure the prop value is a number within the given range.
+ - `between`: provide an object with an `gt` or `gte` number, and an `lt` or `lte` number (only one item allowed from each pairs; one or both pairs may be provided), and the resulting propType validator will ensure the prop value is a number within the given range. Alternatively, you can provide a function that takes the `props` object and returns a number for each of the `gt`/`gte`/`lt`/`lte` values.
  - `childrenHavePropXorChildren`: ensure that either all children have the indicated prop, all children have children, or all children have neither.
  - `childrenOf`: restrict the children prop to only allow children that pass the given propType validator.
  - `childrenOfType`: restrict the children prop to only allow children of the given element types.

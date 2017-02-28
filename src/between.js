@@ -1,37 +1,28 @@
+import { PropTypes } from 'react';
 import shape from './shape';
 import wrapValidator from './helpers/wrapValidator';
 
-function number(props, propName) {
+function number(props, propName, componentName) {
   const value = props[propName];
-  if (typeof value !== 'number' || isNaN(value)) {
-    return new TypeError(`${propName}: a number is required`);
+  if (typeof value === 'number' && !isNaN(value)) {
+    return null;
   }
-  return null;
+
+  return new TypeError(`${componentName}: ${propName} must be a non-NaN number.`);
 }
 
-function noValidValues({ gt, gte, lt, lte }) {
-  if (gt === Infinity || lt === -Infinity) {
-    // nothing can be greater than infinity or less than -infinity
-    return true;
+function numberOrPropsFunc(props, propName) {
+  const value = props[propName];
+
+  if (typeof value === 'function') {
+    return null;
   }
 
-  if (typeof gt === 'number') {
-    if (typeof lt === 'number') {
-      return gt >= lt;
-    }
-    if (typeof lte === 'number') {
-      return gt >= lte;
-    }
-  } else if (typeof gte === 'number') {
-    if (typeof lt === 'number') {
-      return gte >= lt;
-    }
-    if (typeof lte === 'number') {
-      return gte > lte;
-    }
+  if (typeof value === 'number' && !isNaN(value)) {
+    return null;
   }
 
-  return false;
+  return new TypeError(`${propName}: a function, or a non-NaN number is required`);
 }
 
 function lowerCompare(value, { gt, gte }) {
@@ -79,31 +70,51 @@ function errorMessage(componentName, propName, opts) {
   return `${componentName}: ${propName} must be ${errors}`;
 }
 
+function propsThunkify(opts) {
+  return Object.entries(opts).reduce((acc, [key, value]) => {
+    const numberThunk = typeof value === 'number' ? () => value : value;
+    return {
+      ...acc,
+      [key]: numberThunk,
+    };
+  }, {});
+}
+
+function invokeWithProps(optsThunks, props) {
+  return Object.entries(optsThunks).reduce((acc, [key, thunk]) => {
+    const value = thunk(props);
+    return {
+      ...acc,
+      [key]: value,
+    };
+  }, {});
+}
+
 const argValidators = [
-  shape({ lt: number, gt: number }).isRequired,
-  shape({ lte: number, gt: number }).isRequired,
-  shape({ lt: number, gte: number }).isRequired,
-  shape({ lte: number, gte: number }).isRequired,
-  shape({ lt: number }).isRequired,
-  shape({ lte: number }).isRequired,
-  shape({ gt: number }).isRequired,
-  shape({ gte: number }).isRequired,
+  shape({ lt: numberOrPropsFunc, gt: numberOrPropsFunc }).isRequired,
+  shape({ lte: numberOrPropsFunc, gt: numberOrPropsFunc }).isRequired,
+  shape({ lt: numberOrPropsFunc, gte: numberOrPropsFunc }).isRequired,
+  shape({ lte: numberOrPropsFunc, gte: numberOrPropsFunc }).isRequired,
+  shape({ lt: numberOrPropsFunc }).isRequired,
+  shape({ lte: numberOrPropsFunc }).isRequired,
+  shape({ gt: numberOrPropsFunc }).isRequired,
+  shape({ gte: numberOrPropsFunc }).isRequired,
 ];
 function argValidator(props, propName) {
   return argValidators.every(validator => !!validator(props, propName));
 }
 
-export default function betweenValidator(opts) {
-  const argError = argValidator({ opts }, 'opts');
+const thunkValueValidator = PropTypes.objectOf(number).isRequired;
+
+export default function betweenValidator(options) {
+  const argError = argValidator({ options }, 'options');
   if (argError) {
     throw new TypeError('between: only one of the pairs of `lt`/`lte`, and `gt`/`gte`, may be supplied, and at least one pair must be provided.');
   }
 
-  if (noValidValues(opts)) {
-    throw new RangeError('between: values provided allow no possible valid values');
-  }
+  const optsThunks = propsThunkify(options);
 
-  const validator = function between(props, propName, componentName) {
+  const validator = function between(props, propName, componentName, ...rest) {
     const propValue = props[propName];
     if (propValue == null) {
       return null;
@@ -113,17 +124,38 @@ export default function betweenValidator(opts) {
       return new RangeError(`${componentName}: ${propName} must be a number, got "${typeof propValue}"`);
     }
 
+    const opts = invokeWithProps(optsThunks, props);
+    const thunkValuesError = thunkValueValidator(
+      { [propName]: opts },
+      propName,
+      componentName,
+      ...rest,
+    );
+    if (thunkValuesError) {
+      return thunkValuesError;
+    }
+
     if (!lowerCompare(propValue, opts) || !upperCompare(propValue, opts)) {
-      const errors = [greaterThanError(opts), lessThanError(opts)].filter(Boolean).join(' and ');
-      return new RangeError(`${componentName}: ${propName} must be ${errors}`);
+      return new RangeError(errorMessage(componentName, propName, opts));
     }
 
     return null;
   };
-  validator.isRequired = function betweenRequired(props, propName, componentName) {
+  validator.isRequired = function betweenRequired(props, propName, componentName, ...rest) {
     const propValue = props[propName];
     if (typeof propValue !== 'number') {
       return new RangeError(`${componentName}: ${propName} must be a number, got "${typeof propValue}"`);
+    }
+
+    const opts = invokeWithProps(optsThunks, props);
+    const thunkValuesError = thunkValueValidator(
+      { [propName]: opts },
+      propName,
+      componentName,
+      ...rest,
+    );
+    if (thunkValuesError) {
+      return thunkValuesError;
     }
 
     if (!lowerCompare(propValue, opts) || !upperCompare(propValue, opts)) {
@@ -133,5 +165,5 @@ export default function betweenValidator(opts) {
     return null;
   };
 
-  return wrapValidator(validator, 'between', opts);
+  return wrapValidator(validator, 'between', options);
 }
