@@ -15,6 +15,7 @@ Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims]
  - `childrenHavePropXorChildren`: ensure that either all children have the indicated prop, all children have children, or all children have neither.
  - `childrenOf`: restrict the children prop to only allow children that pass the given propType validator.
  - `childrenOfType`: restrict the children prop to only allow children of the given element types.
+ - `childrenSequenceOf`: restrict the children prop to be a sequenceOf the given "specifiers" (see `sequenceOf`)
  - `componentWithName`: restrict the prop to only allow a component with a certain name/displayName.
  - `elementType`: require that the prop be a specific type of React element - takes a Component, an HTML tag name, or "*" to match everything.
  - `explicitNull`: only allow `null` or `undefined`/omission - and only `null` when required.

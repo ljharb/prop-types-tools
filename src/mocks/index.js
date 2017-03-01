@@ -8,6 +8,7 @@ module.exports = {
   childrenHavePropXorChildren: noopThunk,
   childrenOf: noopThunk,
   childrenOfType: noopThunk,
+  childrenSequenceOf: noopThunk,
   componentWithName: noopThunk,
   elementType: noopThunk,
   explicitNull: noopThunk,

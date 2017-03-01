@@ -3,6 +3,7 @@ import between from './between';
 import childrenHavePropXorChildren from './childrenHavePropXorChildren';
 import childrenOf from './childrenOf';
 import childrenOfType from './childrenOfType';
+import childrenSequenceOf from './childrenSequenceOf';
 import componentWithName from './componentWithName';
 import elementType from './elementType';
 import explicitNull from './explicitNull';
@@ -32,6 +33,7 @@ module.exports = {
   childrenHavePropXorChildren,
   childrenOf,
   childrenOfType,
+  childrenSequenceOf,
   componentWithName,
   elementType,
   explicitNull,
