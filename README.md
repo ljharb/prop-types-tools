@@ -31,6 +31,7 @@ Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims]
  - `or`: recursively allows only the provided propTypes, or arrays of those propTypes.
  - `range`: provide a min, and a max, and the prop must be a number in the range `[min, max)`
  - `restrictedProp`: this prop is not permitted to be anything but `null` or `undefined`.
+ - `sequenceOf`: takes 1 or more "specifiers": an object with a "validator" function (a propType validator), a "min" nonNegativeInteger, and a "max" nonNegativeInteger. If both "min" and "max" may be omitted, they default to 1; if only "max" is omitted, it defaults to Infinity; if only "min" is omitted, it defaults to 1.
  - `shape`: takes a shape, and allows it to be enforced on any non-null/undefined value.
  - `uniqueArray`: this prop must be an array, and all values must be unique (determined by `Object.is`). Like `PropTypes.array`, but with uniqueness.
  - `uniqueArrayOf`: `uniqueArray`, with a type validator applied. Like `PropTypes.arrayOf`, but with uniqueness.

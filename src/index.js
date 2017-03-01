@@ -19,6 +19,7 @@ import object from './object';
 import or from './or';
 import range from './range';
 import restrictedProp from './restrictedProp';
+import sequenceOf from './sequenceOf';
 import shape from './shape';
 import uniqueArray from './uniqueArray';
 import uniqueArrayOf from './uniqueArrayOf';
@@ -47,6 +48,7 @@ module.exports = {
   or,
   range,
   restrictedProp,
+  sequenceOf,
   shape,
   uniqueArray,
   uniqueArrayOf,
