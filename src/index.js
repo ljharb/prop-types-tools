@@ -11,6 +11,7 @@ import mutuallyExclusiveTrueProps from './mutuallyExclusiveTrueProps';
 import nChildren from './nChildren';
 import nonNegativeInteger from './nonNegativeInteger';
 import numericString from './numericString';
+import object from './object';
 import or from './or';
 import range from './range';
 import restrictedProp from './restrictedProp';
@@ -32,6 +33,7 @@ module.exports = {
   nChildren,
   nonNegativeInteger,
   numericString,
+  object,
   or,
   range,
   restrictedProp,

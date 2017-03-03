@@ -23,6 +23,7 @@ Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims]
  - `nChildren`: require a specific amount of children.
  - `nonNegativeInteger`: require that the prop be a number, that is 0, or a positive integer.
  - `numericString`: require the prop be a string that is conceptually numeric.
+ - `object`: same as `PropTypes.object`, but can be called outside of React's propType flow.
  - `or`: recursively allows only the provided propTypes, or arrays of those propTypes.
  - `range`: provide a min, and a max, and the prop must be a number in the range `[min, max)`
  - `restrictedProp`: this prop is not permitted to be anything but `null` or `undefined`.

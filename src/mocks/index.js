@@ -16,6 +16,7 @@ module.exports = {
   nChildren: noopThunk,
   nonNegativeInteger: noopThunk,
   numericString: noopThunk,
+  object: noopThunk,
   or: noopThunk,
   range: noopThunk,
   restrictedProp: noopThunk,
