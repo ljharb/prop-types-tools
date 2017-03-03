@@ -10,6 +10,7 @@ module.exports = {
   explicitNull: noopThunk,
   forbidExtraProps: Object,
   integer: noopThunk,
+  keysOf: noopThunk,
   mutuallyExclusiveProps: noopThunk,
   mutuallyExclusiveTrueProps: noopThunk,
   nChildren: noopThunk,

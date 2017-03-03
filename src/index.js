@@ -5,6 +5,7 @@ import componentWithName from './componentWithName';
 import explicitNull from './explicitNull';
 import forbidExtraProps from './forbidExtraProps';
 import integer from './integer';
+import keysOf from './keysOf';
 import mutuallyExclusiveProps from './mutuallyExclusiveProps';
 import mutuallyExclusiveTrueProps from './mutuallyExclusiveTrueProps';
 import nChildren from './nChildren';
@@ -25,6 +26,7 @@ module.exports = {
   explicitNull,
   forbidExtraProps,
   integer,
+  keysOf,
   mutuallyExclusiveProps,
   mutuallyExclusiveTrueProps,
   nChildren,

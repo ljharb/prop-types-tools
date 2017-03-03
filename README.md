@@ -17,6 +17,7 @@ Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims]
  - `explicitNull`: only allow `null` or `undefined`/omission - and only `null` when required.
  - `forbidExtraProps`: pass your entire `propTypes` object into this function, and any nonspecified prop will error.
  - `integer`: require the prop be an integer.
+ - `keysOf`: pass in a proptype, and require all the keys of a prop to have that type
  - `mutuallyExclusiveProps`: provide a propType, and a list of props, and only one prop out of the list will be permitted, validated by the given propType.
  - `mutuallyExclusiveTrueProps`: provide a list of props, and all must be booleans, and only one is allowed to be true.
  - `nChildren`: require a specific amount of children.
