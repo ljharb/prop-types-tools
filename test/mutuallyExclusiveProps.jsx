@@ -48,8 +48,13 @@ describe('mutuallyExclusiveProps', () => {
     const validator = mutuallyExclusiveProps(PropTypes.bool, prop1, prop2);
 
     assertPasses(validator, <div a={false} />, 'a');
+    assertPasses(validator.isRequired, <div a={false} />, 'a');
+
     assertPasses(validator, <div a={1} {...{ [prop1]: true }} />, prop1);
+    assertPasses(validator.isRequired, <div a={1} {...{ [prop1]: true }} />, prop1);
+
     assertPasses(validator, <div a={1} {...{ [prop2]: true }} />, prop2);
+    assertPasses(validator.isRequired, <div a={1} {...{ [prop2]: true }} />, prop2);
   });
 
   it('fails when the provided propType fails', () => {

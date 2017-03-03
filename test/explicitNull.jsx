@@ -19,14 +19,20 @@ describe('explicitNull', () => {
   }
 
   it('passes on null/undefined/missing', () => {
-    assertPasses(explicitNull(), (<div foo={null} />), 'foo');
-    assertPasses(explicitNull(), (<div foo={undefined} />), 'foo');
-    assertPasses(explicitNull(), (<div />), 'foo');
+    const validator = explicitNull();
+
+    assertPasses(validator, (<div foo={null} />), 'foo');
+    assertPasses(validator.isRequired, (<div foo={null} />), 'foo');
+
+    assertPasses(validator, (<div foo={undefined} />), 'foo');
+    assertPasses(validator, (<div />), 'foo');
   });
 
   it('fails on undefined/missing when required', () => {
-    assertFails(explicitNull().isRequired, <div foo={undefined} />, 'foo');
-    assertFails(explicitNull().isRequired, <div />, 'foo');
+    const validator = explicitNull();
+
+    assertFails(validator.isRequired, <div foo={undefined} />, 'foo');
+    assertFails(validator.isRequired, <div />, 'foo');
   });
 
   it('fails on any other value', () => {

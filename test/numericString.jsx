@@ -18,6 +18,12 @@ describe('numericString', () => {
     expect(callValidator(validator, element, propName, '"numericString" test')).to.be.instanceOf(Error);
   }
 
+  it('behaves when absent', () => {
+    const validator = numericString();
+    assertPasses(validator, (<div />), 'a');
+    assertFails(validator.isRequired, (<div />), 'a');
+  });
+
   it('fails when not a string', () => {
     assertFails(numericString(), (<div a />), 'a');
     assertFails(numericString(), (<div a={false} />), 'a');
@@ -28,9 +34,14 @@ describe('numericString', () => {
   });
 
   it('passes on the zeroes', () => {
-    assertPasses(numericString(), (<div a="0" />), 'a');
-    assertPasses(numericString(), (<div a="-0" />), 'a');
-    assertPasses(numericString(), (<div a="+0" />), 'a');
+    const validator = numericString();
+
+    assertPasses(validator, (<div a="0" />), 'a');
+    assertPasses(validator.isRequired, (<div a="0" />), 'a');
+    assertPasses(validator, (<div a="-0" />), 'a');
+    assertPasses(validator.isRequired, (<div a="-0" />), 'a');
+    assertPasses(validator, (<div a="+0" />), 'a');
+    assertPasses(validator.isRequired, (<div a="+0" />), 'a');
   });
 
   it('passes when a numeric string', () => {
@@ -54,12 +65,26 @@ describe('numericString', () => {
   });
 
   it('fails on edge cases', () => {
-    assertFails(numericString(), (<div a="NaN" />), 'a');
-    assertFails(numericString(), (<div a="-NaN" />), 'a');
-    assertFails(numericString(), (<div a="+NaN" />), 'a');
+    const validator = numericString();
 
-    assertFails(numericString(), (<div a="Infinity" />), 'a');
-    assertFails(numericString(), (<div a="-Infinity" />), 'a');
-    assertFails(numericString(), (<div a="+Infinity" />), 'a');
+    assertFails(validator, (<div a="NaN" />), 'a');
+    assertFails(validator, (<div a="-NaN" />), 'a');
+    assertFails(validator, (<div a="+NaN" />), 'a');
+
+    assertFails(validator, (<div a="Infinity" />), 'a');
+    assertFails(validator, (<div a="-Infinity" />), 'a');
+    assertFails(validator, (<div a="+Infinity" />), 'a');
+  });
+
+  it('fails on edge cases when required', () => {
+    const validator = numericString().isRequired;
+
+    assertFails(validator, (<div a="NaN" />), 'a');
+    assertFails(validator, (<div a="-NaN" />), 'a');
+    assertFails(validator, (<div a="+NaN" />), 'a');
+
+    assertFails(validator, (<div a="Infinity" />), 'a');
+    assertFails(validator, (<div a="-Infinity" />), 'a');
+    assertFails(validator, (<div a="+Infinity" />), 'a');
   });
 });

@@ -10,6 +10,23 @@ describe('and', () => {
     expect(typeof and([PropTypes.number, nonNegativeInteger])).to.equal('function');
   });
 
+  it('throws on non-array input', () => {
+    expect(() => and()).to.throw(TypeError);
+    expect(() => and(null)).to.throw(TypeError);
+    expect(() => and(undefined)).to.throw(TypeError);
+    expect(() => and({})).to.throw(TypeError);
+    expect(() => and(() => {})).to.throw(TypeError);
+    expect(() => and(true)).to.throw(TypeError);
+    expect(() => and(42)).to.throw(TypeError);
+    expect(() => and('')).to.throw(TypeError);
+  });
+
+  it('requires at least 2 validators', () => {
+    expect(() => and([])).to.throw(RangeError);
+    expect(() => and([() => {}])).to.throw(RangeError);
+    expect(() => and([() => {}, () => {}])).not.to.throw();
+  });
+
   function assertPasses(validator, element, propName) {
     const result = callValidator(validator, element, propName, '"and" test');
     expect(result).to.equal(null);

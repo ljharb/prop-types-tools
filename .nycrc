@@ -7,6 +7,7 @@
   "branches": 100,
   "exclude": [
     "build",
-    "test"
+    "test",
+    "index.js"
   ]
 }

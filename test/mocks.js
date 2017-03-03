@@ -19,6 +19,9 @@ describe('mocks', () => {
       const validator = mock();
       const expectedType = name === 'forbidExtraProps' ? 'object' : 'function';
       expect([name, typeof validator]).to.eql([name, expectedType]);
+      if (name !== 'forbidExtraProps') {
+        expect(validator).not.to.throw();
+      }
     });
   });
 
