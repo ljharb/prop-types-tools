@@ -33,6 +33,7 @@ Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims]
  - `shape`: takes a shape, and allows it to be enforced on any non-null/undefined value.
  - `uniqueArray`: this prop must be an array, and all values must be unique (determined by `Object.is`). Like `PropTypes.array`, but with uniqueness.
  - `uniqueArrayOf`: `uniqueArray`, with a type validator applied. Like `PropTypes.arrayOf`, but with uniqueness.
+ - `valuesOf`: a non-object requiring `PropTypes.objectOf`. Takes a propType validator, and applies it to every own value on the propValue.
  - `withShape`: takes a PropType and a shape, and allows it to be enforced on any non-null/undefined value.
 
 ## Production

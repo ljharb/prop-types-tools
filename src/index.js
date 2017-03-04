@@ -21,6 +21,7 @@ import restrictedProp from './restrictedProp';
 import shape from './shape';
 import uniqueArray from './uniqueArray';
 import uniqueArrayOf from './uniqueArrayOf';
+import valuesOf from './valuesOf';
 import withShape from './withShape';
 
 module.exports = {
@@ -47,5 +48,6 @@ module.exports = {
   shape,
   uniqueArray,
   uniqueArrayOf,
+  valuesOf,
   withShape,
 };
