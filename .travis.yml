@@ -12,14 +12,18 @@ before_install:
 before_script:
   - "sh install-relevant-react.sh"
 script:
-  - 'if [ -n "${LINT-}" ]; then npm run lint; else npm run travis; fi'
+  - 'if [ -n "${PRETEST-}" ]; then npm run lint; fi'
+  - 'if [ -n "${COVERAGE-}" ]; then npm run coverage; fi'
+  - 'if [ -n "${REACT-}" ]; then npm run "react:${REACT}" && npm run travis; fi'
 sudo: false
 matrix:
   fast_finish: true
   include:
    - node_js: "node"
-     env: LINT=true
+     env: PRETEST=true
+   - node_js: "node"
+     env: COVERAGE=true
   allow_failures:
 env:
-  - REACT=0.14
+  - REACT=14
   - REACT=15
