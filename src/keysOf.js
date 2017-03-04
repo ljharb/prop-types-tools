@@ -1,12 +1,17 @@
+import isPrimitive from './helpers/isPrimitive';
+
 export default function keysOf(validatorFn, name = 'keysOf') {
   if (typeof validatorFn !== 'function') {
     throw new TypeError('argument to keysOf must be a valid PropType');
   }
 
   const keysOfValidator = function keyedBy(props, propName, componentName, ...rest) {
-    if (props[propName] == null) {
-      return null; // not required
+    const propValue = props[propName];
+
+    if (propValue == null || isPrimitive(propValue)) {
+      return null;
     }
+
     const keys = Object.keys(props[propName]);
     let firstError = null;
     keys.some((key) => {

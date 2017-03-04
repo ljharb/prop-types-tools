@@ -1,7 +1,8 @@
+import isPlainObject from './helpers/isPlainObject';
 import wrapValidator from './helpers/wrapValidator';
 
 export default function shapeValidator(shapeTypes) {
-  if (!shapeTypes || Array.isArray(shapeTypes) || typeof shapeTypes !== 'object') {
+  if (!isPlainObject(shapeTypes)) {
     throw new TypeError('shape must be a normal object');
   }
 

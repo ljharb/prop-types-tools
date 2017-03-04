@@ -1,5 +1,6 @@
-import wrapValidator from './helpers/wrapValidator';
+import isPlainObject from './helpers/isPlainObject';
 import typeOf from './helpers/typeOf';
+import wrapValidator from './helpers/wrapValidator';
 
 /*
   code adapted from https://github.com/facebook/react/blob/14156e56b9cf18ac86963185c5af4abddf3ff811/src/isomorphic/classic/types/ReactPropTypes.js#L202-L206
@@ -18,7 +19,7 @@ function object(props, propName, componentName, location, propFullName) {
     return null;
   }
 
-  if (propValue && typeof propValue === 'object' && !Array.isArray(propValue)) {
+  if (isPlainObject(propValue)) {
     return null;
   }
   const locationName = ReactPropTypeLocationNames[location] || location;

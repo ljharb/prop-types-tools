@@ -1,3 +1,4 @@
+import isPrimitive from './helpers/isPrimitive';
 import wrapValidator from './helpers/wrapValidator';
 
 // code adapted from https://github.com/facebook/react/blob/14156e56b9cf18ac86963185c5af4abddf3ff811/src/isomorphic/classic/types/ReactPropTypes.js#L307-L340
@@ -16,12 +17,7 @@ export default function valuesOfValidator(propType) {
     ...rest
   ) {
     const propValue = props[propName];
-    if (propValue == null) {
-      return null;
-    }
-
-    if (!propValue || (typeof propValue !== 'object' && typeof propValue !== 'function')) {
-      // is a primitive
+    if (propValue == null || isPrimitive(propValue)) {
       return null;
     }
 

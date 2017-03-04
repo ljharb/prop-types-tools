@@ -1,4 +1,5 @@
 import has from 'has';
+import isPlainObject from './helpers/isPlainObject';
 
 const zeroWidthSpace = '\u200b';
 const semaphore = {};
@@ -12,7 +13,7 @@ function isBranded(value) {
 }
 
 export default function forbidExtraProps(propTypes) {
-  if (!propTypes || typeof propTypes !== 'object') {
+  if (!isPlainObject(propTypes)) {
     throw new TypeError('given propTypes must be an object');
   }
   if (has(propTypes, zeroWidthSpace) && !isBranded(propTypes[zeroWidthSpace])) {
