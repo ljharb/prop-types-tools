@@ -29,7 +29,8 @@
   },
   "scripts": {
     "pretest": "npm run lint",
-    "test": "npm run build && npm run test:only",
+    "test": "npm run travis",
+    "travis": "npm run build && npm run test:only",
     "test:only": "npm run mocha test",
     "test:all": "npm run test:only && npm run react:14 && npm run test:only && npm run react:15 && npm run test:only",
     "lint": "eslint --ext js,jsx src test",

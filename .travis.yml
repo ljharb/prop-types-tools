@@ -12,9 +12,7 @@ before_install:
 before_script:
   - "sh install-relevant-react.sh"
 script:
-  - 'if [ -n "${LINT-}" ]; then npm run lint; elif [ -n "${REACT-}" ]; then npm run cover; else false ; fi'
-after_script:
-  - 'if [ "${TRAVIS_NODE_VERSION}" = "4" ] || [ "${TRAVIS_NODE_VERSION}" = "0.12" ]; then cat ./coverage/lcov.info | ./node_modules/.bin/coveralls ; fi'
+  - 'if [ -n "${LINT-}" ]; then npm run lint; else npm run travis; fi'
 sudo: false
 matrix:
   fast_finish: true
