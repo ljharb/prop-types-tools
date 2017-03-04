@@ -1,6 +1,6 @@
 {
   "name": "airbnb-prop-types",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Custom React PropType validators that we use at Airbnb.",
   "main": "index.js",
   "dependencies": {

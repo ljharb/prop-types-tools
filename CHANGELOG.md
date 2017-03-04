@@ -1,3 +1,28 @@
+2.4.0 / 2017-03-04
+==================
+  * [New] add `childrenSequenceOf`
+  * [New] add `sequenceOf`
+  * [New] `between`: allow it to take props-taking number thunks as option values as well.
+  * [New] add `between`
+  * [New] add `shape`
+  * [New] add `nonNegativeNumber`
+  * [New] add `elementType`
+  * [New] add `childrenOf`
+  * [New] add `object`
+  * [New] add `keysOf` (#8)
+  * [New] add `valuesOf`
+  * [New] add `isPrimitive` and `isPlainObject` helpers
+  * [New] add `wrapValidator` helper
+  * [New] add `renderableChildren` helper
+  * [New] add `getComponentName` helper
+  * [New] `nChildren`, `restrictedProp`, `childrenHavePropXorChildren`: add `isRequired` for consistency
+  * [New] `and`: `isRequired` validator typeName should indicate such.
+  * [Tests] run coverage as part of tests
+  * [Tests] fix test script
+  * [Tests] improve coverage to 100%
+  * [Tests] add `npm run coverage`
+  * [babel] build with source maps
+
 2.3.0 / 2017-02-23
 ==================
   * [New] add `integer`
