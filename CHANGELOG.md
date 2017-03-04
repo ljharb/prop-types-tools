@@ -1,3 +1,7 @@
+2.4.1 / 2017-03-04
+==================
+  * [Fix] `childrenOfType`: partially revert fc0e37f84e1537a875c30d0db69b5121d790eb40
+
 2.4.0 / 2017-03-04
 ==================
   * [New] add `childrenSequenceOf`
