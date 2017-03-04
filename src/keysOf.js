@@ -1,40 +1,49 @@
 import isPrimitive from './helpers/isPrimitive';
+import wrapValidator from './helpers/wrapValidator';
 
-export default function keysOf(validatorFn, name = 'keysOf') {
-  if (typeof validatorFn !== 'function') {
-    throw new TypeError('argument to keysOf must be a valid PropType');
+export default function keysOfValidator(propType, name = 'keysOf') {
+  if (typeof propType !== 'function') {
+    throw new TypeError('argument to keysOf must be a valid PropType function');
   }
 
-  const keysOfValidator = function keyedBy(props, propName, componentName, ...rest) {
+  const validator = function keysOf(
+    props,
+    propName,
+    componentName,
+    location,
+    propFullName,
+    ...rest
+  ) {
     const propValue = props[propName];
 
     if (propValue == null || isPrimitive(propValue)) {
       return null;
     }
 
-    const keys = Object.keys(props[propName]);
     let firstError = null;
-    keys.some((key) => {
-      const pseudoProps = { key };
-      firstError = validatorFn(pseudoProps, 'key', componentName, ...rest);
+    Object.keys(propValue).some((key) => {
+      firstError = propType(
+        { [key]: key },
+        key,
+        componentName,
+        location,
+        `(${propFullName}).${key}`,
+        ...rest,
+      );
       return firstError != null;
     });
-    return firstError == null ? null : firstError;
+    return firstError || null;
   };
-  keysOfValidator.typeName = name;
 
-  keysOfValidator.isRequired = function keyedByRequired(
-    props,
-    propName,
-    componentName,
-    ...rest
-  ) {
-    if (props[propName] == null) {
-      return new TypeError(`${propName} is required, but value is ${props[propName]}`);
+  validator.isRequired = function keyedByRequired(props, propName, componentName, ...rest) {
+    const propValue = props[propName];
+
+    if (propValue == null) {
+      return new TypeError(`${componentName}: ${propName} is required, but value is ${propValue}`);
     }
-    return keysOfValidator(props, propName, componentName, ...rest);
-  };
-  keysOfValidator.isRequired.typeName = `${name}.isRequired`;
 
-  return keysOfValidator;
+    return validator(props, propName, componentName, ...rest);
+  };
+
+  return wrapValidator(validator, name, propType);
 }
