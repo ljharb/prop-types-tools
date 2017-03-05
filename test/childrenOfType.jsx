@@ -21,12 +21,39 @@ describe('childrenOfType', () => {
     expect(callValidator(validator, element, propName, componentName)).to.be.instanceOf(Error);
   }
 
+  describe('with no children', () => {
+    it('passes when optional', () => {
+      assertPasses(
+        childrenOfType('span'),
+        (<div />),
+        'children',
+        'empty',
+      );
+    });
+
+    it('fails when required', () => {
+      assertFails(
+        childrenOfType('span').isRequired,
+        (<div />),
+        'children',
+        'empty required',
+      );
+    });
+  });
+
   describe('with a single child of the specified type', () => {
     it('passes with a DOM element', () => assertPasses(
       childrenOfType('span'),
       (<div><span /></div>),
       'children',
       'span!',
+    ));
+
+    it('passes with a DOM element when required', () => assertPasses(
+      childrenOfType('span').isRequired,
+      (<div><span /></div>),
+      'children',
+      'span! required',
     ));
 
     it('passes with an SFC', () => assertPasses(
@@ -36,11 +63,25 @@ describe('childrenOfType', () => {
       'SFC!',
     ));
 
+    it('passes with an SFC when required', () => assertPasses(
+      childrenOfType(SFC).isRequired,
+      (<div><SFC default="Foo" /></div>),
+      'children',
+      'SFC! required',
+    ));
+
     it('passes with a Component', () => assertPasses(
       childrenOfType(Component),
       (<div><Component default="Foo" /></div>),
       'children',
       'Component!',
+    ));
+
+    it('passes with a Component when required', () => assertPasses(
+      childrenOfType(Component).isRequired,
+      (<div><Component default="Foo" /></div>),
+      'children',
+      'Component! required',
     ));
   });
 
@@ -59,6 +100,20 @@ describe('childrenOfType', () => {
       'span!',
     ));
 
+    it('passes with a DOM element when required', () => assertPasses(
+      childrenOfType('span').isRequired,
+      (
+        <div>
+          <span />
+          <span />
+          <span />
+          <span />
+        </div>
+      ),
+      'children',
+      'span! required',
+    ));
+
     it('passes with an SFC', () => assertPasses(
       childrenOfType(SFC),
       (
@@ -73,6 +128,20 @@ describe('childrenOfType', () => {
       'SFC!',
     ));
 
+    it('passes with an SFC when required', () => assertPasses(
+      childrenOfType(SFC).isRequired,
+      (
+        <div>
+          <SFC default="Foo" />
+          <SFC default="Foo" />
+          <SFC default="Foo" />
+          <SFC default="Foo" />
+        </div>
+      ),
+      'children',
+      'SFC! required',
+    ));
+
     it('passes with a Component', () => assertPasses(
       childrenOfType(Component),
       (
@@ -85,6 +154,20 @@ describe('childrenOfType', () => {
       ),
       'children',
       'Component!',
+    ));
+
+    it('passes with a Component when required', () => assertPasses(
+      childrenOfType(Component).isRequired,
+      (
+        <div>
+          <Component default="Foo" />
+          <Component default="Foo" />
+          <Component default="Foo" />
+          <Component default="Foo" />
+        </div>
+      ),
+      'children',
+      'Component! required',
     ));
   });
 
