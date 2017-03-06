@@ -3,7 +3,7 @@ import renderableChildren from './helpers/renderableChildren';
 import wrapValidator from './helpers/wrapValidator';
 
 function onlyTypes(types, children, componentName) {
-  if (!children.every(child => child && types.find(Type => child.type === Type))) {
+  if (!children.every(child => child && types.find(Type => Type === '*' || child.type === Type))) {
     const typeNames = types.map(getComponentName).join(', or ');
     return new TypeError(
       `\`${componentName}\` only accepts children of type ${typeNames}`,

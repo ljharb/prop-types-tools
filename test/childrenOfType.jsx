@@ -42,6 +42,20 @@ describe('childrenOfType', () => {
   });
 
   describe('with a single child of the specified type', () => {
+    it('passes with *', () => assertPasses(
+      childrenOfType('*'),
+      (<div><span /></div>),
+      'children',
+      '*!',
+    ));
+
+    it('passes with * when required', () => assertPasses(
+      childrenOfType('*').isRequired,
+      (<div><span /></div>),
+      'children',
+      '*! required',
+    ));
+
     it('passes with a DOM element', () => assertPasses(
       childrenOfType('span'),
       (<div><span /></div>),
@@ -86,6 +100,32 @@ describe('childrenOfType', () => {
   });
 
   describe('with multiple children of the specified type', () => {
+    it('passes with *', () => assertPasses(
+      childrenOfType('*'),
+      (
+        <div>
+          <span />
+          <SFC />
+          <Component />
+        </div>
+      ),
+      'children',
+      '*!',
+    ));
+
+    it('passes with * when required', () => assertPasses(
+      childrenOfType('*').isRequired,
+      (
+        <div>
+          <span />
+          <SFC />
+          <Component />
+        </div>
+      ),
+      'children',
+      '*! required',
+    ));
+
     it('passes with a DOM element', () => assertPasses(
       childrenOfType('span'),
       (
@@ -172,6 +212,36 @@ describe('childrenOfType', () => {
   });
 
   describe('with children of the specified types passed as an array', () => {
+    it('passes with *', () => assertPasses(
+      childrenOfType('*').isRequired,
+      (
+        <div>
+          {[
+            <span key="one" />,
+            <span key="two" />,
+            <span key="three" />,
+          ]}
+        </div>
+      ),
+      'children',
+      '*!',
+    ));
+
+    it('passes with *', () => assertPasses(
+      childrenOfType('*').isRequired,
+      (
+        <div>
+          {[
+            <span key="one" />,
+            <span key="two" />,
+            <span key="three" />,
+          ]}
+        </div>
+      ),
+      'children',
+      '*! required',
+    ));
+
     it('passes with a DOM element', () => assertPasses(
       childrenOfType('span'),
       (
@@ -215,6 +285,68 @@ describe('childrenOfType', () => {
       ),
       'children',
       'Component!',
+    ));
+
+    it('passes with multiple types', () => assertPasses(
+      childrenOfType(SFC, Component, 'span'),
+      (
+        <div>
+          {[
+            <span key="one" default="Foo" />,
+            <Component key="two" default="Foo" />,
+            <SFC key="three" default="Foo" />,
+          ]}
+        </div>
+      ),
+      'children',
+      'all three',
+    ));
+
+    it('passes with multiple types when required', () => assertPasses(
+      childrenOfType(SFC, Component, 'span').isRequired,
+      (
+        <div>
+          {[
+            <span key="one" default="Foo" />,
+            <Component key="two" default="Foo" />,
+            <SFC key="three" default="Foo" />,
+          ]}
+        </div>
+      ),
+      'children',
+      'all three required',
+    ));
+
+    it('passes with multiple types including *', () => assertPasses(
+      childrenOfType(SFC, '*'),
+      (
+        <div>
+          {[
+            <span key="one" default="Foo" />,
+            <Component key="two" default="Foo" />,
+            <SFC key="three" default="Foo" />,
+            'text children',
+          ]}
+        </div>
+      ),
+      'children',
+      'SFC and *',
+    ));
+
+    it('passes with multiple types including * when required', () => assertPasses(
+      childrenOfType(SFC, '*').isRequired,
+      (
+        <div>
+          {[
+            <span key="one" default="Foo" />,
+            <Component key="two" default="Foo" />,
+            <SFC key="three" default="Foo" />,
+            'text children',
+          ]}
+        </div>
+      ),
+      'children',
+      'SFC and *',
     ));
   });
 
