@@ -4,7 +4,8 @@
   "description": "Custom React PropType validators that we use at Airbnb.",
   "main": "index.js",
   "dependencies": {
-    "has": "^1.0.1"
+    "has": "^1.0.1",
+    "is-regex": "^1.0.4"
   },
   "devDependencies": {
     "airbnb-js-shims": "^1.1.1",

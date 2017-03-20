@@ -1,4 +1,6 @@
 import React from 'react';
+import isRegex from 'is-regex';
+
 import getComponentName from './helpers/getComponentName';
 import wrapValidator from './helpers/wrapValidator';
 
@@ -16,7 +18,15 @@ function hasName(name, prop, propName, componentName) {
   }
 
   const { type } = prop;
-  if (getComponentName(type) !== name) {
+  const componentNameFromType = getComponentName(type);
+
+  if (isRegex(name) && !name.test(componentNameFromType)) {
+    return new TypeError(
+      `\`${componentName}.${propName}\` only accepts components matching the regular expression ${name}`,
+    );
+  }
+
+  if (!isRegex(name) && componentNameFromType !== name) {
     return new TypeError(
       `\`${componentName}.${propName}\` only accepts components named ${name}`,
     );

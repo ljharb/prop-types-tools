@@ -217,6 +217,48 @@ describe('componentWithName', () => {
     ));
   });
 
+  describe('when a regex value is provided instead of a string', () => {
+    it('passes with an SFC', () => assertPasses(
+      componentWithName(/FC$/),
+      (
+        <div><SFC default="Foo" /></div>
+      ),
+      'children',
+    ));
+
+    it('passes with an SFC + displayName', () => assertPasses(
+      componentWithName(/display name/),
+      (
+        <div><SFCwithName default="Foo" /></div>
+      ),
+      'children',
+    ));
+
+    it('passes with a Component', () => assertPasses(
+      componentWithName(/^Comp/),
+      (<div><Component default="Foo" /></div>),
+      'children',
+    ));
+
+    it('passes with a Component + displayName', () => assertPasses(
+      componentWithName(/display name/),
+      (<div><ComponentWithName default="Foo" /></div>),
+      'children',
+    ));
+
+    it('fails when SFC name does not match the regex provided', () => assertFails(
+      componentWithName(/foobar/),
+      (<div><SFC default="Foo" /></div>),
+      'children',
+    ));
+
+    it('fails when Component name does not match the regex provided', () => assertFails(
+      componentWithName(/foobar/),
+      (<div><Component default="Foo" /></div>),
+      'children',
+    ));
+  });
+
   it('fails when the provided prop is not a component', () => assertFails(
     componentWithName('SFC'),
     (
