@@ -1,3 +1,10 @@
+2.5.0 / 2017-03-23
+==================
+  * [New] Adds regex capabilities to componentWithName (#11)
+  * [New] `childrenOfType`: add support for `*` which supports anything.
+  * [Dev Deps] update `babel-cli`, `babel-register`, `eslint`, `rimraf`, `babel-plugin-istanbul`, `eslint-plugin-react`
+  * [Tests] improve coverage to 100%
+
 2.4.1 / 2017-03-04
 ==================
   * [Fix] `childrenOfType`: partially revert fc0e37f84e1537a875c30d0db69b5121d790eb40
