@@ -45,7 +45,7 @@
     "cover:run": "nyc --show-process-tree npm run --silent mocha test -- --reporter=dot",
     "precoverage": "NODE_ENV=test npm run build",
     "coverage": "npm run --quiet cover:clean && npm run --silent cover:run",
-    "mocha": "mocha --recursive",
+    "mocha": "mocha --recursive test/helpers/_failTestsOnErrors",
     "react:clean": "rimraf node_modules/react node_modules/react-dom node_modules/react-addons-test-utils",
     "react:14": "npm run react:clean && npm i react@0.14 react-dom@0.14 react-addons-test-utils@0.14",
     "react:15": "npm run react:clean && npm i react@15 react-dom@15 react-addons-test-utils@15"
