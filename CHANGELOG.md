@@ -1,3 +1,11 @@
+2.5.1 / 2017-03-24
+==================
+  * [Fix] `componentWithName`: throw if given a non-string/non-regex name
+  * [Fix] `or`: ensure it works with `explicitNull` (#12)
+  * [Fix] `between`: avoid React PropType warning by using `valuesOf` instead of `PropTypes.objectOf`
+  * [Refactor] `or`: add some extra tests; remove unnecessary `oneOfType` wrapper
+  * [Tests] fail tests on console warnings or errors
+
 2.5.0 / 2017-03-23
 ==================
   * [New] Adds regex capabilities to componentWithName (#11)
