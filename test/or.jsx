@@ -5,9 +5,11 @@ import { or } from '../';
 
 import callValidator from './_callValidator';
 
+const { bool, string, number, arrayOf } = PropTypes;
+
 describe('or', () => {
   it('returns a function', () => {
-    expect(typeof or([PropTypes.string, PropTypes.bool])).to.equal('function');
+    expect(typeof or([string, bool])).to.equal('function');
   });
 
   it('throws if given a non-array', () => {
@@ -19,7 +21,7 @@ describe('or', () => {
 
   it('throws if given an array of zero or one items', () => {
     expect(() => or([])).to.throw(RangeError);
-    expect(() => or([PropTypes.string])).to.throw(RangeError);
+    expect(() => or([string])).to.throw(RangeError);
   });
 
   function assertPasses(validator, element, propName) {
@@ -31,7 +33,7 @@ describe('or', () => {
   }
 
   it('allows composing propTypes', () => {
-    const validator = or([PropTypes.bool, PropTypes.number, PropTypes.arrayOf(PropTypes.string)]);
+    const validator = or([bool, number, arrayOf(string)]);
 
     assertPasses(validator, (<div a />), 'a');
     assertPasses(validator, (<div a={1} />), 'a');
@@ -39,6 +41,13 @@ describe('or', () => {
     assertPasses(validator, (<div a={['b', 'c']} />), 'a');
     assertFails(validator, (<div a={['b', 1]} />), 'a');
     assertFails(validator, (<div a="b" />), 'a');
+
+    assertPasses(validator.isRequired, (<div a />), 'a');
+    assertPasses(validator.isRequired, (<div a={1} />), 'a');
+    assertPasses(validator.isRequired, (<div a={[]} />), 'a');
+    assertPasses(validator.isRequired, (<div a={['b', 'c']} />), 'a');
+    assertFails(validator.isRequired, (<div a={['b', 1]} />), 'a');
+    assertFails(validator.isRequired, (<div a="b" />), 'a');
 
     assertFails(validator.isRequired, (<div />), 'a');
   });

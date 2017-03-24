@@ -10,10 +10,8 @@ export default function or(validators, name = 'or') {
   }
 
   const validator = PropTypes.oneOfType([
-    PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.oneOfType(validators)),
-      ...validators,
-    ]),
+    PropTypes.arrayOf(PropTypes.oneOfType(validators)),
+    ...validators,
   ]);
 
   return wrapValidator(validator, name, validators);
