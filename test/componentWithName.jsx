@@ -25,6 +25,18 @@ describe('componentWithName', () => {
     expect(typeof componentWithName('name')).to.equal('function');
   });
 
+  it('throws when not given a string or a regex', () => {
+    expect(() => componentWithName()).to.throw(TypeError);
+    expect(() => componentWithName(null)).to.throw(TypeError);
+    expect(() => componentWithName(undefined)).to.throw(TypeError);
+    expect(() => componentWithName(true)).to.throw(TypeError);
+    expect(() => componentWithName(false)).to.throw(TypeError);
+    expect(() => componentWithName(42)).to.throw(TypeError);
+    expect(() => componentWithName(NaN)).to.throw(TypeError);
+    expect(() => componentWithName([])).to.throw(TypeError);
+    expect(() => componentWithName({})).to.throw(TypeError);
+  });
+
   function assertPasses(validator, element, propName) {
     expect(callValidator(validator, element, propName)).to.equal(null);
   }

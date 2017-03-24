@@ -14,10 +14,10 @@ Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims]
  - `between`: provide an object with an `gt` or `gte` number, and an `lt` or `lte` number (only one item allowed from each pairs; one or both pairs may be provided), and the resulting propType validator will ensure the prop value is a number within the given range. Alternatively, you can provide a function that takes the `props` object and returns a number for each of the `gt`/`gte`/`lt`/`lte` values.
  - `childrenHavePropXorChildren`: ensure that either all children have the indicated prop, all children have children, or all children have neither.
  - `childrenOf`: restrict the children prop to only allow children that pass the given propType validator.
- - `childrenOfType`: restrict the children prop to only allow children of the given element types.
+ - `childrenOfType`: restrict the children prop to only allow children of the given element types - takes a Component, an HTML tag name, or `"*"` to match everything.
  - `childrenSequenceOf`: restrict the children prop to be a sequenceOf the given "specifiers" (see `sequenceOf`)
- - `componentWithName`: restrict the prop to only allow a component with a certain name/displayName.
- - `elementType`: require that the prop be a specific type of React element - takes a Component, an HTML tag name, or "*" to match everything.
+ - `componentWithName`: restrict the prop to only allow a component with a certain name/displayName. Accepts a string, or a regular expression.
+ - `elementType`: require that the prop be a specific type of React element - takes a Component, an HTML tag name, or `"*"` to match everything.
  - `explicitNull`: only allow `null` or `undefined`/omission - and only `null` when required.
  - `forbidExtraProps`: pass your entire `propTypes` object into this function, and any nonspecified prop will error.
  - `integer`: require the prop be an integer.

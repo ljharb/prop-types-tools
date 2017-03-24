@@ -4,10 +4,10 @@ import isRegex from 'is-regex';
 import getComponentName from './helpers/getComponentName';
 import wrapValidator from './helpers/wrapValidator';
 
-function hasName(name, prop, propName, componentName) {
+function hasName(name, prop, propName, componentName, ...rest) {
   if (Array.isArray(prop)) {
     return prop
-      .map(item => hasName(name, item, propName, componentName))
+      .map(item => hasName(name, item, propName, componentName, ...rest))
       .find(Boolean) || null;
   }
 
@@ -35,28 +35,31 @@ function hasName(name, prop, propName, componentName) {
   return null;
 }
 
-function componentWithName(name) {
-  function componentWithNameValidator(props, propName, componentName) {
+export default function componentWithName(name) {
+  if (typeof name !== 'string' && !isRegex(name)) {
+    throw new TypeError('name must be a string or a regex');
+  }
+
+  function componentWithNameValidator(props, propName, componentName, ...rest) {
     const prop = props[propName];
     if (props[propName] == null) {
       return null;
     }
-    return hasName(name, prop, propName, componentName);
+    return hasName(name, prop, propName, componentName, ...rest);
   }
 
   componentWithNameValidator.isRequired = function componentWithNameRequired(
     props,
     propName,
     componentName,
+    ...rest
   ) {
     const prop = props[propName];
     if (prop == null) {
       return new TypeError(`\`${componentName}.${propName}\` requires at least one component named ${name}`);
     }
-    return hasName(name, prop, propName, componentName);
+    return hasName(name, prop, propName, componentName, ...rest);
   };
 
   return wrapValidator(componentWithNameValidator, `componentWithName:${name}`, name);
 }
-
-export default componentWithName;
