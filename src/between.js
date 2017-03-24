@@ -1,5 +1,5 @@
-import { PropTypes } from 'react';
 import shape from './shape';
+import valuesOf from './valuesOf';
 import wrapValidator from './helpers/wrapValidator';
 
 function number(props, propName, componentName) {
@@ -104,7 +104,7 @@ function argValidator(props, propName) {
   return argValidators.every(validator => !!validator(props, propName));
 }
 
-const thunkValueValidator = PropTypes.objectOf(number).isRequired;
+const thunkValueValidator = valuesOf(number).isRequired;
 
 export default function betweenValidator(options) {
   const argError = argValidator({ options }, 'options');
