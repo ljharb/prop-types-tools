@@ -4,11 +4,13 @@
   "description": "Custom React PropType validators that we use at Airbnb.",
   "main": "index.js",
   "dependencies": {
+    "array.prototype.find": "^2.0.3",
     "has": "^1.0.1",
-    "is-regex": "^1.0.4"
+    "is-regex": "^1.0.4",
+    "object.assign": "^4.0.4",
+    "object.entries": "^1.0.4"
   },
   "devDependencies": {
-    "airbnb-js-shims": "^1.1.1",
     "babel-cli": "^6.24.0",
     "babel-plugin-istanbul": "^4.1.1",
     "babel-preset-airbnb": "^2.2.3",
@@ -21,6 +23,7 @@
     "eslint-plugin-react": "^6.10.3",
     "mocha": "^3.2.0",
     "nyc": "^10.1.2",
+    "object.values": "^1.0.4",
     "react": "^15.4.2",
     "rimraf": "^2.6.1",
     "safe-publish-latest": "^1.1.1"

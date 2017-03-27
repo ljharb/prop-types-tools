@@ -1,3 +1,6 @@
+import assign from 'object.assign';
+import entries from 'object.entries';
+
 import shape from './shape';
 import valuesOf from './valuesOf';
 import wrapValidator from './helpers/wrapValidator';
@@ -71,22 +74,16 @@ function errorMessage(componentName, propName, opts) {
 }
 
 function propsThunkify(opts) {
-  return Object.entries(opts).reduce((acc, [key, value]) => {
+  return entries(opts).reduce((acc, [key, value]) => {
     const numberThunk = typeof value === 'number' ? () => value : value;
-    return {
-      ...acc,
-      [key]: numberThunk,
-    };
+    return assign({}, acc, { [key]: numberThunk });
   }, {});
 }
 
 function invokeWithProps(optsThunks, props) {
-  return Object.entries(optsThunks).reduce((acc, [key, thunk]) => {
+  return entries(optsThunks).reduce((acc, [key, thunk]) => {
     const value = thunk(props);
-    return {
-      ...acc,
-      [key]: value,
-    };
+    return assign({}, acc, { [key]: value });
   }, {});
 }
 

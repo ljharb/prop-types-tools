@@ -1,3 +1,2 @@
 --compilers js:babel-register,jsx:babel-register
 --reporter spec
---require airbnb-js-shims

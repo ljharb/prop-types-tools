@@ -1,8 +1,9 @@
+import isInteger from './helpers/isInteger';
 import wrapValidator from './helpers/wrapValidator';
 
 function requiredInteger(props, propName, componentName) {
   const value = props[propName];
-  if (value == null || !Number.isInteger(value)) {
+  if (value == null || !isInteger(value)) {
     return new RangeError(`${propName} in ${componentName} must be an integer`);
   }
   return null;

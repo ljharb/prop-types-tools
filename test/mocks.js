@@ -1,4 +1,6 @@
 import { expect } from 'chai';
+import entries from 'object.entries';
+import values from 'object.values';
 
 import mocks from '../build/mocks';
 import implementations from '../';
@@ -9,13 +11,13 @@ describe('mocks', () => {
   });
 
   it('matches the types', () => {
-    const mockTypes = Object.values(mocks).map(x => typeof x);
-    const implementationTypes = Object.values(implementations).map(x => typeof x);
+    const mockTypes = values(mocks).map(x => typeof x);
+    const implementationTypes = values(implementations).map(x => typeof x);
     expect(mockTypes).to.eql(implementationTypes);
   });
 
   it('provides a thunk for a validator function', () => {
-    Object.entries(mocks).forEach(([name, mock]) => {
+    entries(mocks).forEach(([name, mock]) => {
       const validator = mock();
       const expectedType = name === 'forbidExtraProps' ? 'object' : 'function';
       expect([name, typeof validator]).to.eql([name, expectedType]);
@@ -26,7 +28,7 @@ describe('mocks', () => {
   });
 
   it('provides a validator with isRequired', () => {
-    Object.entries(mocks).forEach(([name, mock]) => {
+    entries(mocks).forEach(([name, mock]) => {
       if (name === 'forbidExtraProps') return;
       const validator = mock();
       expect([name, typeof validator.isRequired]).to.eql([name, 'function']);

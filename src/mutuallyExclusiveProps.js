@@ -1,3 +1,5 @@
+import assign from 'object.assign';
+
 import wrapValidator from './helpers/wrapValidator';
 
 export default function mutuallyExclusiveOfType(propType, ...exclusiveProps) {
@@ -11,7 +13,7 @@ export default function mutuallyExclusiveOfType(propType, ...exclusiveProps) {
 
   const propList = exclusiveProps.join(', or ');
 
-  const map = exclusiveProps.reduce((acc, prop) => ({ ...acc, [prop]: true }), {});
+  const map = exclusiveProps.reduce((acc, prop) => assign({}, acc, { [prop]: true }), {});
   const countProps = (count, prop) => (count + (map[prop] ? 1 : 0));
 
   const validator = function mutuallyExclusiveProps(props, propName, componentName, ...rest) {

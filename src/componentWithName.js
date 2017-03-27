@@ -1,14 +1,16 @@
 import React from 'react';
 import isRegex from 'is-regex';
+import find from 'array.prototype.find';
 
 import getComponentName from './helpers/getComponentName';
 import wrapValidator from './helpers/wrapValidator';
 
 function hasName(name, prop, propName, componentName, ...rest) {
   if (Array.isArray(prop)) {
-    return prop
-      .map(item => hasName(name, item, propName, componentName, ...rest))
-      .find(Boolean) || null;
+    return find(
+      prop.map(item => hasName(name, item, propName, componentName, ...rest)),
+      Boolean,
+    ) || null;
   }
 
   if (!React.isValidElement(prop)) {
