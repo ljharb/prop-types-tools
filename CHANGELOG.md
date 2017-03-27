@@ -1,3 +1,7 @@
+2.5.2 / 2017-03-27
+==================
+  * [Fix] remove requirement to polyfill
+
 2.5.1 / 2017-03-24
 ==================
   * [Fix] `componentWithName`: throw if given a non-string/non-regex name
