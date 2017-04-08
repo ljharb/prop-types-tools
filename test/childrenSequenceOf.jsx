@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import React, { PropTypes } from 'react';
+import { number, string } from 'prop-types';
+import React from 'react';
 
 import { childrenSequenceOf } from '../';
 
@@ -41,7 +42,7 @@ describe('childrenSequenceOf', () => {
   });
 
   it('throws given a non-positive-integer min or max', () => {
-    const validator = PropTypes.number;
+    const validator = number;
 
     expect(() => childrenSequenceOf({ validator, min: -1 })).to.throw(TypeError);
     expect(() => childrenSequenceOf({ validator, max: -1 })).to.throw(TypeError);
@@ -60,7 +61,7 @@ describe('childrenSequenceOf', () => {
   });
 
   it('throws given inverted "min"/"max"', () => {
-    const validator = PropTypes.number;
+    const validator = number;
 
     expect(() => childrenSequenceOf({ validator, min: 2, max: 1 })).to.throw(TypeError);
     expect(() => childrenSequenceOf({ validator, max: 1, min: 2 })).to.throw(TypeError);
@@ -76,17 +77,17 @@ describe('childrenSequenceOf', () => {
   });
 
   it('returns a function', () => {
-    expect(typeof childrenSequenceOf({ validator: PropTypes.number })).to.equal('function');
+    expect(typeof childrenSequenceOf({ validator: number })).to.equal('function');
   });
 
   it('fails on a non-children prop', () => {
-    const validator = childrenSequenceOf({ validator: PropTypes.number });
+    const validator = childrenSequenceOf({ validator: number });
     assertFails(validator, (<div />), 'cousins');
     assertFails(validator.isRequired, (<div />), 'cousins');
   });
 
   it('passes with null/undefined when optional', () => {
-    const validator = childrenSequenceOf({ validator: PropTypes.number });
+    const validator = childrenSequenceOf({ validator: number });
 
     assertPasses(validator, (<div />), 'children');
     assertPasses(validator, (<div>{null}</div>), 'children');
@@ -94,7 +95,7 @@ describe('childrenSequenceOf', () => {
   });
 
   it('fails with null/undefined when required', () => {
-    const validator = childrenSequenceOf({ validator: PropTypes.number }).isRequired;
+    const validator = childrenSequenceOf({ validator: number }).isRequired;
 
     assertFails(validator, (<div />), 'children');
     assertFails(validator, (<div>{null}</div>), 'children');
@@ -102,7 +103,7 @@ describe('childrenSequenceOf', () => {
   });
 
   it('works with specifiers without "max"/"min"', () => {
-    const validator = childrenSequenceOf({ validator: PropTypes.number });
+    const validator = childrenSequenceOf({ validator: number });
 
     assertPasses(validator, (<div>{1}</div>), 'children');
     assertPasses(validator.isRequired, (<div>{1}</div>), 'children');
@@ -130,8 +131,8 @@ describe('childrenSequenceOf', () => {
   });
 
   it('works with specifiers only providing "min"', () => {
-    const optional = childrenSequenceOf({ validator: PropTypes.number, min: 0 });
-    const twoPlus = childrenSequenceOf({ validator: PropTypes.number, min: 2 });
+    const optional = childrenSequenceOf({ validator: number, min: 0 });
+    const twoPlus = childrenSequenceOf({ validator: number, min: 2 });
 
     assertPasses(optional, (<div />), 'children');
     assertFails(optional.isRequired, (<div />), 'children');
@@ -149,8 +150,8 @@ describe('childrenSequenceOf', () => {
   });
 
   it('works with specifiers only providing "max"', () => {
-    const optional = childrenSequenceOf({ validator: PropTypes.number, max: 1 });
-    const twoOrLess = childrenSequenceOf({ validator: PropTypes.number, max: 2 });
+    const optional = childrenSequenceOf({ validator: number, max: 1 });
+    const twoOrLess = childrenSequenceOf({ validator: number, max: 2 });
 
     assertPasses(optional, (<div />), 'children');
     assertFails(optional.isRequired, (<div />), 'children');
@@ -167,8 +168,8 @@ describe('childrenSequenceOf', () => {
   });
 
   it('works with specifiers with both "min" and "max"', () => {
-    const twoOrThree = childrenSequenceOf({ validator: PropTypes.number, min: 2, max: 3 });
-    const oneOrTwo = childrenSequenceOf({ validator: PropTypes.number, max: 2, min: 1 });
+    const twoOrThree = childrenSequenceOf({ validator: number, min: 2, max: 3 });
+    const oneOrTwo = childrenSequenceOf({ validator: number, max: 2, min: 1 });
 
     assertFails(twoOrThree, (<div>{1}</div>), 'children');
     assertPasses(twoOrThree, (<div>{1}{2}</div>), 'children');
@@ -183,8 +184,8 @@ describe('childrenSequenceOf', () => {
 
   it('works with an optional unmet, and a required met, specifier', () => {
     const validator = childrenSequenceOf(
-      { validator: PropTypes.string, min: 0 },
-      { validator: PropTypes.number },
+      { validator: string, min: 0 },
+      { validator: number },
     );
 
     assertPasses(validator, (<div>a{1}</div>), 'children');

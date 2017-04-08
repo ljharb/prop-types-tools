@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import React, { PropTypes } from 'react';
+import { array, number, oneOf } from 'prop-types';
+import React from 'react';
 
 import { withShape, range } from '../';
 
@@ -49,12 +50,12 @@ describe('withShape', () => {
 
     it('enforces the provided type', () => {
       assertPasses(
-        withShape(PropTypes.number, {}),
+        withShape(number, {}),
         (<div foo={3} />),
         'foo',
       );
       assertFails(
-        withShape(PropTypes.number, {}),
+        withShape(number, {}),
         (<div foo="3" />),
         'foo',
       );
@@ -62,30 +63,30 @@ describe('withShape', () => {
 
     it('enforces the provided shape', () => {
       assertPasses(
-        withShape(PropTypes.array, {
-          length: PropTypes.oneOf([2]),
+        withShape(array, {
+          length: oneOf([2]),
         }),
         (<div foo={[1, 2]} />),
         'foo',
       );
       assertPasses(
-        withShape(PropTypes.array, {
+        withShape(array, {
           length: range(1, 4),
         }),
         (<div foo={[1, 2]} />),
         'foo',
       );
       assertFails(
-        withShape(PropTypes.array, {
-          length: PropTypes.oneOf([2]),
-          missing: PropTypes.number.isRequired,
+        withShape(array, {
+          length: oneOf([2]),
+          missing: number.isRequired,
         }),
         (<div foo={[1, 2]} />),
         'foo',
       );
       assertFails(
-        withShape(PropTypes.array, {
-          length: PropTypes.oneOf([1]),
+        withShape(array, {
+          length: oneOf([1]),
         }),
         (<div foo={[1, 2]} />),
         'foo',

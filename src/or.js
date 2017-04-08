@@ -1,4 +1,4 @@
-import { PropTypes } from 'react';
+import { arrayOf } from 'prop-types';
 import wrapValidator from './helpers/wrapValidator';
 
 function oneOfTypeValidator(validators) {
@@ -42,7 +42,7 @@ export default function or(validators, name = 'or') {
   }
 
   const validator = oneOfTypeValidator([
-    PropTypes.arrayOf(oneOfTypeValidator(validators)),
+    arrayOf(oneOfTypeValidator(validators)),
     ...validators,
   ]);
 

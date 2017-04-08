@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import React, { PropTypes } from 'react';
+import { bool, func, oneOf, number } from 'prop-types';
+import React from 'react';
 
 import { shape } from '../';
 
@@ -36,7 +37,7 @@ describe('shape', () => {
     }
 
     it('behaves when nullary', () => {
-      const validator = shape({ toFixed: PropTypes.func.isRequired });
+      const validator = shape({ toFixed: func.isRequired });
 
       assertPasses(validator, (<div />), 'a');
       assertPasses(validator, (<div a={null} />), 'a');
@@ -49,12 +50,12 @@ describe('shape', () => {
 
     it('enforces the provided type', () => {
       assertPasses(
-        shape({ toFixed: PropTypes.func.isRequired }),
+        shape({ toFixed: func.isRequired }),
         (<div foo={3} />),
         'foo',
       );
       assertFails(
-        shape({ missing: PropTypes.bool.isRequired }),
+        shape({ missing: bool.isRequired }),
         (<div foo="3" />),
         'foo',
       );
@@ -63,22 +64,22 @@ describe('shape', () => {
     it('enforces the provided shape', () => {
       assertPasses(
         shape({
-          length: PropTypes.oneOf([2]),
+          length: oneOf([2]),
         }),
         (<div foo={[1, 2]} />),
         'foo',
       );
       assertFails(
         shape({
-          length: PropTypes.oneOf([2]),
-          missing: PropTypes.number.isRequired,
+          length: oneOf([2]),
+          missing: number.isRequired,
         }),
         (<div foo={[1, 2]} />),
         'foo',
       );
       assertFails(
         shape({
-          length: PropTypes.oneOf([1]),
+          length: oneOf([1]),
         }),
         (<div foo={[1, 2]} />),
         'foo',
@@ -87,7 +88,7 @@ describe('shape', () => {
 
     it('skips falsy shape keys', () => {
       assertPasses(
-        shape({ toFixed: PropTypes.func.isRequired, missing: null, nope: false }),
+        shape({ toFixed: func.isRequired, missing: null, nope: false }),
         (<div foo={3} />),
         'foo',
       );

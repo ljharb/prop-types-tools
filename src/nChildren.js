@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { node } from 'prop-types';
 import wrapValidator from './helpers/wrapValidator';
 
-export default function nChildren(n, propType = PropTypes.node) {
+export default function nChildren(n, propType = node) {
   if (typeof n !== 'number' || isNaN(n) || n < 0) {
     throw new TypeError('a non-negative number is required');
   }

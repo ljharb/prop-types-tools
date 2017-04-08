@@ -1,7 +1,5 @@
-import { PropTypes } from 'react';
+import { bool } from 'prop-types';
 import wrapValidator from './helpers/wrapValidator';
-
-const { bool } = PropTypes;
 
 export default function mutuallyExclusiveTrue(...exclusiveProps) {
   if (exclusiveProps.length < 1) {

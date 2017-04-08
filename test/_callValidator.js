@@ -1,4 +1,4 @@
-import ReactPropTypesSecretExtraArgs from './_reactPropTypeSecretArgs';
+import secret from 'prop-types/lib/ReactPropTypesSecret';
 
 export default function callValidator(
   validator,
@@ -14,6 +14,6 @@ export default function callValidator(
     componentName,
     location,
     propFullName,
-    ...ReactPropTypesSecretExtraArgs,
+    secret,
   );
 }

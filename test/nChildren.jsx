@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import React, { PropTypes } from 'react';
+import { number } from 'prop-types';
+import React from 'react';
 
 import { nChildren, childrenOfType } from '../';
 
@@ -51,7 +52,7 @@ describe('nChildren', () => {
   });
 
   it('validates against the optionally provided propType', () => {
-    assertFails(nChildren(1, PropTypes.number), <div><i /></div>, 'children');
+    assertFails(nChildren(1, number), <div><i /></div>, 'children');
 
     assertPasses(nChildren(1, childrenOfType('i')), <div><i /></div>, 'children');
 

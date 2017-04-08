@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import React, { PropTypes } from 'react';
+import { number } from 'prop-types';
+import React from 'react';
 
 import { valuesOf } from '../';
 
@@ -44,7 +45,7 @@ describe('valuesOf', () => {
   });
 
   it('passes when the validator passes on all values', () => {
-    const validator = valuesOf(PropTypes.number);
+    const validator = valuesOf(number);
 
     assertPasses(
       validator,
@@ -64,30 +65,30 @@ describe('valuesOf', () => {
 
   it('behaves on null values', () => {
     assertPasses(
-      valuesOf(PropTypes.number),
+      valuesOf(number),
       (<div foo={{ a: 3, b: null }} />),
       'foo',
     );
     assertPasses(
-      valuesOf(PropTypes.number).isRequired,
+      valuesOf(number).isRequired,
       (<div foo={{ a: 3, b: null }} />),
       'foo',
     );
 
     assertFails(
-      valuesOf(PropTypes.number.isRequired),
+      valuesOf(number.isRequired),
       (<div foo={{ a: 3, b: null }} />),
       'foo',
     );
     assertFails(
-      valuesOf(PropTypes.number.isRequired).isRequired,
+      valuesOf(number.isRequired).isRequired,
       (<div foo={{ a: 3, b: null }} />),
       'foo',
     );
   });
 
   it('fails when any value fails', () => {
-    const validator = valuesOf(PropTypes.number);
+    const validator = valuesOf(number);
 
     assertFails(
       validator,
@@ -103,7 +104,7 @@ describe('valuesOf', () => {
   });
 
   it('passes on non-nullary primitives', () => {
-    const validator = valuesOf(PropTypes.number.isRequired);
+    const validator = valuesOf(number.isRequired);
 
     assertPasses(validator, (<div a={3} />), 'a');
     assertPasses(validator, (<div a={NaN} />), 'a');
@@ -121,7 +122,7 @@ describe('valuesOf', () => {
   });
 
   it('passes on functions and arrays', () => {
-    const validator = valuesOf(PropTypes.number.isRequired);
+    const validator = valuesOf(number.isRequired);
 
     assertPasses(validator, (<div a={() => {}} />), 'a');
     assertPasses(validator, (<div a={[]} />), 'a');

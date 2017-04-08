@@ -1,11 +1,10 @@
 import { expect } from 'chai';
-import React, { PropTypes } from 'react';
+import { arrayOf, bool, number, string } from 'prop-types';
+import React from 'react';
 
 import { or, explicitNull } from '../';
 
 import callValidator from './_callValidator';
-
-const { bool, string, number, arrayOf } = PropTypes;
 
 describe('or', () => {
   it('returns a function', () => {

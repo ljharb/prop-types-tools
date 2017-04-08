@@ -1,4 +1,4 @@
-import { PropTypes } from 'react';
+import { string } from 'prop-types';
 import wrapValidator from './helpers/wrapValidator';
 
 const validNumericChars = /^[-+]?(?:[1-9][0-9]*(?:\.[0-9]+)?|0|0\.[0-9]+)$/;
@@ -8,7 +8,7 @@ const validator = function numericString(props, propName, componentName, ...rest
     return null;
   }
 
-  const stringError = PropTypes.string(props, propName, componentName, ...rest);
+  const stringError = string(props, propName, componentName, ...rest);
   if (stringError) {
     return stringError;
   }

@@ -1,11 +1,11 @@
-import { PropTypes } from 'react';
+import { array } from 'prop-types';
 import wrapValidator from './helpers/wrapValidator';
 
-function uniqueCountWithSet(array) { return new Set(array).size; }
+function uniqueCountWithSet(arr) { return new Set(arr).size; }
 /* istanbul ignore next */
-function uniqueCountLegacy(array) {
+function uniqueCountLegacy(arr) {
   const seen = [];
-  array.forEach((item) => {
+  arr.forEach((item) => {
     if (seen.indexOf(item) === -1) {
       seen.push(item);
     }
@@ -16,7 +16,7 @@ function uniqueCountLegacy(array) {
 const getUniqueCount = typeof Set === 'function' ? uniqueCountWithSet : /* istanbul ignore next */ uniqueCountLegacy;
 
 function requiredUniqueArray(props, propName, componentName, ...rest) {
-  const result = PropTypes.array.isRequired(props, propName, componentName, ...rest);
+  const result = array.isRequired(props, propName, componentName, ...rest);
   if (result != null) {
     return result;
   }

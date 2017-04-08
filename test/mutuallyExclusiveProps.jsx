@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import React, { PropTypes } from 'react';
+import { any, bool } from 'prop-types';
+import React from 'react';
 
 import { mutuallyExclusiveProps } from '../';
 
@@ -14,11 +15,11 @@ describe('mutuallyExclusiveProps', () => {
   });
 
   it('throws when given 0 props', () => {
-    expect(() => mutuallyExclusiveProps(PropTypes.any)).to.throw(TypeError);
+    expect(() => mutuallyExclusiveProps(any)).to.throw(TypeError);
   });
 
   it('returns a function', () => {
-    expect(typeof mutuallyExclusiveProps(PropTypes.any, 'a', 'b')).to.equal('function');
+    expect(typeof mutuallyExclusiveProps(any, 'a', 'b')).to.equal('function');
   });
 
   function assertPasses(validator, element, propName) {
@@ -31,12 +32,12 @@ describe('mutuallyExclusiveProps', () => {
 
   it('passes with one mutually exclusive prop', () => {
     assertPasses(
-      mutuallyExclusiveProps(PropTypes.bool, 'b'),
+      mutuallyExclusiveProps(bool, 'b'),
       (<div a />),
       'a',
     );
     assertPasses(
-      mutuallyExclusiveProps(PropTypes.bool, 'a'),
+      mutuallyExclusiveProps(bool, 'a'),
       (<div a />),
       'b',
     );
@@ -45,7 +46,7 @@ describe('mutuallyExclusiveProps', () => {
   it('passes when mutually exclusive props are not both provided', () => {
     const prop1 = 'foo';
     const prop2 = 'bar';
-    const validator = mutuallyExclusiveProps(PropTypes.bool, prop1, prop2);
+    const validator = mutuallyExclusiveProps(bool, prop1, prop2);
 
     assertPasses(validator, <div a={false} />, 'a');
     assertPasses(validator.isRequired, <div a={false} />, 'a');
@@ -60,7 +61,7 @@ describe('mutuallyExclusiveProps', () => {
   it('fails when the provided propType fails', () => {
     const prop1 = 'foo';
     const prop2 = 'bar';
-    const validator = mutuallyExclusiveProps(PropTypes.bool, prop1, prop2);
+    const validator = mutuallyExclusiveProps(bool, prop1, prop2);
 
     assertFails(validator, <div a={1} {...{ [prop1]: 1 }} />, prop1);
     assertFails(validator, <div a={1} {...{ [prop2]: 2 }} />, prop2);
@@ -69,7 +70,7 @@ describe('mutuallyExclusiveProps', () => {
   it('fails when mutually exclusive props are provided', () => {
     const prop1 = 'foo';
     const prop2 = 'bar';
-    const validator = mutuallyExclusiveProps(PropTypes.bool, prop1, prop2);
+    const validator = mutuallyExclusiveProps(bool, prop1, prop2);
 
     assertFails(validator, <div a={1} {...{ [prop1]: true, [prop2]: true }} />, prop1);
     assertFails(validator, <div a={1} {...{ [prop1]: true, [prop2]: true }} />, prop2);
@@ -78,7 +79,7 @@ describe('mutuallyExclusiveProps', () => {
   it('passes when one of the exclusive props is null/undefined', () => {
     const prop1 = 'foo';
     const prop2 = 'bar';
-    const validator = mutuallyExclusiveProps(PropTypes.bool, prop1, prop2);
+    const validator = mutuallyExclusiveProps(bool, prop1, prop2);
     assertPasses(validator, (<div foo bar={null} />), prop1);
     assertPasses(validator, (<div foo bar={null} />), prop2);
     assertPasses(validator, (<div bar foo={null} />), prop1);
@@ -88,7 +89,7 @@ describe('mutuallyExclusiveProps', () => {
   it('fails when required, and one of the exclusive props is null/undefined', () => {
     const prop1 = 'foo';
     const prop2 = 'bar';
-    const validator = mutuallyExclusiveProps(PropTypes.bool, prop1, prop2).isRequired;
+    const validator = mutuallyExclusiveProps(bool, prop1, prop2).isRequired;
     assertFails(validator, (<div foo bar={null} />), prop2);
     assertFails(validator, (<div bar foo={null} />), prop1);
     assertFails(validator, (<div foo bar={undefined} />), prop2);

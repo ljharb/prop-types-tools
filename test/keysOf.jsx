@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import React, { PropTypes } from 'react';
+import { any, number, oneOf } from 'prop-types';
+import React from 'react';
 
 import { keysOf } from '../';
 
@@ -14,7 +15,7 @@ describe('keysOf', () => {
   });
 
   it('returns a function', () => {
-    expect(typeof keysOf(PropTypes.any)).to.equal('function');
+    expect(typeof keysOf(any)).to.equal('function');
   });
 
   function assertPasses(validator, element, propName) {
@@ -27,7 +28,7 @@ describe('keysOf', () => {
 
   it('passes with an object with no keys', () => {
     assertPasses(
-      keysOf(PropTypes.number),
+      keysOf(number),
       (<div a={{}} />),
       'a',
     );
@@ -35,7 +36,7 @@ describe('keysOf', () => {
 
   it('passes when keys match the prop type', () => {
     assertPasses(
-      keysOf(PropTypes.oneOf(['foo', 'bar'])),
+      keysOf(oneOf(['foo', 'bar'])),
       (<div a={{ foo: 1, bar: 'qoob' }} />),
       'a',
     );
@@ -43,7 +44,7 @@ describe('keysOf', () => {
 
   it('fails when keys do not match the prop type', () => {
     assertFails(
-      keysOf(PropTypes.oneOf(['foo', 'bar'])),
+      keysOf(oneOf(['foo', 'bar'])),
       (<div a={{ foo: 1, not_validated: 'qoob' }} />),
       'a',
     );
@@ -51,7 +52,7 @@ describe('keysOf', () => {
 
   it('passes when the prop is not defined', () => {
     assertPasses(
-      keysOf(PropTypes.number),
+      keysOf(number),
       (<div />),
       'a',
     );
@@ -59,7 +60,7 @@ describe('keysOf', () => {
 
   it('is required with .isRequired', () => {
     assertFails(
-      keysOf(PropTypes.number).isRequired,
+      keysOf(number).isRequired,
       (<div />),
       'a',
     );
@@ -67,7 +68,7 @@ describe('keysOf', () => {
 
   it('still passes with .isRequired if props are valid', () => {
     assertPasses(
-      keysOf(PropTypes.oneOf(['foo', 'bar'])).isRequired,
+      keysOf(oneOf(['foo', 'bar'])).isRequired,
       (<div a={{ foo: 1, bar: 'qoob' }} />),
       'a',
     );

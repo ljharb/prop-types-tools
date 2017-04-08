@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import React, { PropTypes } from 'react';
+import { node, number, string } from 'prop-types';
+import React from 'react';
 
 import { childrenOf, elementType, or } from '../';
 
@@ -18,7 +19,7 @@ describe('childrenOf', () => {
   }
 
   it('fails on a non-children prop', () => {
-    const validator = childrenOf(PropTypes.node);
+    const validator = childrenOf(node);
 
     assertFails(
       validator,
@@ -38,7 +39,7 @@ describe('childrenOf', () => {
   describe('with no children', () => {
     it('passes when optional', () => {
       assertPasses(
-        childrenOf(PropTypes.node),
+        childrenOf(node),
         (<div />),
         'children',
         'optional empty',
@@ -46,7 +47,7 @@ describe('childrenOf', () => {
 
 
       assertPasses(
-        childrenOf(PropTypes.node),
+        childrenOf(node),
         (<div>{[]}</div>),
         'children',
         'optional empty array',
@@ -54,7 +55,7 @@ describe('childrenOf', () => {
     });
 
     it('fails when required', () => assertFails(
-      childrenOf(PropTypes.node).isRequired,
+      childrenOf(node).isRequired,
       (<div />),
       'children',
       'optional empty',
@@ -63,7 +64,7 @@ describe('childrenOf', () => {
 
   describe('with non-element children', () => {
     it('passes with multiple numbers', () => assertPasses(
-      childrenOf(PropTypes.number),
+      childrenOf(number),
       (
         <div>
           {1}
@@ -76,7 +77,7 @@ describe('childrenOf', () => {
     ));
 
     it('passes with multiple numbers when required', () => assertPasses(
-      childrenOf(PropTypes.number).isRequired,
+      childrenOf(number).isRequired,
       (
         <div>
           {1}
@@ -89,7 +90,7 @@ describe('childrenOf', () => {
     ));
 
     it('passes with multiple strings', () => assertPasses(
-      childrenOf(PropTypes.string),
+      childrenOf(string),
       (
         <div>
           a
@@ -102,7 +103,7 @@ describe('childrenOf', () => {
     ));
 
     it('passes with multiple strings when required', () => assertPasses(
-      childrenOf(PropTypes.string).isRequired,
+      childrenOf(string).isRequired,
       (
         <div>
           a
@@ -115,7 +116,7 @@ describe('childrenOf', () => {
     ));
 
     it('passes with strings and numbers', () => assertPasses(
-      childrenOf(or([PropTypes.string, PropTypes.number])),
+      childrenOf(or([string, number])),
       (
         <div>
           a
@@ -131,7 +132,7 @@ describe('childrenOf', () => {
     ));
 
     it('passes with strings and numbers when required', () => assertPasses(
-      childrenOf(or([PropTypes.string, PropTypes.number])).isRequired,
+      childrenOf(or([string, number])).isRequired,
       (
         <div>
           a

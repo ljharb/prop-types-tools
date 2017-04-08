@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import React, { PropTypes } from 'react';
+import { number } from 'prop-types';
+import React from 'react';
 
 import { and, nonNegativeInteger } from '../';
 
@@ -7,7 +8,7 @@ import callValidator from './_callValidator';
 
 describe('and', () => {
   it('returns a function', () => {
-    expect(typeof and([PropTypes.number, nonNegativeInteger])).to.equal('function');
+    expect(typeof and([number, nonNegativeInteger])).to.equal('function');
   });
 
   it('throws on non-array input', () => {
@@ -39,16 +40,16 @@ describe('and', () => {
 
   describe('validates both propTypes', () => {
     it('passes when expected', () => {
-      const validatorNumber = and([PropTypes.number, nonNegativeInteger]);
-      const validatorNonNegative = and([nonNegativeInteger, PropTypes.number]);
+      const validatorNumber = and([number, nonNegativeInteger]);
+      const validatorNonNegative = and([nonNegativeInteger, number]);
 
       assertPasses(validatorNumber, (<div a={1} />), 'a');
       assertPasses(validatorNonNegative, (<div a={1} />), 'a');
     });
 
     it('fails when expected', () => {
-      const validatorNumber = and([PropTypes.number, nonNegativeInteger]);
-      const validatorNonNegative = and([nonNegativeInteger, PropTypes.number]);
+      const validatorNumber = and([number, nonNegativeInteger]);
+      const validatorNonNegative = and([nonNegativeInteger, number]);
       const invalidElement = (<div a={-2} />);
       const prop = 'a';
 
@@ -61,12 +62,12 @@ describe('and', () => {
       const prop = 'a';
 
       expect(callValidator(
-        and([PropTypes.number, nonNegativeInteger]),
+        and([number, nonNegativeInteger]),
         invalidElement,
         prop,
-      )).to.eql(callValidator(PropTypes.number, invalidElement, prop));
+      )).to.eql(callValidator(number, invalidElement, prop));
       expect(callValidator(
-        and([nonNegativeInteger, PropTypes.number]),
+        and([nonNegativeInteger, number]),
         invalidElement,
         prop,
       )).to.eql(callValidator(nonNegativeInteger, invalidElement, prop));
@@ -75,17 +76,17 @@ describe('and', () => {
 
   describe('isRequired', () => {
     it('passes if not required', () => {
-      const validatorNumber = and([PropTypes.number, nonNegativeInteger]);
+      const validatorNumber = and([number, nonNegativeInteger]);
       assertPasses(validatorNumber, (<div />), 'a');
     });
 
     it('fails if overarching one is required', () => {
-      const validatorNumber = and([PropTypes.number, nonNegativeInteger]).isRequired;
+      const validatorNumber = and([number, nonNegativeInteger]).isRequired;
       assertFails(validatorNumber, (<div />), 'a');
     });
 
     it('fails if an individual validator is required', () => {
-      const validatorNumber = and([PropTypes.number, nonNegativeInteger.isRequired]);
+      const validatorNumber = and([number, nonNegativeInteger.isRequired]);
       assertFails(validatorNumber, (<div />), 'a');
     });
   });

@@ -1,4 +1,4 @@
-import { PropTypes } from 'react';
+import { array, arrayOf } from 'prop-types';
 import assign from 'object.assign';
 
 import and from './and';
@@ -84,7 +84,7 @@ function validateChunks(specifiers, props, propName, componentName, ...rest) {
       continue; // eslint-disable-line no-continue
     }
 
-    const arrayOfValidator = PropTypes.arrayOf(validator).isRequired;
+    const arrayOfValidator = arrayOf(validator).isRequired;
 
     const chunk = chunks.shift(); // extract the next chunk to test
 
@@ -151,7 +151,7 @@ export default function sequenceOfValidator(...specifiers) {
       return null;
     }
 
-    const error = PropTypes.array(props, propName, ...rest);
+    const error = array(props, propName, ...rest);
     if (error) {
       return error;
     }
@@ -160,7 +160,7 @@ export default function sequenceOfValidator(...specifiers) {
   };
 
   validator.isRequired = function sequenceOfRequired(props, propName, componentName, ...rest) {
-    const error = PropTypes.array.isRequired(props, propName, componentName, ...rest);
+    const error = array.isRequired(props, propName, componentName, ...rest);
     if (error) {
       return error;
     }

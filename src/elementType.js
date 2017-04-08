@@ -1,4 +1,4 @@
-import { PropTypes } from 'react';
+import { element } from 'prop-types';
 import and from './and';
 import getComponentName from './helpers/getComponentName';
 import wrapValidator from './helpers/wrapValidator';
@@ -25,7 +25,7 @@ function validateElementType(Type, props, propName, componentName) {
 
 export default function elementTypeValidator(Type) {
   if (Type === '*') {
-    return wrapValidator(PropTypes.element, 'elementType(*)', Type);
+    return wrapValidator(element, 'elementType(*)', Type);
   }
 
   if (typeof Type !== 'string' && typeof Type !== 'function') {
@@ -42,5 +42,5 @@ export default function elementTypeValidator(Type) {
 
   const typeName = getTypeName(Type);
   const validatorName = `elementType(${typeName})`;
-  return wrapValidator(and([PropTypes.element, elementType], validatorName), validatorName, Type);
+  return wrapValidator(and([element, elementType], validatorName), validatorName, Type);
 }

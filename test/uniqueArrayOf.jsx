@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import React, { PropTypes } from 'react';
+import { array, number } from 'prop-types';
+import React from 'react';
 
 import { uniqueArrayOf } from '../';
 
@@ -53,12 +54,12 @@ describe('uniqueArrayOf', () => {
 
   it('enforces the provided validator', () => {
     assertFails(
-      uniqueArrayOf(PropTypes.number),
+      uniqueArrayOf(number),
       (<div foo={[1, 2, '3', 4]} />),
       'foo',
     );
     assertPasses(
-      uniqueArrayOf(PropTypes.number),
+      uniqueArrayOf(number),
       (<div foo={[1, 2, 3, 4]} />),
       'foo',
     );
@@ -66,12 +67,12 @@ describe('uniqueArrayOf', () => {
 
   it('enforces uniqueness', () => {
     assertFails(
-      uniqueArrayOf(PropTypes.number),
+      uniqueArrayOf(number),
       (<div foo={[3, 1, 2, 3, 4]} />),
       'foo',
     );
     assertPasses(
-      uniqueArrayOf(PropTypes.number),
+      uniqueArrayOf(number),
       (<div foo={[1, 2, 3, 4]} />),
       'foo',
     );
@@ -81,12 +82,12 @@ describe('uniqueArrayOf', () => {
     const arr = [1];
 
     assertFails(
-      uniqueArrayOf(PropTypes.array),
+      uniqueArrayOf(array),
       (<div foo={[[1], arr, arr]} />),
       'foo',
     );
     assertPasses(
-      uniqueArrayOf(PropTypes.array),
+      uniqueArrayOf(array),
       (<div foo={[[1], arr, [1]]} />),
       'foo',
     );

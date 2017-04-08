@@ -1,4 +1,4 @@
-import { PropTypes } from 'react';
+import { arrayOf } from 'prop-types';
 import and from './and';
 import uniqueArray from './uniqueArray';
 
@@ -9,7 +9,7 @@ export default function uniqueArrayOfTypeValidator(type, name = 'uniqueArrayOfTy
     throw new TypeError('type must be a validator function');
   }
 
-  const arrayValidator = PropTypes.arrayOf(type);
+  const arrayValidator = arrayOf(type);
 
   const validator = and([arrayValidator, unique], name);
   validator.isRequired = and([

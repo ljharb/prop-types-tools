@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import React, { PropTypes } from 'react';
+import { number, string } from 'prop-types';
+import React from 'react';
 
 import { sequenceOf } from '../';
 
@@ -39,7 +40,7 @@ describe('sequenceOf', () => {
   });
 
   it('throws given a non-positive-integer min or max', () => {
-    const validator = PropTypes.number;
+    const validator = number;
 
     expect(() => sequenceOf({ validator, min: -1 })).to.throw(TypeError);
     expect(() => sequenceOf({ validator, max: -1 })).to.throw(TypeError);
@@ -58,7 +59,7 @@ describe('sequenceOf', () => {
   });
 
   it('throws given inverted "min"/"max"', () => {
-    const validator = PropTypes.number;
+    const validator = number;
 
     expect(() => sequenceOf({ validator, min: 2, max: 1 })).to.throw(TypeError);
     expect(() => sequenceOf({ validator, max: 1, min: 2 })).to.throw(TypeError);
@@ -73,11 +74,11 @@ describe('sequenceOf', () => {
   });
 
   it('returns a function', () => {
-    expect(typeof sequenceOf({ validator: PropTypes.number })).to.equal('function');
+    expect(typeof sequenceOf({ validator: number })).to.equal('function');
   });
 
   it('passes with null/undefined when optional', () => {
-    const validator = sequenceOf({ validator: PropTypes.number });
+    const validator = sequenceOf({ validator: number });
 
     assertPasses(validator, (<div />), 'a');
     assertPasses(validator, (<div a={null} />), 'a');
@@ -85,7 +86,7 @@ describe('sequenceOf', () => {
   });
 
   it('fails with null/undefined when required', () => {
-    const validator = sequenceOf({ validator: PropTypes.number });
+    const validator = sequenceOf({ validator: number });
 
     assertFails(validator.isRequired, (<div />), 'a');
     assertFails(validator.isRequired, (<div a={null} />), 'a');
@@ -93,7 +94,7 @@ describe('sequenceOf', () => {
   });
 
   it('fails with non-arrays', () => {
-    const validator = sequenceOf({ validator: PropTypes.number });
+    const validator = sequenceOf({ validator: number });
 
     assertFails(validator, (<div a={false} />), 'a');
     assertFails(validator, (<div a />), 'a');
@@ -104,7 +105,7 @@ describe('sequenceOf', () => {
   });
 
   it('works with specifiers without "max"/"min"', () => {
-    const validator = sequenceOf({ validator: PropTypes.number });
+    const validator = sequenceOf({ validator: number });
 
     assertPasses(validator, (<div a={[1]} />), 'a');
     assertPasses(validator, (<div a={[NaN]} />), 'a');
@@ -117,8 +118,8 @@ describe('sequenceOf', () => {
   });
 
   it('works with specifiers only providing "min"', () => {
-    const optional = sequenceOf({ validator: PropTypes.number, min: 0 });
-    const twoPlus = sequenceOf({ validator: PropTypes.number, min: 2 });
+    const optional = sequenceOf({ validator: number, min: 0 });
+    const twoPlus = sequenceOf({ validator: number, min: 2 });
 
     assertPasses(optional, (<div a={[]} />), 'a');
     assertFails(twoPlus, (<div a={[]} />), 'a');
@@ -132,8 +133,8 @@ describe('sequenceOf', () => {
   });
 
   it('works with specifiers only providing "max"', () => {
-    const optional = sequenceOf({ validator: PropTypes.number, max: 1 });
-    const twoOrLess = sequenceOf({ validator: PropTypes.number, max: 2 });
+    const optional = sequenceOf({ validator: number, max: 1 });
+    const twoOrLess = sequenceOf({ validator: number, max: 2 });
 
     assertFails(optional, (<div a={[]} />), 'a');
     assertFails(twoOrLess, (<div a={[]} />), 'a');
@@ -148,8 +149,8 @@ describe('sequenceOf', () => {
   });
 
   it('works with specifiers with both "min" and "max"', () => {
-    const twoOrThree = sequenceOf({ validator: PropTypes.number, min: 2, max: 3 });
-    const oneOrTwo = sequenceOf({ validator: PropTypes.number, max: 2, min: 1 });
+    const twoOrThree = sequenceOf({ validator: number, min: 2, max: 3 });
+    const oneOrTwo = sequenceOf({ validator: number, max: 2, min: 1 });
 
     assertFails(twoOrThree, (<div a={[1]} />), 'a');
     assertPasses(twoOrThree, (<div a={[1, 2]} />), 'a');
@@ -164,8 +165,8 @@ describe('sequenceOf', () => {
 
   it('works with an optional unmet, and a required met, specifier', () => {
     const validator = sequenceOf(
-      { validator: PropTypes.string, min: 0 },
-      { validator: PropTypes.number },
+      { validator: string, min: 0 },
+      { validator: number },
     );
 
     assertPasses(validator, (<div a={['a', 1]} />), 'a');
