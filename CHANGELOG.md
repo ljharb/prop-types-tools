@@ -1,3 +1,10 @@
+2.5.3 / 2017-04-08
+==================
+  * [Refactor] Use `prop-types` package instead of `React.PropTypes`
+  * [Deps] update `array.prototype.find`, `prop-types`
+  * [Dev Deps] update `babel-cli`, `babel-register`, `eslint`, `nyc`, `react`
+  * [Tests] improve test matrix
+
 2.5.2 / 2017-03-27
 ==================
   * [Fix] remove requirement to polyfill
