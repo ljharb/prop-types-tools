@@ -1,5 +1,4 @@
 import { array, arrayOf } from 'prop-types';
-import assign from 'object.assign';
 
 import and from './and';
 import between from './between';
@@ -89,7 +88,7 @@ function validateChunks(specifiers, props, propName, componentName, ...rest) {
     const chunk = chunks.shift(); // extract the next chunk to test
 
     const chunkError = arrayOfValidator(
-      assign({}, props, { [propName]: chunk }),
+      { ...props, [propName]: chunk },
       propName,
       componentName,
       ...rest,

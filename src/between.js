@@ -1,4 +1,3 @@
-import assign from 'object.assign';
 import entries from 'object.entries';
 
 import shape from './shape';
@@ -76,14 +75,14 @@ function errorMessage(componentName, propName, opts) {
 function propsThunkify(opts) {
   return entries(opts).reduce((acc, [key, value]) => {
     const numberThunk = typeof value === 'number' ? () => value : value;
-    return assign({}, acc, { [key]: numberThunk });
+    return { ...acc, [key]: numberThunk };
   }, {});
 }
 
 function invokeWithProps(optsThunks, props) {
   return entries(optsThunks).reduce((acc, [key, thunk]) => {
     const value = thunk(props);
-    return assign({}, acc, { [key]: value });
+    return { ...acc, [key]: value };
   }, {});
 }
 

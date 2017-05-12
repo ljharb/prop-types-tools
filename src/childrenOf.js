@@ -1,12 +1,10 @@
-import assign from 'object.assign';
-
 import renderableChildren from './helpers/renderableChildren';
 import wrapValidator from './helpers/wrapValidator';
 
 function validateChildren(propType, children, props, ...rest) {
   let error;
   children.some((child) => {
-    error = propType(assign({}, props, { children: child }), 'children', ...rest);
+    error = propType({ ...props, children: child }, 'children', ...rest);
     return error;
   });
 

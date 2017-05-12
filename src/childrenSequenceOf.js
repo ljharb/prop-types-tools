@@ -1,5 +1,3 @@
-import assign from 'object.assign';
-
 import sequenceOf from './sequenceOf';
 import renderableChildren from './helpers/renderableChildren';
 import wrapValidator from './helpers/wrapValidator';
@@ -17,7 +15,7 @@ export default function childrenSequenceOfValidator(...specifiers) {
     if (children.length === 0) {
       return null;
     }
-    return seq(assign({}, props, { children }), propName, componentName, ...rest);
+    return seq({ ...props, children }, propName, componentName, ...rest);
   };
 
   validator.isRequired = function childrenSequenceOfRequired(
@@ -35,7 +33,7 @@ export default function childrenSequenceOfValidator(...specifiers) {
     if (children.length === 0) {
       return new TypeError(`${componentName}: renderable children are required.`);
     }
-    return seq.isRequired(assign({}, props, { children }), propName, componentName, ...rest);
+    return seq.isRequired({ ...props, children }, propName, componentName, ...rest);
   };
 
   return wrapValidator(validator, 'childrenSequenceOf', specifiers);
