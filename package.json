@@ -9,7 +9,7 @@
     "is-regex": "^1.0.4",
     "object.assign": "^4.0.4",
     "object.entries": "^1.0.4",
-    "prop-types": "^15.5.4"
+    "prop-types": "^15.5.9"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
