@@ -68,6 +68,21 @@ describe('childrenHavePropXorChildren', () => {
       'ComponentName',
     ));
 
+    it('passes when falsy children are present and non-falsy children passes validator', () => assertPasses(
+      childrenHavePropXorChildren(prop),
+      (
+        <header>
+          <div />
+          <div />
+          {null}
+          {false}
+          {''}
+        </header>
+      ),
+      'abc',
+      'ComponentName',
+    ));
+
     it('fails when there is a mix of children and no children', () => assertFails(
       childrenHavePropXorChildren(prop),
       (
@@ -99,6 +114,21 @@ describe('childrenHavePropXorChildren', () => {
         <header>
           <div />
           <div {...{ [prop]: true }} />
+        </header>
+      ),
+      'abc',
+      'ComponentName',
+    ));
+
+    it('fails when falsy children are present and non-falsy children fails validator', () => assertFails(
+      childrenHavePropXorChildren(prop),
+      (
+        <header>
+          <div />
+          <div {...{ [prop]: true }} />
+          {null}
+          {false}
+          {''}
         </header>
       ),
       'abc',

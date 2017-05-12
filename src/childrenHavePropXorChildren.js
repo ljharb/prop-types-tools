@@ -7,22 +7,29 @@ export default function childrenHavePropXorChildren(prop) {
   }
 
   const validator = function childrenHavePropXorChildrenWithProp({ children }, _, componentName) {
-    const childrenCount = React.Children.count(children);
+    let truthyChildrenCount = 0;
     let propCount = 0;
     let grandchildrenCount = 0;
 
     React.Children.forEach(children, (child) => {
+      if (!child) {
+        return;
+      }
+
+      truthyChildrenCount += 1;
+
       if (child.props[prop]) {
         propCount += 1;
       }
+
       if (React.Children.count(child.props.children)) {
         grandchildrenCount += 1;
       }
     });
 
     if (
-      (propCount === childrenCount && grandchildrenCount === 0) ||
-      (propCount === 0 && grandchildrenCount === childrenCount) ||
+      (propCount === truthyChildrenCount && grandchildrenCount === 0) ||
+      (propCount === 0 && grandchildrenCount === truthyChildrenCount) ||
       (propCount === 0 && grandchildrenCount === 0)
     ) {
       return null;
