@@ -1,3 +1,9 @@
+2.5.4 / 2017-05-11
+==================
+  * [Fix] `childrenHavePropXorChildren` Ensure validator skips over falsy children
+  * [Deps] update `prop-types`
+  * [Dev Deps] update `babel-plugin-istanbul`, `mocha`, `nyc`, `react`
+
 2.5.3 / 2017-04-08
 ==================
   * [Refactor] Use `prop-types` package instead of `React.PropTypes`
