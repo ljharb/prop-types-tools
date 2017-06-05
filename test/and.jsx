@@ -60,17 +60,25 @@ describe('and', () => {
     it('fails in the right order', () => {
       const invalidElement = (<div a="b" />);
       const prop = 'a';
+      const location = 'testing "and"';
 
       expect(callValidator(
         and([number, nonNegativeInteger]),
         invalidElement,
         prop,
-      )).to.eql(callValidator(number, invalidElement, prop));
-      expect(callValidator(
+        location,
+      )).to.eql(callValidator(number, invalidElement, prop, location));
+
+      const actual = callValidator(
         and([nonNegativeInteger, number]),
         invalidElement,
         prop,
-      )).to.eql(callValidator(nonNegativeInteger, invalidElement, prop));
+        location,
+      );
+      const expected = callValidator(nonNegativeInteger, invalidElement, prop, location);
+      expect(typeof actual).to.equal(typeof expected);
+      expect(actual.name).to.equal(expected.name);
+      expect(actual.message).to.equal(expected.message);
     });
   });
 
