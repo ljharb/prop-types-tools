@@ -1,13 +1,17 @@
 import { expect } from 'chai';
 import React from 'react';
+import ownKeys from 'reflect.ownkeys';
 
 import { forbidExtraProps } from '../';
 
 import callValidator from './_callValidator';
 
-const zeroWidthSpace = '\u200b';
-
 describe('forbidExtraProps', () => {
+  let specialProperty;
+  beforeEach(() => {
+    [specialProperty] = ownKeys(forbidExtraProps({}));
+  });
+
   function assertPasses(validator, element, propName, componentName) {
     expect(callValidator(validator, element, propName, componentName)).to.equal(null);
   }
@@ -28,7 +32,7 @@ describe('forbidExtraProps', () => {
   });
 
   it('throws when the given propTypes has the magic property', () => {
-    expect(() => forbidExtraProps({ [zeroWidthSpace]: true })).to.throw(TypeError);
+    expect(() => forbidExtraProps({ [specialProperty]: true })).to.throw(TypeError);
   });
 
   it('returns an object', () => {
@@ -38,7 +42,7 @@ describe('forbidExtraProps', () => {
   it('adds one extra key', () => {
     const propTypes = { a: 1, b: 2, c: 3 };
     const result = forbidExtraProps(propTypes);
-    expect(Object.keys(result)).to.eql(Object.keys(propTypes).concat(zeroWidthSpace));
+    expect(ownKeys(result)).to.eql(ownKeys(propTypes).concat(specialProperty));
   });
 
   it('allows for merging of propTypes that have been processed', () => {
@@ -50,7 +54,7 @@ describe('forbidExtraProps', () => {
 
     let validator;
     beforeEach(() => {
-      validator = forbidExtraProps({ [knownProp]() {} })[zeroWidthSpace];
+      validator = forbidExtraProps({ [knownProp]() {} })[specialProperty];
     });
 
     it('adds a function', () => {
@@ -58,15 +62,15 @@ describe('forbidExtraProps', () => {
     });
 
     it('passes when given no props', () => {
-      assertPasses(validator, <div />, zeroWidthSpace, 'Foo');
+      assertPasses(validator, <div />, specialProperty, 'Foo');
     });
 
     it('passes when given only known props', () => {
-      assertPasses(validator, <div {...{ [knownProp]: true }} />, zeroWidthSpace, 'Foo');
+      assertPasses(validator, <div {...{ [knownProp]: true }} />, specialProperty, 'Foo');
     });
 
     it('fails when given an unknown prop', () => {
-      assertFails(validator, <div unknown {...{ [knownProp]: true }} />, zeroWidthSpace, 'Foo');
+      assertFails(validator, <div unknown {...{ [knownProp]: true }} />, specialProperty, 'Foo');
     });
   });
 });

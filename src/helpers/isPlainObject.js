@@ -1,3 +1,3 @@
-export default function isPlainObject(x) {
-  return x && typeof x === 'object' && !Array.isArray(x);
-}
+import isPlainObject from 'prop-types-exact/build/helpers/isPlainObject';
+
+export default isPlainObject;

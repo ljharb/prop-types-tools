@@ -1,4 +1,5 @@
 {
+  "all": true,
   "check-coverage": true,
   "reporter": "html",
   "lines": 100,

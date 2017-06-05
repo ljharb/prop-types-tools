@@ -1,3 +1,5 @@
+import forbidExtraProps from 'prop-types-exact';
+
 import and from './and';
 import between from './between';
 import childrenHavePropXorChildren from './childrenHavePropXorChildren';
@@ -7,7 +9,6 @@ import childrenSequenceOf from './childrenSequenceOf';
 import componentWithName from './componentWithName';
 import elementType from './elementType';
 import explicitNull from './explicitNull';
-import forbidExtraProps from './forbidExtraProps';
 import integer from './integer';
 import keysOf from './keysOf';
 import mutuallyExclusiveProps from './mutuallyExclusiveProps';

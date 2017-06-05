@@ -58,4 +58,3 @@ Simply clone the repo, `npm install`, and run `npm test`
 [license-url]: LICENSE
 [downloads-image]: http://img.shields.io/npm/dm/airbnb-prop-types.svg
 [downloads-url]: http://npm-stat.com/charts.html?package=airbnb-prop-types
-
