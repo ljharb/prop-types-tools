@@ -1,12 +1,18 @@
 import wrapValidator from './helpers/wrapValidator';
 
-function restrictedProp(props, propName, componentName) {
-  if (props[propName] != null) {
-    return new TypeError(`The ${propName} prop on ${componentName} is not allowed.`);
+function customMessageWrapper(messsageFunction) {
+  function restrictedProp(props, propName, componentName, location) {
+    if (messsageFunction && typeof messsageFunction === 'function') {
+      return new TypeError(messsageFunction(props, propName, componentName, location));
+    }
+    if (props[propName] != null) {
+      return new TypeError(`The ${propName} ${location} on ${componentName} is not allowed.`);
+    }
+
+    return null;
   }
-
-  return null;
+  restrictedProp.isRequired = restrictedProp;
+  return restrictedProp;
 }
-restrictedProp.isRequired = restrictedProp;
 
-export default () => wrapValidator(restrictedProp, 'restrictedProp');
+export default (messsageFunction = null) => wrapValidator(customMessageWrapper(messsageFunction), 'restrictedProp');
