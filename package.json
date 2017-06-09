@@ -73,5 +73,11 @@
   "bugs": {
     "url": "https://github.com/airbnb/prop-types/issues"
   },
-  "homepage": "https://github.com/airbnb/prop-types#readme"
+  "homepage": "https://github.com/airbnb/prop-types#readme",
+  "greenkeeper": {
+    "//": "nyc is ignored because it requires node 4+, and we support older than that",
+    "ignore": [
+      "nyc"
+    ]
+  }
 }
