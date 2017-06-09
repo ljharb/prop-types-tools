@@ -1,3 +1,12 @@
+2.6.0 / 2017-06-09
+==================
+  * [New] `restrictedProps`: add ability to overwrite error with custom function (#22)
+  * [Refactor] Allow object rest/spread and `Object.assign` by transforming to `object.assign`
+  * [Deps] update `prop-types`
+  * [Dev Deps] update `babel-plugin-istanbul`, `chai`, `eslint-config-airbnb`, `eslint-plugin-import`, `eslint-plugin-jsx-a11y`, `eslint-plugin-react`, `mocha`
+  * [Tests] on `node` `v8`; `npm` `v5`+ breaks on `node` < v4
+  * [Tests] greenkeeper-ignore `nyc`
+
 2.5.4 / 2017-05-11
 ==================
   * [Fix] `childrenHavePropXorChildren` Ensure validator skips over falsy children
