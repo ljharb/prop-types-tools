@@ -10,28 +10,36 @@ describe('restrictedProp', () => {
     expect(typeof restrictedProp()).to.equal('function');
   });
 
-  function assertPasses(validator, element, propName) {
-    expect(callValidator(validator, element, propName, '"restrictedProp" test')).to.equal(null);
+  function assertPasses(validator, element, propName, location) {
+    expect(callValidator(validator, element, propName, '"restrictedProp" test', location)).to.equal(null);
   }
 
-  function assertFails(validator, element, propName) {
-    expect(callValidator(validator, element, propName, '"restrictedProp" test')).to.be.instanceOf(Error);
+  function assertFails(validator, element, propName, location) {
+    expect(callValidator(validator, element, propName, '"restrictedProp" test', location)).to.be.instanceOf(Error);
   }
 
   it('passes on null/undefined', () => {
-    assertPasses(restrictedProp(), (<div foo={null} />), 'foo');
-    assertPasses(restrictedProp(), (<div foo={undefined} />), 'foo');
+    assertPasses(restrictedProp(), (<div foo={null} />), 'foo', 'prop');
+    assertPasses(restrictedProp(), (<div foo={undefined} />), 'foo', 'prop');
   });
 
   it('fails on any other value', () => {
-    assertFails(restrictedProp(), (<div foo={false} />), 'foo');
-    assertFails(restrictedProp(), (<div foo />), 'foo');
-    assertFails(restrictedProp(), (<div foo={NaN} />), 'foo');
-    assertFails(restrictedProp(), (<div foo={[]} />), 'foo');
-    assertFails(restrictedProp(), (<div foo={{}} />), 'foo');
-    assertFails(restrictedProp(), (<div foo="" />), 'foo');
-    assertFails(restrictedProp(), (<div foo="foo" />), 'foo');
-    assertFails(restrictedProp(), (<div foo={() => {}} />), 'foo');
-    assertFails(restrictedProp(), (<div foo={/a/g} />), 'foo');
+    assertFails(restrictedProp(), (<div foo={false} />), 'foo', 'prop');
+    assertFails(restrictedProp(), (<div foo />), 'foo', 'prop');
+    assertFails(restrictedProp(), (<div foo={NaN} />), 'foo', 'prop');
+    assertFails(restrictedProp(), (<div foo={[]} />), 'foo', 'prop');
+    assertFails(restrictedProp(), (<div foo={{}} />), 'foo', 'prop');
+    assertFails(restrictedProp(), (<div foo="" />), 'foo', 'prop');
+    assertFails(restrictedProp(), (<div foo="foo" />), 'foo', 'prop');
+    assertFails(restrictedProp(), (<div foo={() => {}} />), 'foo', 'prop');
+    assertFails(restrictedProp(), (<div foo={/a/g} />), 'foo', 'prop');
+  });
+
+  it('allows for custom error message', () => {
+    assertFails(restrictedProp(() => new TypeError('Custom Error')), (<div foo={'foo'} />), 'foo', 'prop');
+    const messageFunction = (props, propName, componentName, location) => `[custom message] The ${propName} ${location} on ${componentName} is not allowed.`;
+    expect(callValidator(restrictedProp(messageFunction), (<div foo={'foo'} />), 'foo', '"restrictedProp" test', 'prop')).to.exist
+      .and.be.instanceof(Error)
+      .and.have.property('message', '[custom message] The foo prop on "restrictedProp" test is not allowed.');
   });
 });
