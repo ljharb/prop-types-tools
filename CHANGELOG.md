@@ -1,6 +1,10 @@
+2.6.1 / 2017-06-12
+==================
+  * [Fix] `restrictedProp`: ensure it passes with a custom message when nullary
+
 2.6.0 / 2017-06-09
 ==================
-  * [New] `restrictedProps`: add ability to overwrite error with custom function (#22)
+  * [New] `restrictedProp`: add ability to overwrite error with custom function (#22)
   * [Refactor] Allow object rest/spread and `Object.assign` by transforming to `object.assign`
   * [Deps] update `prop-types`
   * [Dev Deps] update `babel-plugin-istanbul`, `chai`, `eslint-config-airbnb`, `eslint-plugin-import`, `eslint-plugin-jsx-a11y`, `eslint-plugin-react`, `mocha`
