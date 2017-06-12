@@ -36,6 +36,10 @@ describe('restrictedProp', () => {
   });
 
   it('allows for custom error message', () => {
+    assertPasses(restrictedProp(() => new TypeError('Custom Error')), (<div />), 'foo', 'prop');
+    assertPasses(restrictedProp(() => new TypeError('Custom Error')), (<div foo={undefined} />), 'foo', 'prop');
+    assertPasses(restrictedProp(() => new TypeError('Custom Error')), (<div foo={null} />), 'foo', 'prop');
+
     assertFails(restrictedProp(() => new TypeError('Custom Error')), (<div foo={'foo'} />), 'foo', 'prop');
     const messageFunction = (props, propName, componentName, location) => `[custom message] The ${propName} ${location} on ${componentName} is not allowed.`;
     expect(callValidator(restrictedProp(messageFunction), (<div foo={'foo'} />), 'foo', '"restrictedProp" test', 'prop')).to.exist
