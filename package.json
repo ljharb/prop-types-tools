@@ -27,13 +27,13 @@
     "mocha": "^3.4.2",
     "nyc": "^10.3.2",
     "object.values": "^1.0.4",
-    "react": "^15.6.1",
+    "react": "^16.0.0-alpha.12",
     "reflect.ownkeys": "^0.2.0",
     "rimraf": "^2.6.1",
     "safe-publish-latest": "^1.1.1"
   },
   "peerDependencies": {
-    "react": "^0.14 || ^15.0.0"
+    "react": "^0.14 || ^15.0.0 || ^16.0.0-alpha"
   },
   "scripts": {
     "pretest": "npm run lint",
@@ -55,7 +55,8 @@
     "mocha": "mocha --recursive test/helpers/_failTestsOnErrors",
     "react:clean": "rimraf node_modules/react node_modules/react-dom node_modules/react-addons-test-utils",
     "react:14": "npm run react:clean && npm i --no-save react@0.14 react-dom@0.14 react-addons-test-utils@0.14",
-    "react:15": "npm run react:clean && npm i --no-save react@15 react-dom@15 react-addons-test-utils@15"
+    "react:15": "npm run react:clean && npm i --no-save react@15 react-dom@15 react-addons-test-utils@15",
+    "react:16": "npm run react:clean && npm i --no-save react@16.0.0-alpha.12 react-dom@16.0.0-alpha.12 react-addons-test-utils@16.0.0-alpha.3"
   },
   "repository": {
     "type": "git",
