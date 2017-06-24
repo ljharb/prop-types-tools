@@ -1,3 +1,7 @@
+2.7.0 / 2017-06-25
+==================
+  * [New] Added compatibility for React 16 alpha (#25)
+
 2.6.1 / 2017-06-12
 ==================
   * [Fix] `restrictedProp`: ensure it passes with a custom message when nullary
