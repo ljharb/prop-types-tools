@@ -1,3 +1,9 @@
+2.7.1 / 2017-07-13
+==================
+  * [Fix] Make `getComponentName` more robust in IE (#27)
+  * [Deps] update `prop-types-exact`
+  * [Dev Deps] update `babel-preset-airbnb`, `chai`, `eslint-plugin-airbnb`, `eslint-plugin-import`, `eslint-plugin-jsx-a11y`
+
 2.7.0 / 2017-06-25
 ==================
   * [New] Added compatibility for React 16 alpha (#25)
