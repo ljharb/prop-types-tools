@@ -28,6 +28,7 @@ module.exports = {
   sequenceOf: noopThunk,
   shape: noopThunk,
   uniqueArray: noopThunk,
+  uniqueArrayWithMapper: noopThunk,
   uniqueArrayOf: noopThunk,
   valuesOf: noopThunk,
   withShape: noopThunk,

@@ -24,6 +24,7 @@ import restrictedProp from './restrictedProp';
 import sequenceOf from './sequenceOf';
 import shape from './shape';
 import uniqueArray from './uniqueArray';
+import uniqueArrayWithMapper from './uniqueArrayWithMapper';
 import uniqueArrayOf from './uniqueArrayOf';
 import valuesOf from './valuesOf';
 import withShape from './withShape';
@@ -54,6 +55,7 @@ module.exports = {
   sequenceOf,
   shape,
   uniqueArray,
+  uniqueArrayWithMapper,
   uniqueArrayOf,
   valuesOf,
   withShape,
