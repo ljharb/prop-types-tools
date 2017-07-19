@@ -26,7 +26,7 @@ function uniqueArrayWithMapperValidator(mapper) {
 
   uniqueArrayMapped.isRequired = function isRequired(props, propName, ...rest) {
     const propValue = props[propName];
-    if (propValue == null) {
+    if (propValue === undefined) {
       return array.isRequired(props, propName, ...rest);
     }
     return uniqueArrayMapped(props, propName, ...rest);
