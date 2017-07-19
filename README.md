@@ -35,7 +35,7 @@ Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims]
  - `sequenceOf`: takes 1 or more "specifiers": an object with a "validator" function (a propType validator), a "min" nonNegativeInteger, and a "max" nonNegativeInteger. If both "min" and "max" may be omitted, they default to 1; if only "max" is omitted, it defaults to Infinity; if only "min" is omitted, it defaults to 1.
  - `shape`: takes a shape, and allows it to be enforced on any non-null/undefined value.
  - `uniqueArray`: this prop must be an array, and all values must be unique (determined by `Object.is`). Like `PropTypes.array`, but with uniqueness.
- - `uniqueArrayOf`: `uniqueArray`, with a type validator applied. Like `PropTypes.arrayOf`, but with uniqueness.
+ - `uniqueArrayOf`: `uniqueArray`, with a type validator applied. Like `PropTypes.arrayOf`, but with uniqueness. Can also take an optional mapper function that allows for a non-standard unique calculation (otherwise, `Object.is` is used by default). The function is applied to each element in the array, and the resulting values are compared using the standard unique calculation.
  - `valuesOf`: a non-object requiring `PropTypes.objectOf`. Takes a propType validator, and applies it to every own value on the propValue.
  - `withShape`: takes a PropType and a shape, and allows it to be enforced on any non-null/undefined value.
 
