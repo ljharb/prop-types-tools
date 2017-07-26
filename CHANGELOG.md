@@ -1,3 +1,9 @@
+2.8.0 / 2017-07-26
+==================
+  * [New] add optional `mapper` function to `uniqueArrayOf` (#29, #28)
+  * [Deps] update `function.prototype.name`
+  * [Dev Deps] update `eslint`, `eslint-config-airbnb`
+
 2.7.1 / 2017-07-13
 ==================
   * [Fix] Make `getComponentName` more robust in IE (#27)
