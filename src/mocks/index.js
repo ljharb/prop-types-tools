@@ -1,4 +1,4 @@
-function noop() {}
+function noop() { return null; }
 noop.isRequired = noop;
 function noopThunk() { return noop; }
 
@@ -18,7 +18,7 @@ module.exports = {
   mutuallyExclusiveProps: noopThunk,
   mutuallyExclusiveTrueProps: noopThunk,
   nChildren: noopThunk,
-  nonNegativeInteger: noopThunk,
+  nonNegativeInteger: noop,
   nonNegativeNumber: noopThunk,
   numericString: noopThunk,
   object: noopThunk,

@@ -19,9 +19,10 @@ describe('mocks', () => {
   it('provides a thunk for a validator function', () => {
     entries(mocks).forEach(([name, mock]) => {
       const validator = mock();
-      const expectedType = name === 'forbidExtraProps' ? 'object' : 'function';
+      const isSpecialCase = name === 'forbidExtraProps' || name === 'nonNegativeInteger';
+      const expectedType = isSpecialCase ? 'object' : 'function';
       expect([name, typeof validator]).to.eql([name, expectedType]);
-      if (name !== 'forbidExtraProps') {
+      if (!isSpecialCase) {
         expect(validator).not.to.throw();
       }
     });
@@ -30,7 +31,7 @@ describe('mocks', () => {
   it('provides a validator with isRequired', () => {
     entries(mocks).forEach(([name, mock]) => {
       if (name === 'forbidExtraProps') return;
-      const validator = mock();
+      const validator = name === 'nonNegativeInteger' ? mock : mock();
       expect([name, typeof validator.isRequired]).to.eql([name, 'function']);
     });
   });
