@@ -24,7 +24,7 @@
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.1.0",
+    "eslint-plugin-react": "^7.2.0",
     "mocha": "^3.5.0",
     "nyc": "^10.3.2",
     "object.values": "^1.0.4",
