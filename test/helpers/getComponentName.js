@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import getComponentName from '../../src/helpers/getComponentName';
+import getComponentName from '../../build/helpers/getComponentName';
 
 describe('getComponentName', () => {
   it('given a string, returns the string', () => {
