@@ -26,6 +26,7 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.2.0",
     "mocha": "^3.5.0",
+    "mock-env": "^0.2.0",
     "nyc": "^10.3.2",
     "object.values": "^1.0.4",
     "react": "^16.0.0-alpha.12",
