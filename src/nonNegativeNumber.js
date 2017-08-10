@@ -1,7 +1,8 @@
+import is from 'object-is';
 import wrapValidator from './helpers/wrapValidator';
 
 function isNonNegative(x) {
-  return typeof x === 'number' && isFinite(x) && x >= 0 && !Object.is(x, -0);
+  return typeof x === 'number' && isFinite(x) && x >= 0 && !is(x, -0);
 }
 
 function nonNegativeNumber(props, propName, componentName) {
