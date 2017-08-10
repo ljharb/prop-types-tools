@@ -22,11 +22,13 @@ describe('requiredBy propTypes', () => {
     it('passes when the prop that the requiredBy prop needs is passed in', () => {
       assertPasses(requiredBy('bar', bool), (<div bar foo />), 'foo');
       assertPasses(requiredBy('bar', number, 42), (<div bar foo={3} />), 'foo');
+      assertPasses(requiredBy('bar', number, NaN), (<div bar foo={42} />), 'foo');
     });
 
     it('fails when the prop the requiredBy prop needs matches the defaultValue', () => {
       assertFails(requiredBy('bar', number, 42), (<div bar foo={42} />), 'foo');
       assertFails(requiredBy('bar', number, 0), (<div bar foo={0} />), 'foo');
+      assertFails(requiredBy('bar', number, NaN), (<div bar foo={NaN} />), 'foo');
     });
 
     it('fails when the prop the requiredBy prop needs has the wrong prop type', () => {
