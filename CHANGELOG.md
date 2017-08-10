@@ -1,3 +1,7 @@
+2.8.1 / 2017-08-09
+==================
+  * [Fix] `nonNegativeInteger`: mock should match reality and not be a noopThunk, only a noop
+
 2.8.0 / 2017-07-26
 ==================
   * [New] add optional `mapper` function to `uniqueArrayOf` (#29, #28)
