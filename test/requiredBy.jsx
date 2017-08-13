@@ -49,4 +49,25 @@ describe('requiredBy propTypes', () => {
       assertPasses(requiredBy('bar', bool), (<div foo />), 'foo');
     });
   });
+
+  describe('.isRequired', () => {
+    it('is required when the requiredBy prop is present', () => {
+      const validator = requiredBy('bar', bool).isRequired;
+      assertFails(validator, (<div bar />), 'foo');
+      assertPasses(validator, (<div foo bar />), 'foo');
+    });
+    it('is required when the requiredBy prop is absent', () => {
+      const validator = requiredBy('bar', bool).isRequired;
+      assertFails(validator, (<div />), 'foo');
+      assertPasses(validator, (<div foo />), 'foo');
+    });
+    it('is required when the prop matches the defaultValue', () => {
+      const validator = requiredBy('bar', number, 42).isRequired;
+      assertFails(validator, (<div />), 'foo');
+      assertFails(validator, (<div bar />), 'foo');
+      assertFails(validator, (<div foo={42} />), 'foo');
+      assertPasses(validator, (<div foo={7} />), 'foo');
+      assertPasses(validator, (<div foo={0} bar />), 'foo');
+    });
+  });
 });
