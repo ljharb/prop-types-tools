@@ -1,4 +1,4 @@
-# prop-types <sup>[![npm version](https://badge.fury.io/js/airbnb-prop-types.svg)](https://badge.fury.io/js/airbnb-prop-types)</sup>
+# prop-types <sup>![npm version](http://versionbadg.es/airbnb/prop-types.svg)</sup>
 
 [![Build Status][travis-svg]][travis-url]
 [![dependency status][deps-svg]][deps-url]
