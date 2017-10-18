@@ -1,2 +1,2 @@
---require babel-register
+--compilers js:./test/babel-register,jsx:./test/babel-register
 --reporter spec

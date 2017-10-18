@@ -26,7 +26,7 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.4.0",
-    "mocha": "^4.0.1",
+    "mocha": "^3.5.3",
     "mock-env": "^0.2.0",
     "nyc": "^10.3.2",
     "object.values": "^1.0.4",
@@ -42,7 +42,7 @@
     "pretest": "npm run lint",
     "test": "npm run travis",
     "travis": "npm run build && npm run test:only",
-    "test:only": "npm run mocha 'test/**/*.js{,x}'",
+    "test:only": "npm run mocha test",
     "test:all": "npm run test:only && npm run react:14 && npm run test:only && npm run react:15 && npm run test:only",
     "lint": "eslint --ext js,jsx src test",
     "prepublish": "npm run build && safe-publish-latest",
@@ -54,7 +54,7 @@
     "build:index": "babel index.js --out-file index.js --no-babelrc --source-maps",
     "postbuild:index": "mv .index.js index.js",
     "cover:clean": "rimraf coverage",
-    "cover:run": "nyc --show-process-tree npm run --silent mocha 'test/**/*.js{,x}' -- --reporter=dot",
+    "cover:run": "nyc --show-process-tree npm run --silent mocha test -- --reporter=dot",
     "precoverage": "NODE_ENV=test npm run build",
     "coverage": "npm run --quiet cover:clean && npm run --silent cover:run",
     "mocha": "mocha --recursive test/helpers/_failTestsOnErrors",
@@ -83,9 +83,10 @@
   },
   "homepage": "https://github.com/airbnb/prop-types#readme",
   "greenkeeper": {
-    "//": "nyc is ignored because it requires node 4+, and we support older than that",
+    "//": "nyc and mocha are ignored because they requires node 4+, and we support older than that",
     "ignore": [
-      "nyc"
+      "nyc",
+      "mocha"
     ]
   }
 }
