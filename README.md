@@ -47,13 +47,13 @@ Since `PropTypes` are typically not included in production builds of React, this
 Simply clone the repo, `npm install`, and run `npm test`
 
 [package-url]: https://npmjs.org/package/airbnb-prop-types
-[npm-version-svg]: http://versionbadg.es/airbnb/airbnb-prop-types.svg
-[travis-svg]: https://travis-ci.org/airbnb/airbnb-prop-types.svg
-[travis-url]: https://travis-ci.org/airbnb/airbnb-prop-types
-[deps-svg]: https://david-dm.org/airbnb/airbnb-prop-types.svg
-[deps-url]: https://david-dm.org/airbnb/airbnb-prop-types
-[dev-deps-svg]: https://david-dm.org/airbnb/airbnb-prop-types/dev-status.svg
-[dev-deps-url]: https://david-dm.org/airbnb/airbnb-prop-types#info=devDependencies
+[npm-version-svg]: http://versionbadg.es/airbnb/prop-types.svg
+[travis-svg]: https://travis-ci.org/airbnb/prop-types.svg
+[travis-url]: https://travis-ci.org/airbnb/prop-types
+[deps-svg]: https://david-dm.org/airbnb/prop-types.svg
+[deps-url]: https://david-dm.org/airbnb/prop-types
+[dev-deps-svg]: https://david-dm.org/airbnb/prop-types/dev-status.svg
+[dev-deps-url]: https://david-dm.org/airbnb/prop-types#info=devDependencies
 [npm-badge-png]: https://nodei.co/npm/airbnb-prop-types.png?downloads=true&stars=true
 [license-image]: http://img.shields.io/npm/l/airbnb-prop-types.svg
 [license-url]: LICENSE
