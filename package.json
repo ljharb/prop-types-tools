@@ -11,7 +11,7 @@
     "object-is": "^1.0.1",
     "object.assign": "^4.0.4",
     "object.entries": "^1.0.4",
-    "prop-types": "^15.5.10",
+    "prop-types": "^15.6.0",
     "prop-types-exact": "^1.1.1"
   },
   "devDependencies": {
