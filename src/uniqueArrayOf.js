@@ -14,16 +14,15 @@ export default function uniqueArrayOfTypeValidator(type, ...rest) {
 
   if (rest.length === 1) {
     if (typeof rest[0] === 'function') {
-      mapper = rest[0];
+      ([mapper] = rest);
     } else if (typeof rest[0] === 'string') {
-      name = rest[0];
+      ([name] = rest);
     } else {
       throw new TypeError('single input must either be string or function');
     }
   } else if (rest.length === 2) {
     if (typeof rest[0] === 'function' && typeof rest[1] === 'string') {
-      mapper = rest[0];
-      name = rest[1];
+      ([mapper, name] = rest);
     } else {
       throw new TypeError('multiple inputs must be in [function, string] order');
     }
