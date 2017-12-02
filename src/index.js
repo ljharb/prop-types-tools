@@ -26,6 +26,7 @@ import sequenceOf from './sequenceOf';
 import shape from './shape';
 import uniqueArray from './uniqueArray';
 import uniqueArrayOf from './uniqueArrayOf';
+import url from './url';
 import valuesOf from './valuesOf';
 import withShape from './withShape';
 
@@ -57,6 +58,7 @@ module.exports = {
   shape,
   uniqueArray,
   uniqueArrayOf,
+  url,
   valuesOf,
   withShape,
 };

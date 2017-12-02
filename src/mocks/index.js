@@ -30,6 +30,7 @@ module.exports = {
   shape: noopThunk,
   uniqueArray: noopThunk,
   uniqueArrayOf: noopThunk,
+  url: noopThunk,
   valuesOf: noopThunk,
   withShape: noopThunk,
 };

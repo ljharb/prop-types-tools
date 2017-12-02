@@ -8,6 +8,7 @@
     "function.prototype.name": "^1.0.3",
     "has": "^1.0.1",
     "is-regex": "^1.0.4",
+    "is-url": "^1.2.2",
     "object-is": "^1.0.1",
     "object.assign": "^4.0.4",
     "object.entries": "^1.0.4",
