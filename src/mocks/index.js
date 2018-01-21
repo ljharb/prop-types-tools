@@ -28,6 +28,7 @@ module.exports = {
   restrictedProp: noopThunk,
   sequenceOf: noopThunk,
   shape: noopThunk,
+  stringStartsWith: noopThunk,
   uniqueArray: noopThunk,
   uniqueArrayOf: noopThunk,
   valuesOf: noopThunk,
