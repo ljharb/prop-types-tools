@@ -15,18 +15,17 @@ before_install:
   - 'nvm install-latest-npm'
 install:
   - 'if [ "${TRAVIS_NODE_VERSION}" = "0.6" ]; then nvm install --latest-npm 0.8 && npm install && nvm use "${TRAVIS_NODE_VERSION}"; else npm install; fi;'
-before_script:
-  - "sh install-relevant-react.sh"
 script:
   - 'if [ -n "${PRETEST-}" ]; then npm run pretest ; fi'
   - 'if [ -n "${POSTTEST-}" ]; then npm run posttest ; fi'
   - 'if [ -n "${COVERAGE-}" ]; then npm run coverage ; fi'
-  - 'if [ -n "${REACT-}" ]; then npm run "react:${REACT}" && npm run travis; fi'
+  - 'if [ -n "${REACT-}" ]; then case "${TRAVIS_NODE_VERSION}" in [0-3].*) (nvm install 4 && npm run test:prepare) && nvm current ;; esac; npm run test:only; fi'
 sudo: false
 env:
-  - REACT=14
-  - REACT=15
   - REACT=16
+  - REACT=15
+  - REACT=15.4
+  - REACT=0.14
 matrix:
   fast_finish: true
   include:
