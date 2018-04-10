@@ -15,6 +15,8 @@ Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims]
  - `between`: provide an object with an `gt` or `gte` number, and an `lt` or `lte` number (only one item allowed from each pairs; one or both pairs may be provided), and the resulting propType validator will ensure the prop value is a number within the given range. Alternatively, you can provide a function that takes the `props` object and returns a number for each of the `gt`/`gte`/`lt`/`lte` values.
    - `foo: between({ gte: 0, lte: 5 })`
    - `foo: between({ gt: 0, lt: 5 })`
+ - `booleanSome`: provide a list of props, and all must be booleans, and at least one of them must be `true`.
+   - `foo: booleanSome('small', 'medium', 'large')`
  - `childrenHavePropXorChildren`: ensure that either all children have the indicated prop, all children have children, or all children have neither.
    - `foo: childrenHavePropXorChildren('bar')`
  - `childrenOf`: restrict the children prop to only allow children that pass the given propType validator.
@@ -64,6 +66,8 @@ Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims]
    - `foo: sequenceOf({validator: string, min: 0, max: 5})`
  - `shape`: takes a shape, and allows it to be enforced on any non-null/undefined value.
    - `foo: shape({ length: oneOf([2]) })`
+ - `stringStartsWith`: takes a non-empty string, and returns a validator that ensures the prop value is a string that starts with it.
+   - `foo: stringStartsWith('prefix-')`
  - `uniqueArray`: this prop must be an array, and all values must be unique (determined by `Object.is`). Like `PropTypes.array`, but with uniqueness.
    - `foo: uniqueArray()`
  - `uniqueArrayOf`: `uniqueArray`, with a type validator applied. Like `PropTypes.arrayOf`, but with uniqueness. Can also take an optional mapper function that allows for a non-standard unique calculation (otherwise, `Object.is` is used by default). The function is applied to each element in the array, and the resulting values are compared using the standard unique calculation.
