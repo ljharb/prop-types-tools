@@ -1,3 +1,17 @@
+2.9.0 / 2018-04-10
+==================
+  * [New] Added `requiredBy` validator (#30)
+  * [New] add `stringStartsWith`
+  * [New] add `booleanSome`
+  * [Fix] use `object-is` instead of `Object.is`
+  * [Deps] update `prop-types`, `function.prototype.name`, `object.assign`, `prop-types-exact`
+  * [Dev Deps] update `airbnb-browser-shims`, `babel-cli`, `babel-plugin-istanbul`, `babel-plugin-transform-replace-object-assign`, `babel-register`, `chai`, `eslint`, `eslint-config-airbnb`, `eslint-plugin-jsx-a11y`, `eslint-plugin-react`, `eslint-plugin-import`, `react`, `rimraf`
+  * [Docs] fix URLs in readme
+  * [Docs] fix range documentation (#33)
+  * [Docs] Add simple use cases (#38)
+  * [Tests] add `node` `v9`; pin included builds to LTS; use `nvm install-latest-npm`
+  * [Tests] use `enzyme-adapter-react-helper`
+
 2.8.1 / 2017-08-09
 ==================
   * [Fix] `nonNegativeInteger`: mock should match reality and not be a noopThunk, only a noop
