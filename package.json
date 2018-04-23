@@ -4,6 +4,7 @@
   "description": "Custom React PropType validators that we use at Airbnb.",
   "main": "index.js",
   "dependencies": {
+    "array-includes": "^3.0.3",
     "array.prototype.find": "^2.0.4",
     "function.prototype.name": "^1.1.0",
     "has": "^1.0.1",
@@ -22,6 +23,7 @@
     "babel-preset-airbnb": "^2.4.0",
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
+    "enzyme": "^3.3.0",
     "enzyme-adapter-react-helper": "^1.2.3",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
@@ -41,7 +43,7 @@
     "react": "^0.14 || ^15.0.0 || ^16.0.0-alpha"
   },
   "scripts": {
-    "pretest": "npm run lint && npm run test:prepare",
+    "pretest": "npm run test:prepare",
     "pretest:prepare": "npm run build",
     "test:prepare": "npm run react",
     "test": "npm run test:only",

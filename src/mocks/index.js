@@ -1,6 +1,7 @@
 function noop() { return null; }
 noop.isRequired = noop;
 function noopThunk() { return noop; }
+function noopHoc(Component) { return Component; }
 
 module.exports = {
   and: noopThunk,
@@ -25,6 +26,7 @@ module.exports = {
   object: noopThunk,
   or: noopThunk,
   range: noopThunk,
+  renderPropReturning: noopThunk,
   requiredBy: noopThunk,
   restrictedProp: noopThunk,
   sequenceOf: noopThunk,
@@ -32,6 +34,7 @@ module.exports = {
   stringStartsWith: noopThunk,
   uniqueArray: noopThunk,
   uniqueArrayOf: noopThunk,
+  validateRenderPropTypes: noopHoc,
   valuesOf: noopThunk,
   withShape: noopThunk,
 };
