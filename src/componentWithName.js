@@ -5,21 +5,21 @@ import find from 'array.prototype.find';
 import getComponentName from './helpers/getComponentName';
 import wrapValidator from './helpers/wrapValidator';
 
-function hasName(name, prop, propName, componentName, ...rest) {
-  if (Array.isArray(prop)) {
+function hasName(name, propValue, propName, componentName, ...rest) {
+  if (Array.isArray(propValue)) {
     return find(
-      prop.map(item => hasName(name, item, propName, componentName, ...rest)),
+      propValue.map(item => hasName(name, item, propName, componentName, ...rest)),
       Boolean,
     ) || null;
   }
 
-  if (!React.isValidElement(prop)) {
+  if (!React.isValidElement(propValue)) {
     return new TypeError(
       `${componentName}.${propName} is not a valid React element`,
     );
   }
 
-  const { type } = prop;
+  const { type } = propValue;
   const componentNameFromType = getComponentName(type);
 
   if (isRegex(name) && !name.test(componentNameFromType)) {
@@ -43,11 +43,11 @@ export default function componentWithName(name) {
   }
 
   function componentWithNameValidator(props, propName, componentName, ...rest) {
-    const prop = props[propName];
+    const propValue = props[propName];
     if (props[propName] == null) {
       return null;
     }
-    return hasName(name, prop, propName, componentName, ...rest);
+    return hasName(name, propValue, propName, componentName, ...rest);
   }
 
   componentWithNameValidator.isRequired = function componentWithNameRequired(
@@ -56,11 +56,11 @@ export default function componentWithName(name) {
     componentName,
     ...rest
   ) {
-    const prop = props[propName];
-    if (prop == null) {
+    const propValue = props[propName];
+    if (propValue == null) {
       return new TypeError(`\`${componentName}.${propName}\` requires at least one component named ${name}`);
     }
-    return hasName(name, prop, propName, componentName, ...rest);
+    return hasName(name, propValue, propName, componentName, ...rest);
   };
 
   return wrapValidator(componentWithNameValidator, `componentWithName:${name}`, name);
