@@ -26,8 +26,9 @@ Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims]
    - `children: childrenOfType(Component)`
  - `childrenSequenceOf`: restrict the children prop to be a sequenceOf the given "specifiers" (see `sequenceOf`)
    - `children: childrenSequenceOf({validator: string, min: 0, max: 5})`
- - `componentWithName`: restrict the prop to only allow a component with a certain name/displayName. Accepts a string, or a regular expression.
+ - `componentWithName`: restrict the prop to only allow a component with a certain name/displayName. Accepts a string, or a regular expression. Also accepts an `options` object with an optional `stripHOCs` array of string HOC names to strip off before validating; an HOC name must not contain parentheses and must be in camelCase.
    - `foo: componentWithName('Component')`
+   - `foo: componentWithName('Component', { stripHOCs: ['withDirection', 'withStyles'] })`
  - `elementType`: require that the prop be a specific type of React element - takes a Component, an HTML tag name, or `"*"` to match everything.
    - `foo: elementType('span')`
    - `foo: elementType(Component)`

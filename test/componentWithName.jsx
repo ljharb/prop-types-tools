@@ -40,19 +40,25 @@ describe('componentWithName', () => {
     expect(() => componentWithName({})).to.throw(TypeError);
   });
 
+  it('throws when given unknown options', () => {
+    expect(() => componentWithName('Foo', {})).not.to.throw();
+    expect(() => componentWithName('Foo', { stripHOCS: 'typo in the last "s"' })).to.throw(TypeError);
+    expect(() => componentWithName('Foo', { stripHOCs: [], extra: true })).to.throw(TypeError);
+  });
+
   it('throws when given names of HOCs to strip that are not strings', () => {
     const notStrings = [null, undefined, true, false, 42, NaN, [], {}, () => {}];
     notStrings.forEach((notString) => {
-      expect(() => componentWithName('Foo', notString)).to.throw(TypeError);
+      expect(() => componentWithName('Foo', { stripHOCs: [notString] })).to.throw(TypeError);
     });
   });
 
   it('throws when given names of HOCs to strip that have parens', () => {
-    expect(() => componentWithName('Foo', 'with()Foo')).to.throw(TypeError);
+    expect(() => componentWithName('Foo', { stripHOCs: ['with()Foo'] })).to.throw(TypeError);
   });
 
   it('throws when given names of HOCs to strip that are not in camelCase', () => {
-    expect(() => componentWithName('Foo', 'WithFoo')).to.throw(TypeError);
+    expect(() => componentWithName('Foo', { stripHOCs: ['WithFoo'] })).to.throw(TypeError);
   });
 
   function assertPasses(validator, element, propName) {
@@ -90,19 +96,19 @@ describe('componentWithName', () => {
 
     it('passes with a component with HOCs', () => {
       assertPasses(
-        componentWithName('X', 'withA', 'withB', 'withC'),
+        componentWithName('X', { stripHOCs: ['withA', 'withB', 'withC'] }),
         (<div><ComponentWithHOCs default="Foo" /></div>),
         'children',
       );
 
       assertPasses(
-        componentWithName('withC(X)', 'withA', 'withB'),
+        componentWithName('withC(X)', { stripHOCs: ['withA', 'withB'] }),
         (<div><ComponentWithHOCs default="Foo" /></div>),
         'children',
       );
 
       assertPasses(
-        componentWithName('withB(withC(X))', 'withA', 'withC'),
+        componentWithName('withB(withC(X))', { stripHOCs: ['withA', 'withC'] }),
         (<div><ComponentWithHOCs default="Foo" /></div>),
         'children',
       );
@@ -164,7 +170,7 @@ describe('componentWithName', () => {
 
     it('passes with a component with HOCs', () => {
       assertPasses(
-        componentWithName('X', 'withA', 'withB', 'withC'),
+        componentWithName('X', { stripHOCs: ['withA', 'withB', 'withC'] }),
         (
           <div>
             <ComponentWithHOCs default="Foo" />
@@ -177,7 +183,7 @@ describe('componentWithName', () => {
       );
 
       assertPasses(
-        componentWithName('withC(X)', 'withA', 'withB'),
+        componentWithName('withC(X)', { stripHOCs: ['withA', 'withB'] }),
         (
           <div>
             <ComponentWithHOCs default="Foo" />
@@ -190,7 +196,7 @@ describe('componentWithName', () => {
       );
 
       assertPasses(
-        componentWithName('withB(withC(X))', 'withA', 'withC'),
+        componentWithName('withB(withC(X))', { stripHOCs: ['withA', 'withC'] }),
         (
           <div>
             <ComponentWithHOCs default="Foo" />
@@ -263,7 +269,7 @@ describe('componentWithName', () => {
 
     it('passes with a component with HOCs', () => {
       assertPasses(
-        componentWithName('X', 'withA', 'withB', 'withC'),
+        componentWithName('X', { stripHOCs: ['withA', 'withB', 'withC'] }),
         (
           <div>
             {[
@@ -278,7 +284,7 @@ describe('componentWithName', () => {
       );
 
       assertPasses(
-        componentWithName('withC(X)', 'withA', 'withB'),
+        componentWithName('withC(X)', { stripHOCs: ['withA', 'withB'] }),
         (
           <div>
             {[
@@ -293,7 +299,7 @@ describe('componentWithName', () => {
       );
 
       assertPasses(
-        componentWithName('withB(withC(X))', 'withA', 'withC'),
+        componentWithName('withB(withC(X))', { stripHOCs: ['withA', 'withC'] }),
         (
           <div>
             {[
@@ -356,7 +362,7 @@ describe('componentWithName', () => {
 
     it('fails with a component with HOCs', () => {
       assertFails(
-        componentWithName('X', 'withA', 'withB', 'withC'),
+        componentWithName('X', { stripHOCs: ['withA', 'withB', 'withC'] }),
         (
           <div>
             <ComponentWithHOCs default="Foo" />
@@ -367,7 +373,7 @@ describe('componentWithName', () => {
       );
 
       assertFails(
-        componentWithName('withC(X)', 'withA', 'withB'),
+        componentWithName('withC(X)', { stripHOCs: ['withA', 'withB'] }),
         (
           <div>
             <ComponentWithHOCs default="Foo" />
@@ -378,7 +384,7 @@ describe('componentWithName', () => {
       );
 
       assertFails(
-        componentWithName('withB(withC(X))', 'withA', 'withC'),
+        componentWithName('withB(withC(X))', { stripHOCs: ['withA', 'withC'] }),
         (
           <div>
             <ComponentWithHOCs default="Foo" />
@@ -421,19 +427,19 @@ describe('componentWithName', () => {
 
     it('passes with a component with HOCs', () => {
       assertPasses(
-        componentWithName(/^X$/, 'withA', 'withB', 'withC'),
+        componentWithName(/^X$/, { stripHOCs: ['withA', 'withB', 'withC'] }),
         (<div><ComponentWithHOCs default="Foo" /></div>),
         'children',
       );
 
       assertPasses(
-        componentWithName(/^withC\(X\)$/, 'withA', 'withB'),
+        componentWithName(/^withC\(X\)$/, { stripHOCs: ['withA', 'withB'] }),
         (<div><ComponentWithHOCs default="Foo" /></div>),
         'children',
       );
 
       assertPasses(
-        componentWithName(/^withB\(withC\(X\)\)$/, 'withA', 'withC'),
+        componentWithName(/^withB\(withC\(X\)\)$/, { stripHOCs: ['withA', 'withC'] }),
         (<div><ComponentWithHOCs default="Foo" /></div>),
         'children',
       );
@@ -453,19 +459,19 @@ describe('componentWithName', () => {
 
     it('fails with a component with HOCs that does not match the regex', () => {
       assertFails(
-        componentWithName(/^zX$/, 'withA', 'withB', 'withC'),
+        componentWithName(/^zX$/, { stripHOCs: ['withA', 'withB', 'withC'] }),
         (<div><ComponentWithHOCs default="Foo" /></div>),
         'children',
       );
 
       assertFails(
-        componentWithName(/^zwithC\(X\)$/, 'withA', 'withB'),
+        componentWithName(/^zwithC\(X\)$/, { stripHOCs: ['withA', 'withB'] }),
         (<div><ComponentWithHOCs default="Foo" /></div>),
         'children',
       );
 
       assertFails(
-        componentWithName(/^zwithB\(withC\(X\)\)$/, 'withA', 'withC'),
+        componentWithName(/^zwithB\(withC\(X\)\)$/, { stripHOCs: ['withA', 'withC'] }),
         (<div><ComponentWithHOCs default="Foo" /></div>),
         'children',
       );

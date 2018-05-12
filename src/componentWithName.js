@@ -65,10 +65,19 @@ function hasName(name, namesOfHOCsToStrip, propValue, propName, componentName, .
   return null;
 }
 
-export default function componentWithName(name, ...namesOfHOCsToStrip) {
+export default function componentWithName(
+  name,
+  options = {},
+) {
   if (typeof name !== 'string' && !isRegex(name)) {
     throw new TypeError('name must be a string or a regex');
   }
+
+  const passedOptions = Object.keys(options);
+  if (passedOptions.length > 1 || (passedOptions.length === 1 && passedOptions[0] !== 'stripHOCs')) {
+    throw new TypeError(`The only options supported are: “stripHOCs”, got: “${passedOptions.join('”, “')}”`);
+  }
+  const { stripHOCs: namesOfHOCsToStrip = [] } = options;
 
   const allHOCNamesAreValid = namesOfHOCsToStrip.every((x) => {
     if (typeof x !== 'string' || /[()]/g.test(x)) {
