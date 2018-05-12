@@ -5,10 +5,35 @@ import find from 'array.prototype.find';
 import getComponentName from './helpers/getComponentName';
 import wrapValidator from './helpers/wrapValidator';
 
-function hasName(name, propValue, propName, componentName, ...rest) {
+function stripHOCs(fullName, namesOfHOCsToStrip) {
+  let innerName = fullName;
+  while ((/\([^()]*\)/g).test(innerName)) {
+    let HOC = innerName;
+    let previousHOC;
+    do {
+      previousHOC = HOC;
+      HOC = previousHOC.replace(/\([^()]*\)/g, '');
+    } while (previousHOC !== HOC);
+
+    if (namesOfHOCsToStrip.indexOf(HOC) === -1) {
+      return innerName;
+    }
+    innerName = innerName.replace(RegExp(`^${HOC}\\(|\\)$`, 'g'), '');
+  }
+  return innerName;
+}
+
+function hasName(name, namesOfHOCsToStrip, propValue, propName, componentName, ...rest) {
   if (Array.isArray(propValue)) {
     return find(
-      propValue.map(item => hasName(name, item, propName, componentName, ...rest)),
+      propValue.map(item => hasName(
+        name,
+        namesOfHOCsToStrip,
+        item,
+        propName,
+        componentName,
+        ...rest,
+      )),
       Boolean,
     ) || null;
   }
@@ -21,25 +46,38 @@ function hasName(name, propValue, propName, componentName, ...rest) {
 
   const { type } = propValue;
   const componentNameFromType = getComponentName(type);
+  const innerComponentName = namesOfHOCsToStrip.length > 0
+    ? stripHOCs(componentNameFromType, namesOfHOCsToStrip)
+    : componentNameFromType;
 
-  if (isRegex(name) && !name.test(componentNameFromType)) {
+  if (isRegex(name) && !name.test(innerComponentName)) {
     return new TypeError(
       `\`${componentName}.${propName}\` only accepts components matching the regular expression ${name}`,
     );
   }
 
-  if (!isRegex(name) && componentNameFromType !== name) {
+  if (!isRegex(name) && innerComponentName !== name) {
     return new TypeError(
-      `\`${componentName}.${propName}\` only accepts components named ${name}`,
+      `\`${componentName}.${propName}\` only accepts components named ${name}, got ${innerComponentName}`,
     );
   }
 
   return null;
 }
 
-export default function componentWithName(name) {
+export default function componentWithName(name, ...namesOfHOCsToStrip) {
   if (typeof name !== 'string' && !isRegex(name)) {
     throw new TypeError('name must be a string or a regex');
+  }
+
+  const allHOCNamesAreValid = namesOfHOCsToStrip.every((x) => {
+    if (typeof x !== 'string' || /[()]/g.test(x)) {
+      return false;
+    }
+    return /^[a-z][a-zA-Z0-9]+$/.test(x);
+  });
+  if (!allHOCNamesAreValid) {
+    throw new TypeError('every provided HOC name must be a string with no parens, and in camelCase');
   }
 
   function componentWithNameValidator(props, propName, componentName, ...rest) {
@@ -47,7 +85,7 @@ export default function componentWithName(name) {
     if (props[propName] == null) {
       return null;
     }
-    return hasName(name, propValue, propName, componentName, ...rest);
+    return hasName(name, namesOfHOCsToStrip, propValue, propName, componentName, ...rest);
   }
 
   componentWithNameValidator.isRequired = function componentWithNameRequired(
@@ -60,7 +98,7 @@ export default function componentWithName(name) {
     if (propValue == null) {
       return new TypeError(`\`${componentName}.${propName}\` requires at least one component named ${name}`);
     }
-    return hasName(name, propValue, propName, componentName, ...rest);
+    return hasName(name, namesOfHOCsToStrip, propValue, propName, componentName, ...rest);
   };
 
   return wrapValidator(componentWithNameValidator, `componentWithName:${name}`, name);
