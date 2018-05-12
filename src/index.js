@@ -21,6 +21,7 @@ import numericString from './numericString';
 import object from './object';
 import or from './or';
 import range from './range';
+import renderPropReturning from './renderPropReturning';
 import requiredBy from './requiredBy';
 import restrictedProp from './restrictedProp';
 import sequenceOf from './sequenceOf';
@@ -28,6 +29,7 @@ import shape from './shape';
 import stringStartsWith from './stringStartsWith';
 import uniqueArray from './uniqueArray';
 import uniqueArrayOf from './uniqueArrayOf';
+import validateRenderPropTypes from './validateRenderPropTypes';
 import valuesOf from './valuesOf';
 import withShape from './withShape';
 
@@ -54,6 +56,7 @@ module.exports = {
   object,
   or,
   range,
+  renderPropReturning,
   requiredBy,
   restrictedProp,
   sequenceOf,
@@ -61,6 +64,7 @@ module.exports = {
   stringStartsWith,
   uniqueArray,
   uniqueArrayOf,
+  validateRenderPropTypes,
   valuesOf,
   withShape,
 };

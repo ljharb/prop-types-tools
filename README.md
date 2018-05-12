@@ -57,6 +57,8 @@ Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims]
    - `foo: or([bool.isRequired, explicitNull()]`
  - `range`: provide a min, and a max, and the prop must be an integer in the range `[min, max)`
    - `foo: range(-1, 2)`
+ - `renderPropReturning`: require that a render prop (a function returning a React element) returns children validated by the propType validator passed in as an argument. The validator argument must be one of `and`, `childrenHavePropXorChildren`, `childrenOf`, `childrenOfType`, `childrenSequenceOf`, `nChildren`, or `or`, or a standard React propType of either `node`, `element`, `string`, `number`, or an `arrayOf` containing any of these types. `renderPropReturning` must be used in conjunction with the `validateRenderPropTypes` higher order component.
+   - `renderFoo: renderPropReturning(childrenOfType('span'))`
  - `requiredBy`: pass in a prop name and propType, and require that the prop is defined and is not its default value if the passed in prop name is truthy. if the default value is not provided, defaults to checking against `null`.
    - `foo: requiredBy('bar', bool)`
  - `restrictedProp`: this prop is not permitted to be anything but `null` or `undefined`.
@@ -75,6 +77,8 @@ Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims]
    - `foo: uniqueArrayOf(element => element ** 2)`
    - `foo: uniqueArrayOf(element => element ** 2, 'test')`
    - `foo: uniqueArrayOf(array, element => element[0] ** 2, 'test')`
+ - `validateRenderPropTypes`: a higher order component that enables validation of `renderPropReturning` propTypes. This higher order component is necessary due to the fact that render prop functions must be invoked in order to validate what they return. This higher order component will wrap each render prop with a higher order function that returns the render prop's value nested inside of a `ChildrenValidator` component. This component has its `children` propType set to the validator passed into the `renderPropReturning` propType.
+   - `export default validateRenderPropTypes(FooComponent)`
  - `valuesOf`: a non-object requiring `PropTypes.objectOf`. Takes a propType validator, and applies it to every own value on the propValue.
    - `foo: valuesOf(number)`
  - `withShape`: takes a PropType and a shape, and allows it to be enforced on any non-null/undefined value.
