@@ -21,7 +21,7 @@ class ComponentWithName extends React.Component {}
 ComponentWithName.displayName = 'Component with a display name!';
 
 class ComponentWithHOCs extends React.Component {}
-ComponentWithHOCs.displayName = 'withA(withB(withC(X)))';
+ComponentWithHOCs.displayName = 'withA(withB(withC(Connect(X))))';
 
 describe('componentWithName', () => {
   it('returns a function', () => {
@@ -58,7 +58,7 @@ describe('componentWithName', () => {
   });
 
   it('throws when given names of HOCs to strip that are not in camelCase', () => {
-    expect(() => componentWithName('Foo', { stripHOCs: ['WithFoo'] })).to.throw(TypeError);
+    expect(() => componentWithName('Foo', { stripHOCs: ['with_foo'] })).to.throw(TypeError);
   });
 
   function assertPasses(validator, element, propName) {
@@ -96,19 +96,19 @@ describe('componentWithName', () => {
 
     it('passes with a component with HOCs', () => {
       assertPasses(
-        componentWithName('X', { stripHOCs: ['withA', 'withB', 'withC'] }),
+        componentWithName('X', { stripHOCs: ['withA', 'withB', 'withC', 'Connect'] }),
         (<div><ComponentWithHOCs default="Foo" /></div>),
         'children',
       );
 
       assertPasses(
-        componentWithName('withC(X)', { stripHOCs: ['withA', 'withB'] }),
+        componentWithName('withC(Connect(X))', { stripHOCs: ['withA', 'withB'] }),
         (<div><ComponentWithHOCs default="Foo" /></div>),
         'children',
       );
 
       assertPasses(
-        componentWithName('withB(withC(X))', { stripHOCs: ['withA', 'withC'] }),
+        componentWithName('withB(withC(Connect(X)))', { stripHOCs: ['withA', 'withC'] }),
         (<div><ComponentWithHOCs default="Foo" /></div>),
         'children',
       );
@@ -170,7 +170,7 @@ describe('componentWithName', () => {
 
     it('passes with a component with HOCs', () => {
       assertPasses(
-        componentWithName('X', { stripHOCs: ['withA', 'withB', 'withC'] }),
+        componentWithName('X', { stripHOCs: ['withA', 'withB', 'withC', 'Connect'] }),
         (
           <div>
             <ComponentWithHOCs default="Foo" />
@@ -183,7 +183,7 @@ describe('componentWithName', () => {
       );
 
       assertPasses(
-        componentWithName('withC(X)', { stripHOCs: ['withA', 'withB'] }),
+        componentWithName('withC(Connect(X))', { stripHOCs: ['withA', 'withB'] }),
         (
           <div>
             <ComponentWithHOCs default="Foo" />
@@ -196,7 +196,7 @@ describe('componentWithName', () => {
       );
 
       assertPasses(
-        componentWithName('withB(withC(X))', { stripHOCs: ['withA', 'withC'] }),
+        componentWithName('withB(withC(Connect(X)))', { stripHOCs: ['withA', 'withC'] }),
         (
           <div>
             <ComponentWithHOCs default="Foo" />
@@ -269,7 +269,7 @@ describe('componentWithName', () => {
 
     it('passes with a component with HOCs', () => {
       assertPasses(
-        componentWithName('X', { stripHOCs: ['withA', 'withB', 'withC'] }),
+        componentWithName('X', { stripHOCs: ['withA', 'withB', 'withC', 'Connect'] }),
         (
           <div>
             {[
@@ -284,7 +284,7 @@ describe('componentWithName', () => {
       );
 
       assertPasses(
-        componentWithName('withC(X)', { stripHOCs: ['withA', 'withB'] }),
+        componentWithName('withC(Connect(X))', { stripHOCs: ['withA', 'withB'] }),
         (
           <div>
             {[
@@ -299,7 +299,7 @@ describe('componentWithName', () => {
       );
 
       assertPasses(
-        componentWithName('withB(withC(X))', { stripHOCs: ['withA', 'withC'] }),
+        componentWithName('withB(withC(Connect(X)))', { stripHOCs: ['withA', 'withC'] }),
         (
           <div>
             {[
@@ -362,7 +362,7 @@ describe('componentWithName', () => {
 
     it('fails with a component with HOCs', () => {
       assertFails(
-        componentWithName('X', { stripHOCs: ['withA', 'withB', 'withC'] }),
+        componentWithName('X', { stripHOCs: ['withA', 'withB', 'withC', 'Connect'] }),
         (
           <div>
             <ComponentWithHOCs default="Foo" />
@@ -373,7 +373,7 @@ describe('componentWithName', () => {
       );
 
       assertFails(
-        componentWithName('withC(X)', { stripHOCs: ['withA', 'withB'] }),
+        componentWithName('withC(Connect(X))', { stripHOCs: ['withA', 'withB'] }),
         (
           <div>
             <ComponentWithHOCs default="Foo" />
@@ -384,7 +384,7 @@ describe('componentWithName', () => {
       );
 
       assertFails(
-        componentWithName('withB(withC(X))', { stripHOCs: ['withA', 'withC'] }),
+        componentWithName('withB(withC(Connect(X)))', { stripHOCs: ['withA', 'withC'] }),
         (
           <div>
             <ComponentWithHOCs default="Foo" />
@@ -427,19 +427,19 @@ describe('componentWithName', () => {
 
     it('passes with a component with HOCs', () => {
       assertPasses(
-        componentWithName(/^X$/, { stripHOCs: ['withA', 'withB', 'withC'] }),
+        componentWithName(/^X$/, { stripHOCs: ['withA', 'withB', 'withC', 'Connect'] }),
         (<div><ComponentWithHOCs default="Foo" /></div>),
         'children',
       );
 
       assertPasses(
-        componentWithName(/^withC\(X\)$/, { stripHOCs: ['withA', 'withB'] }),
+        componentWithName(/^withC\(Connect\(X\)\)$/, { stripHOCs: ['withA', 'withB'] }),
         (<div><ComponentWithHOCs default="Foo" /></div>),
         'children',
       );
 
       assertPasses(
-        componentWithName(/^withB\(withC\(X\)\)$/, { stripHOCs: ['withA', 'withC'] }),
+        componentWithName(/^withB\(withC\(Connect\(X\)\)\)$/, { stripHOCs: ['withA', 'withC'] }),
         (<div><ComponentWithHOCs default="Foo" /></div>),
         'children',
       );

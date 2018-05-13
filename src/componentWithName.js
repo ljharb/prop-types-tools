@@ -83,7 +83,7 @@ export default function componentWithName(
     if (typeof x !== 'string' || /[()]/g.test(x)) {
       return false;
     }
-    return /^[a-z][a-zA-Z0-9]+$/.test(x);
+    return /^(?:[a-z][a-zA-Z0-9]+|[A-Z][a-z][a-zA-Z0-9]+)$/.test(x);
   });
   if (!allHOCNamesAreValid) {
     throw new TypeError('every provided HOC name must be a string with no parens, and in camelCase');
