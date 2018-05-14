@@ -20,6 +20,9 @@ class Component extends React.Component {}
 class ComponentWithName extends React.Component {}
 ComponentWithName.displayName = 'Component with a display name!';
 
+class ComponentWithHOCs extends React.Component {}
+ComponentWithHOCs.displayName = 'withA(withB(withC(Connect(X))))';
+
 describe('componentWithName', () => {
   it('returns a function', () => {
     expect(typeof componentWithName('name')).to.equal('function');
@@ -35,6 +38,27 @@ describe('componentWithName', () => {
     expect(() => componentWithName(NaN)).to.throw(TypeError);
     expect(() => componentWithName([])).to.throw(TypeError);
     expect(() => componentWithName({})).to.throw(TypeError);
+  });
+
+  it('throws when given unknown options', () => {
+    expect(() => componentWithName('Foo', {})).not.to.throw();
+    expect(() => componentWithName('Foo', { stripHOCS: 'typo in the last "s"' })).to.throw(TypeError);
+    expect(() => componentWithName('Foo', { stripHOCs: [], extra: true })).to.throw(TypeError);
+  });
+
+  it('throws when given names of HOCs to strip that are not strings', () => {
+    const notStrings = [null, undefined, true, false, 42, NaN, [], {}, () => {}];
+    notStrings.forEach((notString) => {
+      expect(() => componentWithName('Foo', { stripHOCs: [notString] })).to.throw(TypeError);
+    });
+  });
+
+  it('throws when given names of HOCs to strip that have parens', () => {
+    expect(() => componentWithName('Foo', { stripHOCs: ['with()Foo'] })).to.throw(TypeError);
+  });
+
+  it('throws when given names of HOCs to strip that are not in camelCase', () => {
+    expect(() => componentWithName('Foo', { stripHOCs: ['with_foo'] })).to.throw(TypeError);
   });
 
   function assertPasses(validator, element, propName) {
@@ -69,6 +93,26 @@ describe('componentWithName', () => {
       (<div><ComponentWithName default="Foo" /></div>),
       'children',
     ));
+
+    it('passes with a component with HOCs', () => {
+      assertPasses(
+        componentWithName('X', { stripHOCs: ['withA', 'withB', 'withC', 'Connect'] }),
+        (<div><ComponentWithHOCs default="Foo" /></div>),
+        'children',
+      );
+
+      assertPasses(
+        componentWithName('withC(Connect(X))', { stripHOCs: ['withA', 'withB'] }),
+        (<div><ComponentWithHOCs default="Foo" /></div>),
+        'children',
+      );
+
+      assertPasses(
+        componentWithName('withB(withC(Connect(X)))', { stripHOCs: ['withA', 'withC'] }),
+        (<div><ComponentWithHOCs default="Foo" /></div>),
+        'children',
+      );
+    });
   });
 
   describe('with multiple children of the specified name', () => {
@@ -123,6 +167,47 @@ describe('componentWithName', () => {
       ),
       'children',
     ));
+
+    it('passes with a component with HOCs', () => {
+      assertPasses(
+        componentWithName('X', { stripHOCs: ['withA', 'withB', 'withC', 'Connect'] }),
+        (
+          <div>
+            <ComponentWithHOCs default="Foo" />
+            <ComponentWithHOCs default="Foo" />
+            <ComponentWithHOCs default="Foo" />
+            <ComponentWithHOCs default="Foo" />
+          </div>
+        ),
+        'children',
+      );
+
+      assertPasses(
+        componentWithName('withC(Connect(X))', { stripHOCs: ['withA', 'withB'] }),
+        (
+          <div>
+            <ComponentWithHOCs default="Foo" />
+            <ComponentWithHOCs default="Foo" />
+            <ComponentWithHOCs default="Foo" />
+            <ComponentWithHOCs default="Foo" />
+          </div>
+        ),
+        'children',
+      );
+
+      assertPasses(
+        componentWithName('withB(withC(Connect(X)))', { stripHOCs: ['withA', 'withC'] }),
+        (
+          <div>
+            <ComponentWithHOCs default="Foo" />
+            <ComponentWithHOCs default="Foo" />
+            <ComponentWithHOCs default="Foo" />
+            <ComponentWithHOCs default="Foo" />
+          </div>
+        ),
+        'children',
+      );
+    });
   });
 
   describe('with children of the specified names passed as an array', () => {
@@ -181,10 +266,57 @@ describe('componentWithName', () => {
       ),
       'children',
     ));
+
+    it('passes with a component with HOCs', () => {
+      assertPasses(
+        componentWithName('X', { stripHOCs: ['withA', 'withB', 'withC', 'Connect'] }),
+        (
+          <div>
+            {[
+              <ComponentWithHOCs key="one" default="Foo" />,
+              <ComponentWithHOCs key="two" default="Foo" />,
+              <ComponentWithHOCs key="three" default="Foo" />,
+              <ComponentWithHOCs key="four" default="Foo" />,
+            ]}
+          </div>
+        ),
+        'children',
+      );
+
+      assertPasses(
+        componentWithName('withC(Connect(X))', { stripHOCs: ['withA', 'withB'] }),
+        (
+          <div>
+            {[
+              <ComponentWithHOCs key="one" default="Foo" />,
+              <ComponentWithHOCs key="two" default="Foo" />,
+              <ComponentWithHOCs key="three" default="Foo" />,
+              <ComponentWithHOCs key="four" default="Foo" />,
+            ]}
+          </div>
+        ),
+        'children',
+      );
+
+      assertPasses(
+        componentWithName('withB(withC(Connect(X)))', { stripHOCs: ['withA', 'withC'] }),
+        (
+          <div>
+            {[
+              <ComponentWithHOCs key="one" default="Foo" />,
+              <ComponentWithHOCs key="two" default="Foo" />,
+              <ComponentWithHOCs key="three" default="Foo" />,
+              <ComponentWithHOCs key="four" default="Foo" />,
+            ]}
+          </div>
+        ),
+        'children',
+      );
+    });
   });
 
   describe('when an unspecified name is provided as a child', () => {
-    it('passes with an SFC', () => assertFails(
+    it('fails with an SFC', () => assertFails(
       componentWithName('SFC'),
       (
         <div>
@@ -195,7 +327,7 @@ describe('componentWithName', () => {
       'children',
     ));
 
-    it('passes with an SFC + displayName', () => assertFails(
+    it('fails with an SFC + displayName', () => assertFails(
       componentWithName(SFCwithName.displayName),
       (
         <div>
@@ -206,7 +338,7 @@ describe('componentWithName', () => {
       'children',
     ));
 
-    it('passes with a Component', () => assertFails(
+    it('fails with a Component', () => assertFails(
       componentWithName('Component'),
       (
         <div>
@@ -217,7 +349,7 @@ describe('componentWithName', () => {
       'children',
     ));
 
-    it('passes with a Component + displayName', () => assertFails(
+    it('fails with a Component + displayName', () => assertFails(
       componentWithName(ComponentWithName.displayName),
       (
         <div>
@@ -227,6 +359,41 @@ describe('componentWithName', () => {
       ),
       'children',
     ));
+
+    it('fails with a component with HOCs', () => {
+      assertFails(
+        componentWithName('X', { stripHOCs: ['withA', 'withB', 'withC', 'Connect'] }),
+        (
+          <div>
+            <ComponentWithHOCs default="Foo" />
+            <section>No way.</section>
+          </div>
+        ),
+        'children',
+      );
+
+      assertFails(
+        componentWithName('withC(Connect(X))', { stripHOCs: ['withA', 'withB'] }),
+        (
+          <div>
+            <ComponentWithHOCs default="Foo" />
+            <section>No way.</section>
+          </div>
+        ),
+        'children',
+      );
+
+      assertFails(
+        componentWithName('withB(withC(Connect(X)))', { stripHOCs: ['withA', 'withC'] }),
+        (
+          <div>
+            <ComponentWithHOCs default="Foo" />
+            <section>No way.</section>
+          </div>
+        ),
+        'children',
+      );
+    });
   });
 
   describe('when a regex value is provided instead of a string', () => {
@@ -258,6 +425,26 @@ describe('componentWithName', () => {
       'children',
     ));
 
+    it('passes with a component with HOCs', () => {
+      assertPasses(
+        componentWithName(/^X$/, { stripHOCs: ['withA', 'withB', 'withC', 'Connect'] }),
+        (<div><ComponentWithHOCs default="Foo" /></div>),
+        'children',
+      );
+
+      assertPasses(
+        componentWithName(/^withC\(Connect\(X\)\)$/, { stripHOCs: ['withA', 'withB'] }),
+        (<div><ComponentWithHOCs default="Foo" /></div>),
+        'children',
+      );
+
+      assertPasses(
+        componentWithName(/^withB\(withC\(Connect\(X\)\)\)$/, { stripHOCs: ['withA', 'withC'] }),
+        (<div><ComponentWithHOCs default="Foo" /></div>),
+        'children',
+      );
+    });
+
     it('fails when SFC name does not match the regex provided', () => assertFails(
       componentWithName(/foobar/),
       (<div><SFC default="Foo" /></div>),
@@ -269,6 +456,26 @@ describe('componentWithName', () => {
       (<div><Component default="Foo" /></div>),
       'children',
     ));
+
+    it('fails with a component with HOCs that does not match the regex', () => {
+      assertFails(
+        componentWithName(/^zX$/, { stripHOCs: ['withA', 'withB', 'withC'] }),
+        (<div><ComponentWithHOCs default="Foo" /></div>),
+        'children',
+      );
+
+      assertFails(
+        componentWithName(/^zwithC\(X\)$/, { stripHOCs: ['withA', 'withB'] }),
+        (<div><ComponentWithHOCs default="Foo" /></div>),
+        'children',
+      );
+
+      assertFails(
+        componentWithName(/^zwithB\(withC\(X\)\)$/, { stripHOCs: ['withA', 'withC'] }),
+        (<div><ComponentWithHOCs default="Foo" /></div>),
+        'children',
+      );
+    });
   });
 
   it('fails when the provided prop is not a component', () => assertFails(
