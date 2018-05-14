@@ -1,3 +1,10 @@
+2.10.0 / 2018-05-14
+==================
+  * [New] `componentWithName`: allow it to take a list of HOC names to strip off before validating (#41)
+  * [Docs] add docs for 2 newest validators
+  * [Dev Deps] update `eslint-plugin-import`, `eslint-plugin-react`
+  * [Tests] on `node` `v10`
+
 2.9.0 / 2018-04-10
 ==================
   * [New] Added `requiredBy` validator (#30)
