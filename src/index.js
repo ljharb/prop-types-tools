@@ -8,6 +8,7 @@ import childrenOf from './childrenOf';
 import childrenOfType from './childrenOfType';
 import childrenSequenceOf from './childrenSequenceOf';
 import componentWithName from './componentWithName';
+import disallowedIf from './disallowedIf';
 import elementType from './elementType';
 import explicitNull from './explicitNull';
 import integer from './integer';
@@ -40,6 +41,7 @@ module.exports = {
   childrenOfType,
   childrenSequenceOf,
   componentWithName,
+  disallowedIf,
   elementType,
   explicitNull,
   forbidExtraProps,

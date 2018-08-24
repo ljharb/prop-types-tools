@@ -11,6 +11,7 @@ module.exports = {
   childrenOfType: noopThunk,
   childrenSequenceOf: noopThunk,
   componentWithName: noopThunk,
+  disallowedIf: noopThunk,
   elementType: noopThunk,
   explicitNull: noopThunk,
   forbidExtraProps: Object,
