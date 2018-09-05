@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import React from 'react';
 
-import { uniqueArray } from '../';
+import { uniqueArray } from '..';
 
 import callValidator from './_callValidator';
 

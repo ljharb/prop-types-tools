@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import React from 'react';
 import ownKeys from 'reflect.ownkeys';
 
-import { forbidExtraProps } from '../';
+import { forbidExtraProps } from '..';
 
 import callValidator from './_callValidator';
 

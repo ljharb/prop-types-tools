@@ -16,7 +16,7 @@ export default function valuesOfValidator(propType) {
     propFullName,
     ...rest
   ) {
-    const propValue = props[propName];
+    const { [propName]: propValue } = props;
     if (propValue == null || isPrimitive(propValue)) {
       return null;
     }
@@ -36,7 +36,7 @@ export default function valuesOfValidator(propType) {
     return firstError || null;
   };
   validator.isRequired = function valuesOfRequired(props, propName, componentName, ...rest) {
-    const propValue = props[propName];
+    const { [propName]: propValue } = props;
     if (propValue == null) {
       return new TypeError(`${componentName}: ${propName} is required.`);
     }

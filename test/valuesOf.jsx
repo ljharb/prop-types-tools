@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { number } from 'prop-types';
 import React from 'react';
 
-import { valuesOf } from '../';
+import { valuesOf } from '..';
 
 import callValidator from './_callValidator';
 

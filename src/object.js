@@ -14,7 +14,7 @@ const ReactPropTypeLocationNames = {
 };
 
 function object(props, propName, componentName, location, propFullName) {
-  const propValue = props[propName];
+  const { [propName]: propValue } = props;
   if (propValue == null) {
     return null;
   }
@@ -33,7 +33,7 @@ object.isRequired = function objectRequired(
   propFullName,
   ...rest
 ) {
-  const propValue = props[propName];
+  const { [propName]: propValue } = props;
   if (propValue == null) {
     const locationName = ReactPropTypeLocationNames[location] || location;
     return new TypeError(`The ${locationName} \`${propFullName}\` is marked as required in \`${componentName}\`, but its value is \`${propValue}\`.`);

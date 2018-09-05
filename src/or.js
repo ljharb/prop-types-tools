@@ -3,7 +3,8 @@ import wrapValidator from './helpers/wrapValidator';
 
 function oneOfTypeValidator(validators) {
   const validator = function oneOfType(props, propName, componentName, ...rest) {
-    if (typeof props[propName] === 'undefined') {
+    const { [propName]: propValue } = props;
+    if (typeof propValue === 'undefined') {
       return null;
     }
 
@@ -17,7 +18,8 @@ function oneOfTypeValidator(validators) {
     return new TypeError(`${componentName}: invalid value supplied to ${propName}.`);
   };
   validator.isRequired = function oneOfTypeRequired(props, propName, componentName, ...rest) {
-    if (typeof props[propName] === 'undefined') {
+    const { [propName]: propValue } = props;
+    if (typeof propValue === 'undefined') {
       return new TypeError(`${componentName}: missing value for required ${propName}.`);
     }
 

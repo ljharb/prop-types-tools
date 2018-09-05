@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { number, string } from 'prop-types';
 import React from 'react';
 
-import { childrenSequenceOf } from '../';
+import { childrenSequenceOf } from '..';
 
 import callValidator from './_callValidator';
 

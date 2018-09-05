@@ -90,7 +90,7 @@ export default function componentWithName(
   }
 
   function componentWithNameValidator(props, propName, componentName, ...rest) {
-    const propValue = props[propName];
+    const { [propName]: propValue } = props;
     if (props[propName] == null) {
       return null;
     }
@@ -103,7 +103,7 @@ export default function componentWithName(
     componentName,
     ...rest
   ) {
-    const propValue = props[propName];
+    const { [propName]: propValue } = props;
     if (propValue == null) {
       return new TypeError(`\`${componentName}.${propName}\` requires at least one component named ${name}`);
     }

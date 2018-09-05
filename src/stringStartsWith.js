@@ -7,7 +7,7 @@ export default function stringStartsWithValidator(start) {
   }
 
   const validator = function stringStartsWith(props, propName, componentName, ...rest) {
-    const propValue = props[propName];
+    const { [propName]: propValue } = props;
 
     if (propValue == null) {
       return null;

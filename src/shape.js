@@ -7,7 +7,7 @@ export default function shapeValidator(shapeTypes) {
   }
 
   function shape(props, propName, componentName, location, ...rest) {
-    const propValue = props[propName];
+    const { [propName]: propValue } = props;
     if (propValue == null) {
       return null;
     }
@@ -32,7 +32,7 @@ export default function shapeValidator(shapeTypes) {
   }
 
   shape.isRequired = function shapeRequired(props, propName, componentName, ...rest) {
-    const propValue = props[propName];
+    const { [propName]: propValue } = props;
     if (propValue == null) {
       return new TypeError(`${componentName}: ${propName} is required.`);
     }

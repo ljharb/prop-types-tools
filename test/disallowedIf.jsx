@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { any, bool } from 'prop-types';
 import React from 'react';
 
-import { disallowedIf } from '../';
+import { disallowedIf } from '..';
 
 import callValidator from './_callValidator';
 

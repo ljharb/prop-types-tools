@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import React from 'react';
 
-import { childrenOfType } from '../';
+import { childrenOfType } from '..';
 
 import callValidator from './_callValidator';
 

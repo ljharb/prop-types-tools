@@ -1,8 +1,13 @@
 import { expect } from 'chai';
-import { arrayOf, bool, number, string } from 'prop-types';
+import {
+  arrayOf,
+  bool,
+  number,
+  string,
+} from 'prop-types';
 import React from 'react';
 
-import { or, explicitNull } from '../';
+import { or, explicitNull } from '..';
 
 import callValidator from './_callValidator';
 

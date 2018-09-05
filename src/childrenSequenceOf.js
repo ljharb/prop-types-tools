@@ -10,7 +10,7 @@ export default function childrenSequenceOfValidator(...specifiers) {
       return new TypeError(`${componentName} is using the childrenSequenceOf validator on non-children prop "${propName}"`);
     }
 
-    const propValue = props[propName];
+    const { [propName]: propValue } = props;
     const children = renderableChildren(propValue);
     if (children.length === 0) {
       return null;
@@ -28,7 +28,7 @@ export default function childrenSequenceOfValidator(...specifiers) {
       return new TypeError(`${componentName} is using the childrenSequenceOf validator on non-children prop "${propName}"`);
     }
 
-    const propValue = props[propName];
+    const { [propName]: propValue } = props;
     const children = renderableChildren(propValue);
     if (children.length === 0) {
       return new TypeError(`${componentName}: renderable children are required.`);

@@ -17,7 +17,7 @@ export default function childrenOf(propType) {
       return new TypeError(`${componentName} is using the childrenOf validator on non-children prop "${propName}"`);
     }
 
-    const propValue = props[propName];
+    const { [propName]: propValue } = props;
 
     if (propValue == null) {
       return null;

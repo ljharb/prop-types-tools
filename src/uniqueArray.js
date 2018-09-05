@@ -21,7 +21,7 @@ function requiredUniqueArray(props, propName, componentName, ...rest) {
     return result;
   }
 
-  const propValue = props[propName];
+  const { [propName]: propValue } = props;
   const uniqueCount = getUniqueCount(propValue);
   if (uniqueCount !== propValue.length) {
     return new RangeError(`${componentName}: values must be unique. ${propValue.length - uniqueCount} duplicate values found.`);
@@ -30,7 +30,7 @@ function requiredUniqueArray(props, propName, componentName, ...rest) {
 }
 
 function uniqueArray(props, propName, ...rest) {
-  const propValue = props[propName];
+  const { [propName]: propValue } = props;
   if (propValue == null) {
     return null;
   }

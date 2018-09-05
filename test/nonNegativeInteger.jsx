@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import React from 'react';
 
-import { nonNegativeInteger } from '../';
+import { nonNegativeInteger } from '..';
 
 import callValidator from './_callValidator';
 

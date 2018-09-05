@@ -111,7 +111,7 @@ export default function betweenValidator(options) {
   const optsThunks = propsThunkify(options);
 
   const validator = function between(props, propName, componentName, ...rest) {
-    const propValue = props[propName];
+    const { [propName]: propValue } = props;
     if (propValue == null) {
       return null;
     }
@@ -138,7 +138,7 @@ export default function betweenValidator(options) {
     return null;
   };
   validator.isRequired = function betweenRequired(props, propName, componentName, ...rest) {
-    const propValue = props[propName];
+    const { [propName]: propValue } = props;
     if (typeof propValue !== 'number') {
       return new RangeError(`${componentName}: ${propName} must be a number, got "${typeof propValue}"`);
     }

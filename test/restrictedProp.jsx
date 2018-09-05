@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import React from 'react';
 
-import { restrictedProp } from '../';
+import { restrictedProp } from '..';
 
 import callValidator from './_callValidator';
 

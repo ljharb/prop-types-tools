@@ -14,7 +14,7 @@ export default function keysOfValidator(propType, name = 'keysOf') {
     propFullName,
     ...rest
   ) {
-    const propValue = props[propName];
+    const { [propName]: propValue } = props;
 
     if (propValue == null || isPrimitive(propValue)) {
       return null;
@@ -36,7 +36,7 @@ export default function keysOfValidator(propType, name = 'keysOf') {
   };
 
   validator.isRequired = function keyedByRequired(props, propName, componentName, ...rest) {
-    const propValue = props[propName];
+    const { [propName]: propValue } = props;
 
     if (propValue == null) {
       return new TypeError(`${componentName}: ${propName} is required, but value is ${propValue}`);

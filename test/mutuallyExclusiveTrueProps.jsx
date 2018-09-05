@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import React from 'react';
 
-import { mutuallyExclusiveTrueProps } from '../';
+import { mutuallyExclusiveTrueProps } from '..';
 
 import callValidator from './_callValidator';
 

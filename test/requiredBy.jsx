@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import React from 'react';
 import { bool, number } from 'prop-types';
 
-import { requiredBy } from '../';
+import { requiredBy } from '..';
 import callValidator from './_callValidator';
 
 function assertPasses(validator, element, propName) {

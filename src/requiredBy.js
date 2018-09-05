@@ -4,7 +4,7 @@ import wrapValidator from './helpers/wrapValidator';
 export default function getRequiredBy(requiredByPropName, propType, defaultValue = null) {
   function requiredBy(props, propName, componentName, ...rest) {
     if (props[requiredByPropName]) {
-      const propValue = props[propName];
+      const { [propName]: propValue } = props;
       if (is(propValue, defaultValue) || typeof propValue === 'undefined') {
         return new TypeError(
           `${componentName}: when ${requiredByPropName} is true, prop “${propName}” must be present.`,
@@ -14,7 +14,7 @@ export default function getRequiredBy(requiredByPropName, propType, defaultValue
     return propType(props, propName, componentName, ...rest);
   }
   requiredBy.isRequired = function requiredByRequired(props, propName, componentName, ...rest) {
-    const propValue = props[propName];
+    const { [propName]: propValue } = props;
     if (is(propValue, defaultValue)) {
       return new TypeError(`${componentName}: prop “${propName}” must be present.`);
     }

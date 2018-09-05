@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import React from 'react';
 
-import { stringStartsWith } from '../';
+import { stringStartsWith } from '..';
 
 import callValidator from './_callValidator';
 

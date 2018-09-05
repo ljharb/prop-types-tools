@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import React from 'react';
 
-import { object } from '../';
+import { object } from '..';
 
 import callValidator from './_callValidator';
 

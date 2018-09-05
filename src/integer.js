@@ -2,17 +2,17 @@ import isInteger from './helpers/isInteger';
 import wrapValidator from './helpers/wrapValidator';
 
 function requiredInteger(props, propName, componentName) {
-  const value = props[propName];
-  if (value == null || !isInteger(value)) {
+  const { [propName]: propValue } = props;
+  if (propValue == null || !isInteger(propValue)) {
     return new RangeError(`${propName} in ${componentName} must be an integer`);
   }
   return null;
 }
 
 const validator = function integer(props, propName, ...rest) {
-  const value = props[propName];
+  const { [propName]: propValue } = props;
 
-  if (value == null) {
+  if (propValue == null) {
     return null;
   }
 

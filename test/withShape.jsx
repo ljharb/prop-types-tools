@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { array, number, oneOf } from 'prop-types';
 import React from 'react';
 
-import { withShape, range } from '../';
+import { withShape, range } from '..';
 
 import callValidator from './_callValidator';
 

@@ -28,9 +28,9 @@ export default function childrenHavePropXorChildren(prop) {
     });
 
     if (
-      (propCount === truthyChildrenCount && grandchildrenCount === 0) ||
-      (propCount === 0 && grandchildrenCount === truthyChildrenCount) ||
-      (propCount === 0 && grandchildrenCount === 0)
+      (propCount === truthyChildrenCount && grandchildrenCount === 0)
+      || (propCount === 0 && grandchildrenCount === truthyChildrenCount)
+      || (propCount === 0 && grandchildrenCount === 0)
     ) {
       return null;
     }

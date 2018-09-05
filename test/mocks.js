@@ -3,7 +3,7 @@ import entries from 'object.entries';
 import values from 'object.values';
 
 import mocks from '../build/mocks';
-import implementations from '../';
+import implementations from '..';
 
 describe('mocks', () => {
   it('has the same keys', () => {

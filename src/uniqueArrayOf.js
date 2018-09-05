@@ -31,7 +31,7 @@ export default function uniqueArrayOfTypeValidator(type, ...rest) {
   }
 
   function uniqueArrayOfMapped(props, propName, ...args) {
-    const propValue = props[propName];
+    const { [propName]: propValue } = props;
     if (propValue == null) {
       return null;
     }
@@ -41,7 +41,7 @@ export default function uniqueArrayOfTypeValidator(type, ...rest) {
   }
 
   uniqueArrayOfMapped.isRequired = function isRequired(props, propName, ...args) {
-    const propValue = props[propName];
+    const { [propName]: propValue } = props;
     if (propValue == null) {
       return array.isRequired(props, propName, ...args);
     }

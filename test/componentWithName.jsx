@@ -6,7 +6,7 @@
 import React from 'react';
 import { expect } from 'chai';
 
-import { componentWithName } from '../';
+import { componentWithName } from '..';
 
 import callValidator from './_callValidator';
 

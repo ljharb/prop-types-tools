@@ -24,7 +24,8 @@ function validateRange(min, max) {
 
 const specifierShape = {
   validator(props, propName) {
-    if (typeof props[propName] !== 'function') {
+    const { [propName]: propValue } = props;
+    if (typeof propValue !== 'function') {
       return new TypeError('"validator" must be a propType validator function');
     }
     return null;
@@ -70,7 +71,7 @@ function chunkByType(items) {
 }
 
 function validateChunks(specifiers, props, propName, componentName, ...rest) {
-  const items = props[propName];
+  const { [propName]: items } = props;
   const chunks = chunkByType(items);
 
   for (let i = 0; i < specifiers.length; i += 1) {
@@ -144,7 +145,7 @@ export default function sequenceOfValidator(...specifiers) {
   }
 
   const validator = function sequenceOf(props, propName, ...rest) {
-    const propValue = props[propName];
+    const { [propName]: propValue } = props;
 
     if (propValue == null) {
       return null;
