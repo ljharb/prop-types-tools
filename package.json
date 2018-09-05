@@ -6,13 +6,13 @@
   "dependencies": {
     "array.prototype.find": "^2.0.4",
     "function.prototype.name": "^1.1.0",
-    "has": "^1.0.1",
+    "has": "^1.0.3",
     "is-regex": "^1.0.4",
     "object-is": "^1.0.1",
     "object.assign": "^4.1.0",
     "object.entries": "^1.0.4",
-    "prop-types": "^15.6.1",
-    "prop-types-exact": "^1.1.2"
+    "prop-types": "^15.6.2",
+    "prop-types-exact": "^1.2.0"
   },
   "devDependencies": {
     "airbnb-browser-shims": "^2.1.0",
