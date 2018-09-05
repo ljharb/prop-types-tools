@@ -1,3 +1,9 @@
+2.11.0 / 2018-09-04
+==================
+  * [New] Add disallowedIf propType (#45)
+  * [Deps] update `has`, `prop-types`, `prop-types-exact`
+  * [Dev Deps] update `enzyme`, `enzyme-adapter-react-helper`, `eslint`, `eslint-config-airbnb`, `eslint-plugin-import`, `eslint-plugin-jsx-a11y`, `eslint-plugin-react`, `safe-publish-latest`
+
 2.10.0 / 2018-05-14
 ==================
   * [New] `componentWithName`: allow it to take a list of HOC names to strip off before validating (#41)
