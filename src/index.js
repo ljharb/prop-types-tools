@@ -29,6 +29,7 @@ import shape from './shape';
 import stringStartsWith from './stringStartsWith';
 import uniqueArray from './uniqueArray';
 import uniqueArrayOf from './uniqueArrayOf';
+import url from './url';
 import valuesOf from './valuesOf';
 import withShape from './withShape';
 
@@ -63,6 +64,7 @@ module.exports = {
   stringStartsWith,
   uniqueArray,
   uniqueArrayOf,
+  url,
   valuesOf,
   withShape,
 };

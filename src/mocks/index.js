@@ -33,6 +33,7 @@ module.exports = {
   stringStartsWith: noopThunk,
   uniqueArray: noopThunk,
   uniqueArrayOf: noopThunk,
+  url: noopThunk,
   valuesOf: noopThunk,
   withShape: noopThunk,
 };
