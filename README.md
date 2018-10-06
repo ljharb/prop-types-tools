@@ -57,7 +57,7 @@ Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims]
    - `foo: numericString`
  - `object`: same as `PropTypes.object`, but can be called outside of React's propType flow.
  - `or`: recursively allows only the provided propTypes, or arrays of those propTypes.
-   - `foo: or([bool.isRequired, explicitNull()]`
+   - `foo: or([bool.isRequired, explicitNull()])`
  - `range`: provide a min, and a max, and the prop must be an integer in the range `[min, max)`
    - `foo: range(-1, 2)`
  - `requiredBy`: pass in a prop name and propType, and require that the prop is defined and is not its default value if the passed in prop name is truthy. if the default value is not provided, defaults to checking against `null`.
