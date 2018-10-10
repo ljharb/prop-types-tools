@@ -1,3 +1,3 @@
-require('babel-register')({
-  only: /test\//,
+require('@babel/register')({
+  only: [/test\//],
 });
