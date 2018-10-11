@@ -40,4 +40,7 @@ matrix:
     - node_js: "9"
     - node_js: "7"
     - node_js: "5"
+    - node_js: "4" # babel 7 requires node >= 6
     - node_js: "iojs"
+    - node_js: "0.12" # babel 7 requires node >= 6
+    - node_js: "0.10" # babel 7 requires node >= 6
