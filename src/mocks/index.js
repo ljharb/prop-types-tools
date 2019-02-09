@@ -13,6 +13,7 @@ module.exports = {
   componentWithName: noopThunk,
   disallowedIf: noopThunk,
   elementType: noopThunk,
+  empty: noopThunk,
   explicitNull: noopThunk,
   forbidExtraProps: Object,
   integer: noopThunk,

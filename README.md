@@ -34,6 +34,8 @@ Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims]
  - `elementType`: require that the prop be a specific type of React element - takes a Component, an HTML tag name, or `"*"` to match everything.
    - `foo: elementType('span')`
    - `foo: elementType(Component)`
+ - `empty`: a value that React renders to nothing: `undefined`, `null`, `false`, the empty string, or an array of those things.
+   - `foo: empty()`
  - `explicitNull`: only allow `null` or `undefined`/omission - and only `null` when required.
    - `foo: explicitNull()`
  - `forbidExtraProps`: pass your entire `propTypes` object into this function, and any nonspecified prop will error.

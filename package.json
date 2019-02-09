@@ -34,6 +34,7 @@
     "mocha": "^3.5.3",
     "mock-env": "^0.2.0",
     "nyc": "^10.3.2",
+    "object-inspect": "^1.6.0",
     "object.values": "^1.1.0",
     "react": "^0.14 || ^15.0.0 || ^16.0.0-alpha",
     "reflect.ownkeys": "^0.2.0",
