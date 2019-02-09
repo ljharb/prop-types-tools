@@ -10,7 +10,7 @@
     "is-regex": "^1.0.4",
     "object-is": "^1.0.1",
     "object.assign": "^4.1.0",
-    "object.entries": "^1.0.4",
+    "object.entries": "^1.1.0",
     "prop-types": "^15.6.2",
     "prop-types-exact": "^1.2.0",
     "react-is": "^16.8.1"
