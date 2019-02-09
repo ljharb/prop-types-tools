@@ -1,3 +1,10 @@
+2.12.0 / 2019-02-09
+==================
+  * [New] add `.empty`
+  * [New] `elementType`: support forwardRefs and Context Provider/Consumer
+  * [Deps] update `object.entries`
+  * [Dev Deps] update to babel 7; update `airbnb-browser-shims`, `chai`, `enzyme`, `enzyme`, `enzyme-adapter-react-helper`, `eslint`, `eslint-plugin-jsx-a11y`, `eslint-plugin-react`, `eslint-plugin-import`
+
 2.11.0 / 2018-09-04
 ==================
   * [New] Add disallowedIf propType (#45)
