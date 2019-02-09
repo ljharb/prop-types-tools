@@ -12,7 +12,8 @@
     "object.assign": "^4.1.0",
     "object.entries": "^1.0.4",
     "prop-types": "^15.6.2",
-    "prop-types-exact": "^1.2.0"
+    "prop-types-exact": "^1.2.0",
+    "react-is": "^16.8.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",

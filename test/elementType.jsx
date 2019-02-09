@@ -279,5 +279,76 @@ describe('elementType', () => {
         'array',
       ));
     });
+
+    (React.forwardRef ? describe : describe.skip)('React.forwardRef', () => {
+      const MyForwardRef = React.forwardRef((props, ref) => <div ref={ref} />);
+
+      it('passes with * and a forwardRef', () => assertPasses(
+        elementType('*'),
+        (<div a={<MyForwardRef />} />),
+        'a',
+        '* + forwardRef',
+      ));
+
+      it('passes with matching forwardRef', () => assertPasses(
+        elementType(MyForwardRef),
+        (<div a={<MyForwardRef />} />),
+        'a',
+        'forwardRef + forwardRef',
+      ));
+
+      it('fails with a string and a forwardRef', () => assertFails(
+        elementType('div'),
+        (<div a={<MyForwardRef />} />),
+        'a',
+        'div + forwardRef',
+      ));
+    });
+
+    (React.createContext ? describe : describe.skip)('React.createContext', () => {
+      const { Provider, Consumer } = React.createContext('test');
+
+      it('passes with * and a Provider', () => assertPasses(
+        elementType('*'),
+        (<div a={<Provider />} />),
+        'a',
+        '* + Provider',
+      ));
+
+      it('passes with * and a Consumer', () => assertPasses(
+        elementType('*'),
+        (<div a={<Consumer />} />),
+        'a',
+        '* + Consumer',
+      ));
+
+      it('passes with matching Provider', () => assertPasses(
+        elementType(Provider),
+        (<div a={<Provider />} />),
+        'a',
+        'Provider + Provider',
+      ));
+
+      it('passes with matching Consumer', () => assertPasses(
+        elementType(Consumer),
+        (<div a={<Consumer />} />),
+        'a',
+        'Consumer + Consumer',
+      ));
+
+      it('fails with a string and a Provider', () => assertFails(
+        elementType('div'),
+        (<div a={<Provider />} />),
+        'a',
+        'div + Provider',
+      ));
+
+      it('fails with a string and a Consumer', () => assertFails(
+        elementType('div'),
+        (<div a={<Consumer />} />),
+        'a',
+        'div + Consumer',
+      ));
+    });
   });
 });

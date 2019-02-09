@@ -1,4 +1,6 @@
 import { element } from 'prop-types';
+import { isValidElementType } from 'react-is';
+
 import and from './and';
 import getComponentName from './helpers/getComponentName';
 import wrapValidator from './helpers/wrapValidator';
@@ -28,7 +30,7 @@ export default function elementTypeValidator(Type) {
     return wrapValidator(element, 'elementType(*)', Type);
   }
 
-  if (typeof Type !== 'string' && typeof Type !== 'function') {
+  if (!isValidElementType(Type)) {
     throw new TypeError(`Type must be a React Component, an HTML element tag name, or "*". Got an ${typeof Type}`);
   }
 
