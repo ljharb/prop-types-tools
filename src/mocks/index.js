@@ -27,6 +27,7 @@ module.exports = {
   object: noopThunk,
   or: noopThunk,
   range: noopThunk,
+  ref: noopThunk,
   requiredBy: noopThunk,
   restrictedProp: noopThunk,
   sequenceOf: noopThunk,

@@ -52,16 +52,18 @@ Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims]
    - `children: nChildren(3)`
    - `children: nChildren(3, childrenOfType('span'))`
  - `nonNegativeInteger`: require that the prop be a number, that is 0, or a finite positive integer.
-   - `foo: nonNegativeInteger`
+   - `foo: nonNegativeInteger()`
  - `nonNegativeNumber`: require that the prop be a number, that is 0, or a finite positive number.
-   - `foo: nonNegativeNumber`
+   - `foo: nonNegativeNumber()`
  - `numericString`: require the prop be a string that is conceptually numeric.
-   - `foo: numericString`
+   - `foo: numericString()`
  - `object`: same as `PropTypes.object`, but can be called outside of React's propType flow.
  - `or`: recursively allows only the provided propTypes, or arrays of those propTypes.
    - `foo: or([bool.isRequired, explicitNull()])`
  - `range`: provide a min, and a max, and the prop must be an integer in the range `[min, max)`
    - `foo: range(-1, 2)`
+ - `ref`: require the prop to be a React ref. These can be either the object returned from `React.createRef()` or "callback" refs.
+   - `foo: ref()`
  - `requiredBy`: pass in a prop name and propType, and require that the prop is defined and is not its default value if the passed in prop name is truthy. if the default value is not provided, defaults to checking against `null`.
    - `foo: requiredBy('bar', bool)`
  - `restrictedProp`: this prop is not permitted to be anything but `null` or `undefined`.

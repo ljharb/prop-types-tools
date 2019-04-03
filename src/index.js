@@ -23,6 +23,7 @@ import numericString from './numericString';
 import object from './object';
 import or from './or';
 import range from './range';
+import ref from './ref';
 import requiredBy from './requiredBy';
 import restrictedProp from './restrictedProp';
 import sequenceOf from './sequenceOf';
@@ -58,6 +59,7 @@ module.exports = {
   object,
   or,
   range,
+  ref,
   requiredBy,
   restrictedProp,
   sequenceOf,
