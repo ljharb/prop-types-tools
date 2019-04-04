@@ -31,14 +31,32 @@ describe('ref', () => {
     });
 
     it('passes with legacy refs', () => {
-      assertPasses(validator, <div someRef={() => {}} />, 'someRef');
+      assertPasses(validator, <div someRef={(node) => {}} />, 'someRef'); // eslint-disable-line no-unused-vars
     });
 
     it('passes with ref objects', () => {
       assertPasses(validator, <div someRef={React.createRef()} />, 'someRef');
     });
 
-    it('fails with non-refs', () => {
+    it('fails with React components', () => {
+      class A extends React.Component {
+        constructor(props) {} // eslint-disable-line
+      }
+      assertFails(validator, <div someRef={A} />, 'someRef');
+    });
+
+    it('fails with React pure components', () => {
+      class B extends React.PureComponent {
+        constructor(props) {} // eslint-disable-line
+      }
+      assertFails(validator, <div someRef={B} />, 'someRef');
+    });
+
+    it('fails with non-ref functions', () => {
+      assertFails(validator, <div someRef={() => {}} />, 'someRef');
+    });
+
+    it('fails with other non-refs', () => {
       assertFails(validator, <div someRef={666} />, 'someRef');
     });
   });
@@ -56,14 +74,32 @@ describe('ref', () => {
     });
 
     it('passes with legacy refs', () => {
-      assertPasses(validator, <div someRef={() => {}} />, 'someRef');
+      assertPasses(validator, <div someRef={(node) => {}} />, 'someRef'); // eslint-disable-line no-unused-vars
     });
 
     it('passes with ref objects', () => {
       assertPasses(validator, <div someRef={React.createRef()} />, 'someRef');
     });
 
-    it('fails with non-refs', () => {
+    it('fails with React components', () => {
+      class A extends React.Component {
+        constructor(props) {} // eslint-disable-line
+      }
+      assertFails(validator, <div someRef={A} />, 'someRef');
+    });
+
+    it('fails with React pure components', () => {
+      class B extends React.PureComponent {
+        constructor(props) {} // eslint-disable-line
+      }
+      assertFails(validator, <div someRef={B} />, 'someRef');
+    });
+
+    it('fails with non-ref functions', () => {
+      assertFails(validator, <div someRef={() => {}} />, 'someRef');
+    });
+
+    it('fails with other non-refs', () => {
       assertFails(validator, <div someRef={666} />, 'someRef');
     });
   });
