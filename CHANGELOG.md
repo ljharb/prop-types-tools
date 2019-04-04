@@ -1,6 +1,12 @@
+2.13.0 / 2019-04-04
+==================
+  * [New] add `ref` (#54)
+  * [Deps] update `prop-types`, `react-is`
+  * [Dev Deps] update `@babel/cli`, `@babel/core`, `@babel/register`, `airbnb-browser-shims`, `babel-plugin-istanbul`, `babel-preset-airbnb`, `enzyme`, `enzyme-adapter-react-helper`, `eslint`
+
 2.12.0 / 2019-02-09
 ==================
-  * [New] add `.empty`
+  * [New] add `empty`
   * [New] `elementType`: support forwardRefs and Context Provider/Consumer
   * [Deps] update `object.entries`
   * [Dev Deps] update to babel 7; update `airbnb-browser-shims`, `chai`, `enzyme`, `enzyme`, `enzyme-adapter-react-helper`, `eslint`, `eslint-plugin-jsx-a11y`, `eslint-plugin-react`, `eslint-plugin-import`
