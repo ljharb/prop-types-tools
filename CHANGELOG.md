@@ -1,3 +1,7 @@
+2.13.1 / 2019-04-06
+==================
+  * [Fix] `ref`: ensure that the prop value is not a component (#55)
+
 2.13.0 / 2019-04-04
 ==================
   * [New] add `ref` (#54)
