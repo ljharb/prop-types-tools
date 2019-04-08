@@ -2,6 +2,8 @@ import { Component, PureComponent } from 'react';
 import isPlainObject from './helpers/isPlainObject';
 import wrapValidator from './helpers/wrapValidator';
 
+const { isPrototypeOf } = Object.prototype;
+
 function isNewRef(prop) {
   if (!isPlainObject(prop)) {
     return false;
@@ -12,9 +14,8 @@ function isNewRef(prop) {
 
 function isCallbackRef(prop) {
   return typeof prop === 'function'
-    && !Object.prototype.isPrototypeOf.call(Component, prop)
-    && (!PureComponent || !Object.prototype.isPrototypeOf.call(PureComponent, prop))
-    && prop.length === 1;
+    && !isPrototypeOf.call(Component, prop)
+    && (!PureComponent || !isPrototypeOf.call(PureComponent, prop));
 }
 
 function requiredRef(props, propName, componentName) {

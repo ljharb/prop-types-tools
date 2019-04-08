@@ -30,8 +30,8 @@ describe('ref', () => {
       assertPasses(validator, <div />, 'someRef');
     });
 
-    it('passes with legacy refs', () => {
-      assertPasses(validator, <div someRef={(node) => {}} />, 'someRef'); // eslint-disable-line no-unused-vars
+    it('passes with callback refs', () => {
+      assertPasses(validator, <div someRef={() => {}} />, 'someRef');
     });
 
     it('passes with ref objects', () => {
@@ -50,10 +50,6 @@ describe('ref', () => {
         constructor(props) {} // eslint-disable-line
       }
       assertFails(validator, <div someRef={B} />, 'someRef');
-    });
-
-    it('fails with non-ref functions', () => {
-      assertFails(validator, <div someRef={() => {}} />, 'someRef');
     });
 
     it('fails with other non-refs', () => {
@@ -73,8 +69,8 @@ describe('ref', () => {
       assertFails(validator, <div />, 'someRef');
     });
 
-    it('passes with legacy refs', () => {
-      assertPasses(validator, <div someRef={(node) => {}} />, 'someRef'); // eslint-disable-line no-unused-vars
+    it('passes with callback refs', () => {
+      assertPasses(validator, <div someRef={() => {}} />, 'someRef');
     });
 
     it('passes with ref objects', () => {
@@ -93,10 +89,6 @@ describe('ref', () => {
         constructor(props) {} // eslint-disable-line
       }
       assertFails(validator, <div someRef={B} />, 'someRef');
-    });
-
-    it('fails with non-ref functions', () => {
-      assertFails(validator, <div someRef={() => {}} />, 'someRef');
     });
 
     it('fails with other non-refs', () => {
