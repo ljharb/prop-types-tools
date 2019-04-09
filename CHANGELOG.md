@@ -1,3 +1,7 @@
+2.13.2 / 2019-04-08
+==================
+  * [patch] `ref`: Remove arity check (#57)
+
 2.13.1 / 2019-04-06
 ==================
   * [Fix] `ref`: ensure that the prop value is not a component (#55)
