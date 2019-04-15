@@ -28,6 +28,7 @@ import requiredBy from './requiredBy';
 import restrictedProp from './restrictedProp';
 import sequenceOf from './sequenceOf';
 import shape from './shape';
+import stringEndsWith from './stringEndsWith';
 import stringStartsWith from './stringStartsWith';
 import uniqueArray from './uniqueArray';
 import uniqueArrayOf from './uniqueArrayOf';
@@ -64,6 +65,7 @@ module.exports = {
   restrictedProp,
   sequenceOf,
   shape,
+  stringEndsWith,
   stringStartsWith,
   uniqueArray,
   uniqueArrayOf,
