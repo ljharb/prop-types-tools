@@ -73,6 +73,8 @@ Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims]
    - `foo: sequenceOf({validator: string, min: 0, max: 5})`
  - `shape`: takes a shape, and allows it to be enforced on any non-null/undefined value.
    - `foo: shape({ length: oneOf([2]) })`
+ - `stringEndsWith`: takes a non-empty string, and returns a validator that ensures the prop value is a string that ends with it.
+   - `foo: stringEndsWith('.png')`
  - `stringStartsWith`: takes a non-empty string, and returns a validator that ensures the prop value is a string that starts with it.
    - `foo: stringStartsWith('prefix-')`
  - `uniqueArray`: this prop must be an array, and all values must be unique (determined by `Object.is`). Like `PropTypes.array`, but with uniqueness.
