@@ -29,7 +29,7 @@ Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims]
  - `componentWithName`: restrict the prop to only allow a component with a certain name/displayName. Accepts a string, or a regular expression. Also accepts an `options` object with an optional `stripHOCs` array of string HOC names to strip off before validating; an HOC name must not contain parentheses and must be in camelCase.
    - `foo: componentWithName('Component')`
    - `foo: componentWithName('Component', { stripHOCs: ['withDirection', 'withStyles'] })`
- - `disallowedIf`: restrict the prop from being provided if the given other prop name matches the given other prop type.
+ - `disallowedIf`: restrict the prop from being provided if the given other prop name matches the given other prop type. The other prop type validator only applies if the other prop name is not a null value.
    - `foo: disallowedIf(string, 'bar', bool)`
  - `elementType`: require that the prop be a specific type of React element - takes a Component, an HTML tag name, or `"*"` to match everything.
    - `foo: elementType('span')`
