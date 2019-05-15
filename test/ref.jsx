@@ -34,7 +34,7 @@ describe('ref', () => {
       assertPasses(validator, <div someRef={() => {}} />, 'someRef');
     });
 
-    it('passes with ref objects', () => {
+    (React.createRef ? it : it.skip)('passes with ref objects', () => {
       assertPasses(validator, <div someRef={React.createRef()} />, 'someRef');
     });
 
@@ -73,7 +73,7 @@ describe('ref', () => {
       assertPasses(validator, <div someRef={() => {}} />, 'someRef');
     });
 
-    it('passes with ref objects', () => {
+    (React.createRef ? it : it.skip)('passes with ref objects', () => {
       assertPasses(validator, <div someRef={React.createRef()} />, 'someRef');
     });
 

@@ -281,7 +281,7 @@ describe('elementType', () => {
     });
 
     (React.forwardRef ? describe : describe.skip)('React.forwardRef', () => {
-      const MyForwardRef = React.forwardRef((props, ref) => <div ref={ref} />);
+      const MyForwardRef = React.forwardRef && React.forwardRef((props, ref) => <div ref={ref} />);
 
       it('passes with * and a forwardRef', () => assertPasses(
         elementType('*'),
@@ -306,7 +306,7 @@ describe('elementType', () => {
     });
 
     (React.createContext ? describe : describe.skip)('React.createContext', () => {
-      const { Provider, Consumer } = React.createContext('test');
+      const { Provider, Consumer } = React.createContext ? React.createContext('test') : {};
 
       it('passes with * and a Provider', () => assertPasses(
         elementType('*'),
