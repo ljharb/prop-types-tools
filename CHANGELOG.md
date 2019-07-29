@@ -1,3 +1,13 @@
+2.14.0 / 2019-07-28
+==================
+  * [New] add `stringEndsWith` (#59)
+  * [Fix] `getComponentName`/`componentWithName`: get display name from forwardRefs (#64)
+  * [Docs] Conform disallowedIf file to lint. Update disallowedIf documentation (#62)
+  * [Docs] add stringEndsWith to README.md (#60)
+  * [Deps] update `array.prototype.find`, `function.prototype.name`
+  * [Dev Deps] update `@babel/cli`, `@babel/core`, `@babel/register`, `babel-plugin-istanbul`, `babel-preset-airbnb`, `enzyme`, `enzyme-adapter-react-helper`, `eslint-config-airbnb`, `eslint-plugin-import`, `eslint-plugin-jsx-a11y`, `eslint-plugin-react`
+  * [Tests] fix some broken tests
+
 2.13.2 / 2019-04-08
 ==================
   * [patch] `ref`: Remove arity check (#57)
