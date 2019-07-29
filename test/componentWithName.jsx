@@ -23,6 +23,8 @@ ComponentWithName.displayName = 'Component with a display name!';
 class ComponentWithHOCs extends React.Component {}
 ComponentWithHOCs.displayName = 'withA(withB(withC(Connect(X))))';
 
+const describeIfForwardRefs = React.forwardRef ? describe : describe.skip;
+
 describe('componentWithName', () => {
   it('returns a function', () => {
     expect(typeof componentWithName('name')).to.equal('function');
@@ -516,5 +518,17 @@ describe('componentWithName', () => {
       (<div a={<SFC />} />),
       'a',
     ));
+  });
+
+  describeIfForwardRefs('Forward Refs', () => {
+    it('passes on a forward ref', () => {
+      const Reffy = React.forwardRef(() => <main />);
+      Reffy.displayName = 'Reffy Name';
+      assertPasses(
+        componentWithName('Reffy Name').isRequired,
+        (<div a={<Reffy />} />),
+        'a',
+      );
+    });
   });
 });
