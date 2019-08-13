@@ -1,7 +1,9 @@
 import React from 'react';
 import { expect } from 'chai';
-
+import ifReact from 'enzyme-adapter-react-helper/build/ifReact';
 import getComponentName from '../../build/helpers/getComponentName';
+
+const itIfReact = (version, ...args) => ifReact(version, () => it(...args), () => it.skip(...args));
 
 describe('getComponentName', () => {
   it('given a string, returns the string', () => {
@@ -17,7 +19,7 @@ describe('getComponentName', () => {
     expect(getComponentName(Foo)).to.equal(Foo.displayName);
   });
 
-  it('given a memo, returns the name or displayName', () => {
+  itIfReact('>= 16.6', 'given a memo, returns the name or displayName', () => {
     function Foo() {}
     const FooMemo = React.memo(Foo);
     expect(getComponentName(FooMemo)).to.equal('Foo');

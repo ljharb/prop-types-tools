@@ -1,9 +1,12 @@
 import { expect } from 'chai';
 import React from 'react';
+import ifReact from 'enzyme-adapter-react-helper/build/ifReact';
 
 import { ref } from '..';
 
 import callValidator from './_callValidator';
+
+const itIfReact = (version, ...args) => ifReact(version, () => it(...args), () => it.skip(...args));
 
 describe('ref', () => {
   it('is a function', () => {
@@ -34,7 +37,7 @@ describe('ref', () => {
       assertPasses(validator, <div someRef={() => {}} />, 'someRef');
     });
 
-    (React.createRef ? it : it.skip)('passes with ref objects', () => {
+    itIfReact('>= 16.3', 'passes with ref objects', () => {
       assertPasses(validator, <div someRef={React.createRef()} />, 'someRef');
     });
 
@@ -45,7 +48,7 @@ describe('ref', () => {
       assertFails(validator, <div someRef={A} />, 'someRef');
     });
 
-    it('fails with React pure components', () => {
+    itIfReact('>= 15.2', 'fails with React pure components', () => {
       class B extends React.PureComponent {
         constructor(props) {} // eslint-disable-line
       }
@@ -73,7 +76,7 @@ describe('ref', () => {
       assertPasses(validator, <div someRef={() => {}} />, 'someRef');
     });
 
-    (React.createRef ? it : it.skip)('passes with ref objects', () => {
+    itIfReact('>= 16.3', 'passes with ref objects', () => {
       assertPasses(validator, <div someRef={React.createRef()} />, 'someRef');
     });
 
@@ -84,7 +87,7 @@ describe('ref', () => {
       assertFails(validator, <div someRef={A} />, 'someRef');
     });
 
-    it('fails with React pure components', () => {
+    itIfReact('>= 15.2', 'fails with React pure components', () => {
       class B extends React.PureComponent {
         constructor(props) {} // eslint-disable-line
       }

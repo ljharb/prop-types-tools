@@ -45,7 +45,7 @@
     "react": "^0.14 || ^15.0.0 || ^16.0.0-alpha"
   },
   "scripts": {
-    "pretest": "npm run lint && npm run test:prepare",
+    "pretest": "npm run lint",
     "pretest:prepare": "npm run build",
     "test:prepare": "npm run react",
     "test": "npm run test:only",

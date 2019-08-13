@@ -19,10 +19,11 @@ before_install:
 install:
   - 'if [ "${TRAVIS_NODE_VERSION}" = "0.6" ]; then nvm install --latest-npm 0.8 && npm install && nvm use "${TRAVIS_NODE_VERSION}"; else npm install; fi;'
 script:
+  - 'if [ -n "${COVERAGE-}" ] || [ -n "${REACT-}" ]; then case "${TRAVIS_NODE_VERSION}" in [0-3].*) (nvm install lts/* && npm run test:prepare) && nvm current ;; *) npm run test:prepare ;; esac; fi'
   - 'if [ -n "${PRETEST-}" ]; then npm run pretest ; fi'
   - 'if [ -n "${POSTTEST-}" ]; then npm run posttest ; fi'
   - 'if [ -n "${COVERAGE-}" ]; then npm run coverage ; fi'
-  - 'if [ -n "${REACT-}" ]; then case "${TRAVIS_NODE_VERSION}" in [0-3].*) (nvm install 4 && npm run test:prepare) && nvm current ;; esac; npm run test:only; fi'
+  - 'if [ -n "${REACT-}" ]; then npm run test:only; fi'
 sudo: false
 env:
   - REACT=16
@@ -42,8 +43,8 @@ matrix:
     - node_js: "11"
     - node_js: "9"
     - node_js: "7"
-    - node_js: "5"
+    - node_js: "5" # babel 7 requires node >= 6
     - node_js: "4" # babel 7 requires node >= 6
-    - node_js: "iojs"
+    - node_js: "iojs" # babel 7 requires node >= 6
     - node_js: "0.12" # babel 7 requires node >= 6
     - node_js: "0.10" # babel 7 requires node >= 6
