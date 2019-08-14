@@ -13,7 +13,7 @@
     "object.entries": "^1.1.0",
     "prop-types": "^15.7.2",
     "prop-types-exact": "^1.2.0",
-    "react-is": "^16.8.6"
+    "react-is": "^16.9.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
