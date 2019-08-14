@@ -1,3 +1,11 @@
+2.15.0 / 2019-08-13
+==================
+  * [New] [getComponentName] Add logic to handle React.memo (#65)
+  * [Deps] update `react-is`
+  * [Dev Deps] update `enzyme-adapter-react-helper`, `eslint`, `eslint-config-airbnb`, `rimraf`, `safe-publish-latest`
+  * [Tests] actually run `npm run test:prepare` in node >= 4
+  * [Tests] up to `node` `v12`
+
 2.14.0 / 2019-07-28
 ==================
   * [New] add `stringEndsWith` (#59)
