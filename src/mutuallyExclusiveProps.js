@@ -16,7 +16,7 @@ export default function mutuallyExclusiveOfType(propType, ...exclusiveProps) {
 
   const validator = function mutuallyExclusiveProps(props, propName, componentName, ...rest) {
     const exclusivePropCount = Object.keys(props)
-      .filter(prop => props[prop] != null)
+      .filter((prop) => props[prop] != null)
       .reduce(countProps, 0);
     if (exclusivePropCount > 1) {
       return new Error(`A ${componentName} cannot have more than one of these props: ${propList}`);
@@ -31,7 +31,7 @@ export default function mutuallyExclusiveOfType(propType, ...exclusiveProps) {
     ...rest
   ) {
     const exclusivePropCount = Object.keys(props)
-      .filter(prop => prop === propName || props[prop] != null)
+      .filter((prop) => prop === propName || props[prop] != null)
       .reduce(countProps, 0);
     if (exclusivePropCount > 1) {
       return new Error(`A ${componentName} cannot have more than one of these props: ${propList}`);

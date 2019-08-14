@@ -11,8 +11,8 @@ describe('mocks', () => {
   });
 
   it('matches the types', () => {
-    const mockTypes = values(mocks).map(x => typeof x);
-    const implementationTypes = values(implementations).map(x => typeof x);
+    const mockTypes = values(mocks).map((x) => typeof x);
+    const implementationTypes = values(implementations).map((x) => typeof x);
     expect(mockTypes).to.eql(implementationTypes);
   });
 

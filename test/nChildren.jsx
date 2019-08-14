@@ -38,17 +38,39 @@ describe('nChildren', () => {
     const validator = nChildren(3);
     assertFails(validator, <div />, 'children');
     assertFails(validator, <div><i /></div>, 'children');
-    assertFails(validator, <div><i /><i /></div>, 'children');
+    assertFails(
+      validator,
+      <div>
+        <i />
+        <i />
+      </div>,
+      'children',
+    );
   });
 
   it('passes when the children are equal to n', () => {
     const validator = nChildren(3);
-    assertPasses(validator, <div><i /><i /><i /></div>, 'children');
+    assertPasses(
+      validator,
+      <div>
+        <i />
+        <i />
+        <i />
+      </div>,
+      'children',
+    );
   });
 
   it('fails when the children are more than n', () => {
     const validator = nChildren(1);
-    assertFails(validator, <div><i /><i /></div>, 'children');
+    assertFails(
+      validator,
+      <div>
+        <i />
+        <i />
+      </div>,
+      'children',
+    );
   });
 
   it('validates against the optionally provided propType', () => {

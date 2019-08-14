@@ -127,7 +127,14 @@ describe('childrenSequenceOf', () => {
       </div>
     ), 'children');
     assertFails(validator, (<div>1</div>), 'children');
-    assertFails(validator, (<div>1{2}</div>), 'children');
+    assertFails(
+      validator,
+      <div>
+        1
+        {2}
+      </div>,
+      'children',
+    );
   });
 
   it('works with specifiers only providing "min"', () => {
@@ -141,12 +148,42 @@ describe('childrenSequenceOf', () => {
     assertFails(twoPlus.isRequired, (<div />), 'children');
 
     assertFails(twoPlus, (<div>{1}</div>), 'children');
-    assertPasses(twoPlus, (<div>{1}{2}</div>), 'children');
-    assertPasses(twoPlus, (<div>{1}{2}{3}</div>), 'children');
+    assertPasses(
+      twoPlus,
+      <div>
+        {1}
+        {2}
+      </div>,
+      'children',
+    );
+    assertPasses(
+      twoPlus,
+      <div>
+        {1}
+        {2}
+        {3}
+      </div>,
+      'children',
+    );
 
     assertFails(twoPlus, (<div>1</div>), 'children');
-    assertFails(twoPlus, (<div>1{2}</div>), 'children');
-    assertFails(twoPlus, (<div>{1}2{3}</div>), 'children');
+    assertFails(
+      twoPlus,
+      <div>
+        1
+        {2}
+      </div>,
+      'children',
+    );
+    assertFails(
+      twoPlus,
+      <div>
+        {1}
+        2
+        {3}
+      </div>,
+      'children',
+    );
   });
 
   it('works with specifiers only providing "max"', () => {
@@ -159,12 +196,42 @@ describe('childrenSequenceOf', () => {
     assertFails(twoOrLess.isRequired, (<div />), 'children');
 
     assertPasses(twoOrLess, (<div>{1}</div>), 'children');
-    assertPasses(twoOrLess, (<div>{1}{2}</div>), 'children');
+    assertPasses(
+      twoOrLess,
+      <div>
+        {1}
+        {2}
+      </div>,
+      'children',
+    );
 
-    assertFails(twoOrLess, (<div>{1}{2}{3}</div>), 'children');
+    assertFails(
+      twoOrLess,
+      <div>
+        {1}
+        {2}
+        {3}
+      </div>,
+      'children',
+    );
     assertFails(twoOrLess, (<div>1</div>), 'children');
-    assertFails(twoOrLess, (<div>1{2}</div>), 'children');
-    assertFails(twoOrLess, (<div>{1}2{3}</div>), 'children');
+    assertFails(
+      twoOrLess,
+      <div>
+        1
+        {2}
+      </div>,
+      'children',
+    );
+    assertFails(
+      twoOrLess,
+      <div>
+        {1}
+        2
+        {3}
+      </div>,
+      'children',
+    );
   });
 
   it('works with specifiers with both "min" and "max"', () => {
@@ -172,14 +239,53 @@ describe('childrenSequenceOf', () => {
     const oneOrTwo = childrenSequenceOf({ validator: number, max: 2, min: 1 });
 
     assertFails(twoOrThree, (<div>{1}</div>), 'children');
-    assertPasses(twoOrThree, (<div>{1}{2}</div>), 'children');
-    assertPasses(twoOrThree, (<div>{1}{2}{3}</div>), 'children');
-    assertFails(twoOrThree, (<div>{1}{2}{3}{4}</div>), 'children');
+    assertPasses(
+      twoOrThree,
+      <div>
+        {1}
+        {2}
+      </div>,
+      'children',
+    );
+    assertPasses(
+      twoOrThree,
+      <div>
+        {1}
+        {2}
+        {3}
+      </div>,
+      'children',
+    );
+    assertFails(
+      twoOrThree,
+      <div>
+        {1}
+        {2}
+        {3}
+        {4}
+      </div>,
+      'children',
+    );
 
     assertFails(oneOrTwo.isRequired, (<div />), 'children');
     assertPasses(oneOrTwo, (<div>{1}</div>), 'children');
-    assertPasses(oneOrTwo, (<div>{1}{2}</div>), 'children');
-    assertFails(oneOrTwo, (<div>{1}{2}{3}</div>), 'children');
+    assertPasses(
+      oneOrTwo,
+      <div>
+        {1}
+        {2}
+      </div>,
+      'children',
+    );
+    assertFails(
+      oneOrTwo,
+      <div>
+        {1}
+        {2}
+        {3}
+      </div>,
+      'children',
+    );
   });
 
   it('works with an optional unmet, and a required met, specifier', () => {
@@ -188,10 +294,31 @@ describe('childrenSequenceOf', () => {
       { validator: number },
     );
 
-    assertPasses(validator, (<div>a{1}</div>), 'children');
+    assertPasses(
+      validator,
+      <div>
+        a
+        {1}
+      </div>,
+      'children',
+    );
     assertPasses(validator, (<div>{1}</div>), 'children');
     assertFails(validator, (<div>a</div>), 'children');
-    assertFails(validator, (<div>a{'b'}</div>), 'children');
-    assertFails(validator, (<div>{1}{2}</div>), 'children');
+    assertFails(
+      validator,
+      <div>
+        a
+        {'b'}
+      </div>,
+      'children',
+    );
+    assertFails(
+      validator,
+      <div>
+        {1}
+        {2}
+      </div>,
+      'children',
+    );
   });
 });

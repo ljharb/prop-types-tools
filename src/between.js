@@ -97,7 +97,7 @@ const argValidators = [
   shape({ gte: numberOrPropsFunc }).isRequired,
 ];
 function argValidator(props, propName) {
-  return argValidators.every(validator => !!validator(props, propName));
+  return argValidators.every((validator) => !!validator(props, propName));
 }
 
 const thunkValueValidator = valuesOf(number).isRequired;

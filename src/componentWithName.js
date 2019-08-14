@@ -26,7 +26,7 @@ function stripHOCs(fullName, namesOfHOCsToStrip) {
 function hasName(name, namesOfHOCsToStrip, propValue, propName, componentName, ...rest) {
   if (Array.isArray(propValue)) {
     return find(
-      propValue.map(item => hasName(
+      propValue.map((item) => hasName(
         name,
         namesOfHOCsToStrip,
         item,

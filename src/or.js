@@ -9,7 +9,7 @@ function oneOfTypeValidator(validators) {
     }
 
     const errors = validators
-      .map(v => v(props, propName, componentName, ...rest))
+      .map((v) => v(props, propName, componentName, ...rest))
       .filter(Boolean);
 
     if (errors.length < validators.length) {
@@ -24,7 +24,7 @@ function oneOfTypeValidator(validators) {
     }
 
     const errors = validators
-      .map(v => v(props, propName, componentName, ...rest))
+      .map((v) => v(props, propName, componentName, ...rest))
       .filter(Boolean);
 
     if (errors.length === validators.length) {

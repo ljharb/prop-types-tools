@@ -5,7 +5,7 @@ export default function booleanSomeValidator(...notAllPropsFalse) {
   if (notAllPropsFalse.length < 1) {
     throw new TypeError('at least one prop (one of which must be `true`) is required');
   }
-  if (!notAllPropsFalse.every(x => typeof x === 'string')) {
+  if (!notAllPropsFalse.every((x) => typeof x === 'string')) {
     throw new TypeError('all booleanSome props must be strings');
   }
 

@@ -7,7 +7,7 @@ const errorWhitelist = [
 ];
 
 function throwError(msg) {
-  if (errorWhitelist.every(regex => !regex.test(msg))) throw new Error(msg);
+  if (errorWhitelist.every((regex) => !regex.test(msg))) throw new Error(msg);
 }
 
 console.warn = throwError;

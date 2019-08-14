@@ -5,7 +5,7 @@ export default function mutuallyExclusiveTrue(...exclusiveProps) {
   if (exclusiveProps.length < 1) {
     throw new TypeError('at least one prop that is mutually exclusive is required');
   }
-  if (!exclusiveProps.every(x => typeof x === 'string')) {
+  if (!exclusiveProps.every((x) => typeof x === 'string')) {
     throw new TypeError('all exclusive true props must be strings');
   }
 
