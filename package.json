@@ -3,6 +3,10 @@
   "version": "2.15.0",
   "description": "Custom React PropType validators that we use at Airbnb.",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "build/*"
+  ],
   "dependencies": {
     "array.prototype.find": "^2.1.0",
     "function.prototype.name": "^1.1.1",
