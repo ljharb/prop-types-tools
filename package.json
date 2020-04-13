@@ -46,9 +46,9 @@
   "scripts": {
     "pretest": "npm run lint",
     "pretest:prepare": "npm run build",
-    "test:prepare": "npm run react",
-    "test": "npm run test:only",
-    "test:only": "npm run mocha test",
+    "test:prepare": "npm run react && npm run build:test",
+    "test": "npm run build:test && npm run test:only",
+    "test:only": "npm run mocha build-test",
     "test:all": "npm run test:only && npm run react:14 && npm run test:only && npm run react:15 && npm run test:only",
     "lint": "eslint --ext js,jsx src test",
     "prepublish": "npm run build && safe-publish-latest",
@@ -59,11 +59,13 @@
     "prebuild:index": "cp index.js .index.js",
     "build:index": "babel index.js --out-file index.js --no-babelrc --source-maps",
     "postbuild:index": "mv .index.js index.js",
+    "prebuild:test": "rimraf build-test",
+    "build:test": "babel test --out-dir build-test --source-maps",
     "cover:clean": "rimraf coverage",
-    "cover:run": "nyc --show-process-tree npm run --silent mocha test -- --reporter=dot",
+    "cover:run": "nyc --show-process-tree npm run --silent mocha build-test -- --reporter=dot",
     "precoverage": "NODE_ENV=test npm run build",
     "coverage": "npm run --quiet cover:clean && npm run --silent cover:run",
-    "mocha": "mocha --recursive test/helpers/_failTestsOnErrors",
+    "mocha": "mocha --recursive build-test/helpers/_failTestsOnErrors",
     "react": "enzyme-adapter-react-install 16"
   },
   "repository": {

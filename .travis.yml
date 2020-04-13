@@ -1,7 +1,12 @@
 language: node_js
-os:
- - linux
+workspaces:
+  use:
+    - build
+stages:
+  - install-build
+  - test
 node_js:
+  - "13"
   - "12"
   - "11"
   - "10"
@@ -14,16 +19,12 @@ node_js:
   - "iojs"
   - "0.12"
   - "0.10"
-before_install:
-  - 'nvm install-latest-npm'
-install:
-  - 'if [ "${TRAVIS_NODE_VERSION}" = "0.6" ]; then nvm install --latest-npm 0.8 && npm install && nvm use "${TRAVIS_NODE_VERSION}"; else npm install; fi;'
-script:
-  - 'if [ -n "${COVERAGE-}" ] || [ -n "${REACT-}" ]; then case "${TRAVIS_NODE_VERSION}" in [0-3].*) (nvm install lts/* && npm run test:prepare) && nvm current ;; *) npm run test:prepare ;; esac; fi'
-  - 'if [ -n "${PRETEST-}" ]; then npm run pretest ; fi'
-  - 'if [ -n "${POSTTEST-}" ]; then npm run posttest ; fi'
-  - 'if [ -n "${COVERAGE-}" ]; then npm run coverage ; fi'
-  - 'if [ -n "${REACT-}" ]; then npm run test:only; fi'
+import:
+  - ljharb/travis-ci:node/latest-npm.yml
+  - ljharb/travis-ci:node/greenkeeper.yml
+  - ljharb/travis-ci:node/dependabot.yml
+install: 'echo already installed!'
+script: 'npm run react && npm run test:only'
 sudo: false
 env:
   - REACT=16
@@ -33,18 +34,21 @@ env:
 matrix:
   fast_finish: true
   include:
-    - node_js: "lts/*"
+    - stage: install-build
+      workspaces:
+        create:
+          name: build
+          paths:
+            - ./
+      node_js: "lts/*"
+      env: BUILD=true
+      install: 'npm install'
+      script: 'npm run test:prepare'
+    - stage: test
+      node_js: "lts/*"
+      script: 'npm run pretest'
       env: PRETEST=true
-    - node_js: "lts/*"
+    - stage: test
+      node_js: "lts/*"
+      script: 'npm run coverage'
       env: COVERAGE=true
-  allow_failures:
-    - os: osx
-    - env: TEST=true ALLOW_FAILURE=true
-    - node_js: "11"
-    - node_js: "9"
-    - node_js: "7"
-    - node_js: "5" # babel 7 requires node >= 6
-    - node_js: "4" # babel 7 requires node >= 6
-    - node_js: "iojs" # babel 7 requires node >= 6
-    - node_js: "0.12" # babel 7 requires node >= 6
-    - node_js: "0.10" # babel 7 requires node >= 6
