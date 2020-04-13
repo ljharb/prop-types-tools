@@ -306,6 +306,7 @@ describe('childrenSequenceOf', () => {
     assertFails(validator, (<div>a</div>), 'children');
     assertFails(
       validator,
+      /* eslint react/jsx-curly-brace-presence: 0 */
       <div>
         a
         {'b'}

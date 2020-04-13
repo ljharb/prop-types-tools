@@ -71,6 +71,7 @@ describe('childrenHavePropXorChildren', () => {
     it('passes when falsy children are present and non-falsy children passes validator', () => assertPasses(
       childrenHavePropXorChildren(prop),
       (
+        /* eslint react/jsx-curly-brace-presence: 1 */
         <header>
           <div />
           <div />
@@ -123,6 +124,7 @@ describe('childrenHavePropXorChildren', () => {
     it('fails when falsy children are present and non-falsy children fails validator', () => assertFails(
       childrenHavePropXorChildren(prop),
       (
+        /* eslint react/jsx-curly-brace-presence: 1 */
         <header>
           <div />
           <div {...{ [prop]: true }} />
