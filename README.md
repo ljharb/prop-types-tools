@@ -60,6 +60,8 @@ Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims]
  - `object`: same as `PropTypes.object`, but can be called outside of React's propType flow.
  - `or`: recursively allows only the provided propTypes, or arrays of those propTypes.
    - `foo: or([bool.isRequired, explicitNull()])`
+ - `predicate`: provide a predicate function, and an optional message, and will fail when the predicate returns false.
+   - `foo: predicate((x) => x % 2 === 0, 'must be an even integer')`
  - `range`: provide a min, and a max, and the prop must be an integer in the range `[min, max)`
    - `foo: range(-1, 2)`
  - `ref`: require the prop to be a React ref. These can be either the object returned from `React.createRef()` or "callback" refs.

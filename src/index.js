@@ -22,6 +22,7 @@ import nonNegativeNumber from './nonNegativeNumber';
 import numericString from './numericString';
 import object from './object';
 import or from './or';
+import predicate from './predicate';
 import range from './range';
 import ref from './ref';
 import requiredBy from './requiredBy';
@@ -59,6 +60,7 @@ module.exports = {
   numericString,
   object,
   or,
+  predicate,
   range,
   ref,
   requiredBy,

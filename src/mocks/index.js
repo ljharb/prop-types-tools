@@ -26,6 +26,7 @@ module.exports = {
   numericString: noopThunk,
   object: noopThunk,
   or: noopThunk,
+  predicate: noopThunk,
   range: noopThunk,
   ref: noopThunk,
   requiredBy: noopThunk,
