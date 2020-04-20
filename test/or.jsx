@@ -59,42 +59,62 @@ describe('or', () => {
   describe('works with explicitNull', () => {
     it('works when outer and inner are optional', () => {
       assertPasses(or([bool.isRequired, explicitNull()]), (<div a />), 'a');
+      assertPasses(or([explicitNull(), bool.isRequired]), (<div a />), 'a');
       assertPasses(or([bool.isRequired, explicitNull()]), (<div a={false} />), 'a');
+      assertPasses(or([explicitNull(), bool.isRequired]), (<div a={false} />), 'a');
 
       assertPasses(or([bool.isRequired, explicitNull()]), (<div a={null} />), 'a');
+      assertPasses(or([explicitNull(), bool.isRequired]), (<div a={null} />), 'a');
 
       assertPasses(or([bool.isRequired, explicitNull()]), (<div />), 'a');
+      assertPasses(or([explicitNull(), bool.isRequired]), (<div />), 'a');
       assertPasses(or([bool.isRequired, explicitNull()]), (<div a={undefined} />), 'a');
+      assertPasses(or([explicitNull(), bool.isRequired]), (<div a={undefined} />), 'a');
     });
 
     it('works when outer is optional, inner is required', () => {
       assertPasses(or([bool.isRequired, explicitNull().isRequired]), (<div a />), 'a');
+      assertPasses(or([explicitNull().isRequired, bool.isRequired]), (<div a />), 'a');
       assertPasses(or([bool.isRequired, explicitNull().isRequired]), (<div a={false} />), 'a');
+      assertPasses(or([explicitNull().isRequired, bool.isRequired]), (<div a={false} />), 'a');
 
       assertPasses(or([bool.isRequired, explicitNull().isRequired]), (<div a={null} />), 'a');
+      assertPasses(or([explicitNull().isRequired, bool.isRequired]), (<div a={null} />), 'a');
 
       assertPasses(or([bool.isRequired, explicitNull().isRequired]), (<div />), 'a');
+      assertPasses(or([explicitNull().isRequired, bool.isRequired]), (<div />), 'a');
       assertPasses(or([bool.isRequired, explicitNull().isRequired]), (<div a={undefined} />), 'a');
+      assertPasses(or([explicitNull().isRequired, bool.isRequired]), (<div a={undefined} />), 'a');
     });
 
     it('works when outer is required, inner is optional', () => {
       assertPasses(or([bool.isRequired, explicitNull()]).isRequired, (<div a />), 'a');
+      assertPasses(or([explicitNull(), bool.isRequired]).isRequired, (<div a />), 'a');
       assertPasses(or([bool.isRequired, explicitNull()]).isRequired, (<div a={false} />), 'a');
+      assertPasses(or([explicitNull(), bool.isRequired]).isRequired, (<div a={false} />), 'a');
 
       assertPasses(or([bool.isRequired, explicitNull()]).isRequired, (<div a={null} />), 'a');
+      assertPasses(or([explicitNull(), bool.isRequired]).isRequired, (<div a={null} />), 'a');
 
       assertFails(or([bool.isRequired, explicitNull()]).isRequired, (<div />), 'a');
+      assertFails(or([explicitNull(), bool.isRequired]).isRequired, (<div />), 'a');
       assertFails(or([bool.isRequired, explicitNull()]).isRequired, (<div a={undefined} />), 'a');
+      assertFails(or([explicitNull(), bool.isRequired]).isRequired, (<div a={undefined} />), 'a');
     });
 
     it('works when outer is required, inner is required', () => {
       assertPasses(or([bool.isRequired, explicitNull().isRequired]).isRequired, (<div a />), 'a');
+      assertPasses(or([explicitNull().isRequired, bool.isRequired]).isRequired, (<div a />), 'a');
       assertPasses(or([bool.isRequired, explicitNull().isRequired]).isRequired, (<div a={false} />), 'a');
+      assertPasses(or([explicitNull().isRequired, bool.isRequired]).isRequired, (<div a={false} />), 'a');
 
       assertPasses(or([bool.isRequired, explicitNull().isRequired]).isRequired, (<div a={null} />), 'a');
+      assertPasses(or([explicitNull().isRequired, bool.isRequired]).isRequired, (<div a={null} />), 'a');
 
       assertFails(or([bool.isRequired, explicitNull().isRequired]).isRequired, (<div />), 'a');
+      assertFails(or([explicitNull().isRequired, bool.isRequired]).isRequired, (<div />), 'a');
       assertFails(or([bool.isRequired, explicitNull().isRequired]).isRequired, (<div a={undefined} />), 'a');
+      assertFails(or([explicitNull().isRequired, bool.isRequired]).isRequired, (<div a={undefined} />), 'a');
     });
   });
 });
