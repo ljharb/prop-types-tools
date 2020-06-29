@@ -3,11 +3,11 @@
 const consoleWarn = console.warn;
 const consoleError = console.error;
 
-const errorWhitelist = [
+const errorAllowlist = [
 ];
 
 function throwError(msg) {
-  if (errorWhitelist.every((regex) => !regex.test(msg))) throw new Error(msg);
+  if (errorAllowlist.every((regex) => !regex.test(msg))) throw new Error(msg);
 }
 
 console.warn = throwError;
