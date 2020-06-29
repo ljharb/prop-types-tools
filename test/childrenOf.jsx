@@ -45,7 +45,6 @@ describe('childrenOf', () => {
         'optional empty',
       );
 
-
       assertPasses(
         childrenOf(node),
         (<div>{[]}</div>),
