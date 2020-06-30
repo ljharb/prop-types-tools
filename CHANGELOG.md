@@ -1,3 +1,15 @@
+2.16.0 / 2020-06-30
+==================
+  * [New] add `predicate` validator
+  * [meta] add `funding` field
+  * [Deps] remove unused `has` (#67)
+  * [Deps] update `array.prototype.find`, `function.prototype.name`, `is-regex`, `object.entries`, `object-is`, `react-is`
+  * [Dev Deps] update `@babel/cli`, `@babel/core`, `@babel/register`, `airbnb-browser-shims`, `enzyme`, `enzyme-adapter-react-helper`, `eslint`, `eslint-config-airbnb`, `eslint-plugin-import`, `eslint-plugin-react`, `enzyme-adapter-react-helper`, `object-inspect`, `object.values`, `reflect.ownkeys`, `rimraf`, `safe-publish-latest`
+  * [Tests] use travis-ci build stages, and shared configs
+  * [Tests] add more `or` tests
+  * [Tests] Replace non-inclusive "whitelist" term with "allowlist" (#69)
+  * [Tests] fix eslint error
+
 2.15.0 / 2019-08-13
 ==================
   * [New] [getComponentName] Add logic to handle React.memo (#65)
