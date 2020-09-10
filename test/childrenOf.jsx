@@ -9,6 +9,8 @@ import callValidator from './_callValidator';
 function SFC() {}
 class Component extends React.Component {} // eslint-disable-line react/prefer-stateless-function
 
+const describeIfFragments = React.Fragment ? describe : describe.skip;
+
 describe('childrenOf', () => {
   function assertPasses(validator, element, propName, componentName) {
     expect(callValidator(validator, element, propName, componentName)).to.equal(null);
@@ -296,6 +298,64 @@ describe('childrenOf', () => {
       ),
       'children',
       'Component!',
+    ));
+  });
+
+  describeIfFragments('it passes through fragments to validates its children instead', () => {
+    it('fails when an empty fragment is provided, but children are required', () => assertFails(
+      childrenOf(node).isRequired,
+      (
+        <div><></></div>
+      ),
+      'children',
+    ));
+
+    it('passes when an empty fragment is provided and children are optional', () => assertPasses(
+      childrenOf(node),
+      (
+        <div><></></div>
+      ),
+      'children',
+    ));
+
+    it('passes when a valid child is provided within a fragment', () => assertPasses(
+      childrenOf(number),
+      (
+        <div>
+          <>
+            {0}
+          </>
+        </div>
+      ),
+      'children',
+      'number',
+    ));
+
+    it('fails when a invalid child is provided within a fragment', () => assertFails(
+      childrenOf(number),
+      (
+        <div>
+          <>
+            <span />
+          </>
+        </div>
+      ),
+      'children',
+      'number!',
+    ));
+
+    it('passes when fragments are mixed with other nodes', () => assertPasses(
+      childrenOf(node),
+      (
+        <div>
+          <span />
+          <>
+            <span />
+          </>
+        </div>
+      ),
+      'children',
+      'node!',
     ));
   });
 });

@@ -6,6 +6,8 @@ import { childrenSequenceOf } from '..';
 
 import callValidator from './_callValidator';
 
+const describeIfFragments = React.Fragment ? describe : describe.skip;
+
 describe('childrenSequenceOf', () => {
   it('is a function', () => {
     expect(typeof childrenSequenceOf).to.equal('function');
@@ -321,5 +323,71 @@ describe('childrenSequenceOf', () => {
       </div>,
       'children',
     );
+  });
+
+  describeIfFragments('it passes through fragments to validates its children instead', () => {
+    it('passes when part of the sequence is in a fragment', () => assertPasses(
+      childrenSequenceOf({ validator: number, min: 2 }),
+      (
+        <div>
+          {1}
+          <>{2}</>
+        </div>
+      ),
+      'children',
+    ));
+
+    it('fails when there is an invalid child in a fragment', () => assertFails(
+      childrenSequenceOf({ validator: number, min: 2 }),
+      (
+        <div>
+          {1}
+          <>2</>
+        </div>
+      ),
+      'children',
+    ));
+
+    it('passes when the entire sequence is in a fragment', () => assertPasses(
+      childrenSequenceOf({ validator: number, min: 2 }),
+      (
+        <div>
+          <>
+            {1}
+            {2}
+            {3}
+          </>
+        </div>
+      ),
+      'children',
+    ));
+
+    it('passes with a complex sequence in a fragment', () => assertPasses(
+      childrenSequenceOf({ validator: number }, { validator: string }, { validator: number }),
+      (
+        <div>
+          <>
+            {1}
+            2
+            {3}
+          </>
+        </div>
+      ),
+      'children',
+    ));
+
+    it('fails with an invalid sequence in a fragment', () => assertFails(
+      childrenSequenceOf({ validator: number }, { validator: string }, { validator: number }),
+      (
+        <div>
+          <>
+            {1}
+            {2}
+            3
+          </>
+        </div>
+      ),
+      'children',
+    ));
   });
 });
