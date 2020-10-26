@@ -6,6 +6,8 @@ stages:
   - install-build
   - test
 node_js:
+  - "15"
+  - "14"
   - "13"
   - "12"
   - "11"
@@ -27,6 +29,7 @@ install: 'echo already installed!'
 script: 'npm run react && npm run test:only'
 sudo: false
 env:
+  - REACT=17
   - REACT=16
   - REACT=15
   - REACT=15.4

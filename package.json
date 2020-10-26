@@ -36,13 +36,13 @@
     "nyc": "^10.3.2",
     "object-inspect": "^1.8.0",
     "object.values": "^1.1.1",
-    "react": "^0.14 || ^15.0.0 || ^16.0.0-alpha",
+    "react": "^0.14 || ^15.0.0 || ^16.0.0-alpha || ^17",
     "reflect.ownkeys": "^1.0.1",
     "rimraf": "^2.7.1",
     "safe-publish-latest": "^1.1.4"
   },
   "peerDependencies": {
-    "react": "^0.14 || ^15.0.0 || ^16.0.0-alpha"
+    "react": "^0.14 || ^15.0.0 || ^16.0.0-alpha || ^17"
   },
   "scripts": {
     "pretest": "npm run lint",
