@@ -8,7 +8,7 @@
 
 [![npm badge][npm-badge-png]][package-url]
 
-Custom React PropType validators that we use at Airbnb. Use of [airbnb-js-shims](https://npmjs.com/package/airbnb-js-shims) or the equivalent is recommended.
+Custom React PropType validators. Use of [airbnb-js-shims](https://npmjs.com/package/airbnb-js-shims) or the equivalent is recommended.
 
  - `and`: ensure that all provided propType validators pass
    - `foo: and([number, nonNegativeInteger])`
