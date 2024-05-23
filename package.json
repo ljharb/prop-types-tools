@@ -99,5 +99,8 @@
       "nyc",
       "mocha"
     ]
+  },
+  "engines": {
+    "node": ">= 0.10"
   }
 }
