@@ -21,6 +21,7 @@
     "@babel/register": "^7.23.7",
     "airbnb-browser-shims": "^3.3.0",
     "aud": "^2.0.4",
+    "auto-changelog": "^2.4.0",
     "babel-plugin-istanbul": "^5.2.0",
     "babel-plugin-transform-replace-object-assign": "^2.0.0",
     "babel-preset-airbnb": "^3.3.2",
@@ -69,7 +70,9 @@
     "precoverage": "NODE_ENV=test npm run build",
     "coverage": "npm run --quiet cover:clean && npm run --silent cover:run",
     "mocha": "mocha --recursive build-test/helpers/_failTestsOnErrors",
-    "react": "enzyme-adapter-react-install 16"
+    "react": "enzyme-adapter-react-install 16",
+    "version": "auto-changelog && git add CHANGELOG.md",
+    "postversion": "auto-changelog && git add CHANGELOG.md && git commit --no-edit --amend && git tag -f \"v$(node -e \"console.log(require('./package.json').version)\")\""
   },
   "repository": {
     "type": "git",
@@ -95,5 +98,14 @@
   "homepage": "https://github.com/ljharb/prop-types-tools#readme",
   "engines": {
     "node": ">= 0.10"
+  },
+  "auto-changelog": {
+    "output": "CHANGELOG.md",
+    "template": "keepachangelog",
+    "unreleased": false,
+    "commitLimit": false,
+    "backfillLimit": false,
+    "hideCredit": true,
+    "startingVersion": "2.17.0"
   }
 }
