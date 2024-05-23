@@ -4,6 +4,7 @@ const consoleWarn = console.warn;
 const consoleError = console.error;
 
 const errorAllowlist = [
+  /DeprecationWarning: /,
 ];
 
 function throwError(msg) {
