@@ -1,8 +1,7 @@
 # prop-types <sup>[![Version Badge][npm-version-svg]][package-url]</sup>
 
-[![Build Status][travis-svg]][travis-url]
-[![dependency status][deps-svg]][deps-url]
-[![dev dependency status][dev-deps-svg]][dev-deps-url]
+[![github actions][actions-image]][actions-url]
+[![coverage][codecov-image]][codecov-url]
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
 
@@ -97,16 +96,18 @@ Since `PropTypes` are typically not included in production builds of React, this
 ## Tests
 Clone the repo, `npm install`, `npm run react`, and run `npm test`
 
-[package-url]: https://npmjs.org/package/airbnb-prop-types
-[npm-version-svg]: http://versionbadg.es/airbnb/prop-types.svg
-[travis-svg]: https://travis-ci.org/airbnb/prop-types.svg
-[travis-url]: https://travis-ci.org/airbnb/prop-types
-[deps-svg]: https://david-dm.org/airbnb/prop-types.svg
-[deps-url]: https://david-dm.org/airbnb/prop-types
-[dev-deps-svg]: https://david-dm.org/airbnb/prop-types/dev-status.svg
-[dev-deps-url]: https://david-dm.org/airbnb/prop-types#info=devDependencies
-[npm-badge-png]: https://nodei.co/npm/airbnb-prop-types.png?downloads=true&stars=true
-[license-image]: http://img.shields.io/npm/l/airbnb-prop-types.svg
+[package-url]: https://npmjs.org/package/prop-types-tools
+[npm-version-svg]: http://versionbadg.es/ljharb/prop-types-tools.svg
+[deps-svg]: https://david-dm.org/ljharb/prop-types-tools.svg
+[deps-url]: https://david-dm.org/ljharb/prop-types-tools
+[dev-deps-svg]: https://david-dm.org/ljharb/prop-types-tools/dev-status.svg
+[dev-deps-url]: https://david-dm.org/ljharb/prop-types-tools#info=devDependencies
+[npm-badge-png]: https://nodei.co/npm/prop-types-tools.png?downloads=true&stars=true
+[license-image]: http://img.shields.io/npm/l/prop-types-tools.svg
 [license-url]: LICENSE
-[downloads-image]: http://img.shields.io/npm/dm/airbnb-prop-types.svg
-[downloads-url]: http://npm-stat.com/charts.html?package=airbnb-prop-types
+[downloads-image]: http://img.shields.io/npm/dm/prop-types-tools.svg
+[downloads-url]: http://npm-stat.com/charts.html?package=prop-types-tools
+[codecov-image]: https://codecov.io/gh/ljharb/prop-types-tools/branch/main/graphs/badge.svg
+[codecov-url]: https://app.codecov.io/gh/ljharb/prop-types-tools/
+[actions-image]: https://img.shields.io/endpoint?url=https://github-actions-badge-u3jn4tfpocch.runkit.sh/ljharb/prop-types-tools
+[actions-url]: https://github.com/ljharb/prop-types-tools

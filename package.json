@@ -1,7 +1,7 @@
 {
-  "name": "airbnb-prop-types",
+  "name": "prop-types-tools",
   "version": "2.16.0",
-  "description": "Custom React PropType validators that we use at Airbnb.",
+  "description": "Custom React PropType validators",
   "main": "index.js",
   "dependencies": {
     "array.prototype.find": "^2.2.3",
@@ -73,7 +73,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/airbnb/prop-types.git"
+    "url": "git+https://github.com/ljharb/prop-types-tools.git"
   },
   "keywords": [
     "react",
@@ -90,16 +90,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/airbnb/prop-types/issues"
+    "url": "https://github.com/ljharb/prop-types-tools/issues"
   },
-  "homepage": "https://github.com/airbnb/prop-types#readme",
-  "greenkeeper": {
-    "//": "nyc and mocha are ignored because they requires node 4+, and we support older than that",
-    "ignore": [
-      "nyc",
-      "mocha"
-    ]
-  },
+  "homepage": "https://github.com/ljharb/prop-types-tools#readme",
   "engines": {
     "node": ">= 0.10"
   }
