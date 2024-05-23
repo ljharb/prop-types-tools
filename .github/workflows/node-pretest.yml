@@ -1,0 +1,12 @@
+name: 'Tests: pretest/posttest'
+
+on: [pull_request, push]
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    uses: ljharb/actions/.github/workflows/pretest.yml@main
+    with:
+      skip-pack: true # the tests are built, but not in the package tarball, so it fails
