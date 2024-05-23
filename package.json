@@ -1,6 +1,6 @@
 {
   "name": "prop-types-tools",
-  "version": "2.16.0",
+  "version": "2.17.0",
   "description": "Custom React PropType validators",
   "main": "index.js",
   "dependencies": {

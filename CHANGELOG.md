@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.17.0](https://github.com/airbnb/prop-types/compare/v2.16.0...v2.17.0) - 2024-05-23
+
+### Fixed
+
+- [New] `childrenOf`/`childrenOfType`/`childrenSequenceOf`: support fragments via `renderableChildren` helper [`#71`](https://github.com/airbnb/prop-types/issues/71)
+
+### Commits
+
+- [Dev Deps] update all the things [`5032f7f`](https://github.com/airbnb/prop-types/commit/5032f7f80ff3497a3763e50e5c5b20e2e3c6d0e0)
+- [Tests] migrate to GHA [`c92c5c4`](https://github.com/airbnb/prop-types/commit/c92c5c4d8c6814e1872eb437083401f4417a3067)
+- [meta] rename package and URLs [`8586801`](https://github.com/airbnb/prop-types/commit/8586801c3c3ec8bf729b22c06f1711c7beff29c8)
+- [meta] use `npmignore` [`0a366a6`](https://github.com/airbnb/prop-types/commit/0a366a661a716e77da2fbb15e699e82746001d80)
+- [actions] add "Automatic Rebase" and "require allow edits" actions [`6539947`](https://github.com/airbnb/prop-types/commit/65399472f19c025891e4e9ceac7acd00d7a651d8)
+- [meta] use `auto-changelog` [`1255cd7`](https://github.com/airbnb/prop-types/commit/1255cd7b0b11a059745a736ba205abeb47d63cea)
+- [Deps] update `array.prototype.find`, `array.prototype.flatmap`, `function.prototype.name`, `is-regex`, `object-is`, `object.assign`, `object.entries`, `prop-types`, `prop-types-exact` [`7ed89ae`](https://github.com/airbnb/prop-types/commit/7ed89ae3ab3b60878021173d58afe7d438025c35)
+- [Dev Deps] update `@babel/cli`, `@babel/core`, `@babel/register`, `eslint`, `eslint-plugin-import`, `eslint-plugin-jsx-a11y`, `eslint-plugin-react` [`af140ff`](https://github.com/airbnb/prop-types/commit/af140fffdf2b68dd868e2b2ce38d013306c58332)
+- [Dev Deps] update `@babel/cli`, `@babel/core`, `@babel/register`, `enzyme-adapter-react-helper`, `eslint`, `eslint-plugin-react` [`e560291`](https://github.com/airbnb/prop-types/commit/e5602918450d85f0d566ba140defda6cd1649c4d)
+- [Deps] update `object-is`, `object.assign`, `react-is` [`4f12896`](https://github.com/airbnb/prop-types/commit/4f12896d4fa38f7ce2d3c80a9d75d548ac9032e0)
+- [meta] add missing `engines.node` [`9c6f8e6`](https://github.com/airbnb/prop-types/commit/9c6f8e6c34a03e7ef6ead6e1dae4f9783704ba51)
+- [Tests] use `aud` in posttest [`e9fb91a`](https://github.com/airbnb/prop-types/commit/e9fb91a7196233e368d332c71795280cd14b9145)
+- Remove "that we use at Airbnb" from readme [`2b14af0`](https://github.com/airbnb/prop-types/commit/2b14af05ead47a3accb78124b503745f71573e43)
+- [Deps] update `is-regex` [`5c7bd2b`](https://github.com/airbnb/prop-types/commit/5c7bd2b03b66b486b8a9e41a94ae41accbc905b8)
+- [Tests] ignore node deprecation warnings [`42d5f4d`](https://github.com/airbnb/prop-types/commit/42d5f4d3b8858f630b55abc6eb2502decfc37931)
+
 <!-- auto-changelog-above -->
 
 2.16.0 / 2020-06-30
