@@ -119,22 +119,27 @@ describe('childrenSequenceOf', () => {
     assertPasses(validator, (<div>{Infinity}</div>), 'children');
     assertPasses(validator.isRequired, (<div>{Infinity}</div>), 'children');
 
-    assertFails(validator, (
-      <div>
-        {1}
-        {2}
-        {null}
-        <span />
-        {() => {}}
-      </div>
-    ), 'children');
+    assertFails(
+      validator, (
+        <div>
+          {1}
+          {2}
+          {null}
+          <span />
+          {() => {}}
+        </div>
+      ),
+      'children',
+    );
     assertFails(validator, (<div>1</div>), 'children');
     assertFails(
       validator,
-      <div>
-        1
-        {2}
-      </div>,
+      (
+        <div>
+          1
+          {2}
+        </div>
+      ),
       'children',
     );
   });
@@ -152,38 +157,46 @@ describe('childrenSequenceOf', () => {
     assertFails(twoPlus, (<div>{1}</div>), 'children');
     assertPasses(
       twoPlus,
-      <div>
-        {1}
-        {2}
-      </div>,
+      (
+        <div>
+          {1}
+          {2}
+        </div>
+      ),
       'children',
     );
     assertPasses(
       twoPlus,
-      <div>
-        {1}
-        {2}
-        {3}
-      </div>,
+      (
+        <div>
+          {1}
+          {2}
+          {3}
+        </div>
+      ),
       'children',
     );
 
     assertFails(twoPlus, (<div>1</div>), 'children');
     assertFails(
       twoPlus,
-      <div>
-        1
-        {2}
-      </div>,
+      (
+        <div>
+          1
+          {2}
+        </div>
+      ),
       'children',
     );
     assertFails(
       twoPlus,
-      <div>
-        {1}
-        2
-        {3}
-      </div>,
+      (
+        <div>
+          {1}
+          2
+          {3}
+        </div>
+      ),
       'children',
     );
   });
@@ -200,38 +213,46 @@ describe('childrenSequenceOf', () => {
     assertPasses(twoOrLess, (<div>{1}</div>), 'children');
     assertPasses(
       twoOrLess,
-      <div>
-        {1}
-        {2}
-      </div>,
+      (
+        <div>
+          {1}
+          {2}
+        </div>
+      ),
       'children',
     );
 
     assertFails(
       twoOrLess,
-      <div>
-        {1}
-        {2}
-        {3}
-      </div>,
+      (
+        <div>
+          {1}
+          {2}
+          {3}
+        </div>
+      ),
       'children',
     );
     assertFails(twoOrLess, (<div>1</div>), 'children');
     assertFails(
       twoOrLess,
-      <div>
-        1
-        {2}
-      </div>,
+      (
+        <div>
+          1
+          {2}
+        </div>
+      ),
       'children',
     );
     assertFails(
       twoOrLess,
-      <div>
-        {1}
-        2
-        {3}
-      </div>,
+      (
+        <div>
+          {1}
+          2
+          {3}
+        </div>
+      ),
       'children',
     );
   });
@@ -243,29 +264,35 @@ describe('childrenSequenceOf', () => {
     assertFails(twoOrThree, (<div>{1}</div>), 'children');
     assertPasses(
       twoOrThree,
-      <div>
-        {1}
-        {2}
-      </div>,
+      (
+        <div>
+          {1}
+          {2}
+        </div>
+      ),
       'children',
     );
     assertPasses(
       twoOrThree,
-      <div>
-        {1}
-        {2}
-        {3}
-      </div>,
+      (
+        <div>
+          {1}
+          {2}
+          {3}
+        </div>
+      ),
       'children',
     );
     assertFails(
       twoOrThree,
-      <div>
-        {1}
-        {2}
-        {3}
-        {4}
-      </div>,
+      (
+        <div>
+          {1}
+          {2}
+          {3}
+          {4}
+        </div>
+      ),
       'children',
     );
 
@@ -273,19 +300,23 @@ describe('childrenSequenceOf', () => {
     assertPasses(oneOrTwo, (<div>{1}</div>), 'children');
     assertPasses(
       oneOrTwo,
-      <div>
-        {1}
-        {2}
-      </div>,
+      (
+        <div>
+          {1}
+          {2}
+        </div>
+      ),
       'children',
     );
     assertFails(
       oneOrTwo,
-      <div>
-        {1}
-        {2}
-        {3}
-      </div>,
+      (
+        <div>
+          {1}
+          {2}
+          {3}
+        </div>
+      ),
       'children',
     );
   });
@@ -298,10 +329,12 @@ describe('childrenSequenceOf', () => {
 
     assertPasses(
       validator,
-      <div>
-        a
-        {1}
-      </div>,
+      (
+        <div>
+          a
+          {1}
+        </div>
+      ),
       'children',
     );
     assertPasses(validator, (<div>{1}</div>), 'children');
@@ -309,18 +342,22 @@ describe('childrenSequenceOf', () => {
     assertFails(
       validator,
       /* eslint react/jsx-curly-brace-presence: 0 */
-      <div>
-        a
-        {'b'}
-      </div>,
+      (
+        <div>
+          a
+          {'b'}
+        </div>
+      ),
       'children',
     );
     assertFails(
       validator,
-      <div>
-        {1}
-        {2}
-      </div>,
+      (
+        <div>
+          {1}
+          {2}
+        </div>
+      ),
       'children',
     );
   });

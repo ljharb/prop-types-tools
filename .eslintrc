@@ -2,7 +2,17 @@
   "root": true,
   "extends": "airbnb",
   "rules": {
-    "function-paren-newline": 0,
-    "no-restricted-globals": 1
-  }
+    "import/no-import-module-exports": 1,
+    "no-restricted-globals": 1,
+    "react/forbid-prop-types": 0,
+  },
+  "overrides": [
+    {
+      "files": "test/**/*.jsx",
+      "rules": {
+        "react/jsx-no-useless-fragment": 0,
+        "react/no-unknown-property": 0,
+      },
+    },
+  ],
 }
