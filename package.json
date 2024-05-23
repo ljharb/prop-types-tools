@@ -8,17 +8,17 @@
     "array.prototype.flatmap": "^1.2.3",
     "function.prototype.name": "^1.1.2",
     "is-regex": "^1.1.1",
-    "object-is": "^1.1.2",
-    "object.assign": "^4.1.0",
+    "object-is": "^1.1.3",
+    "object.assign": "^4.1.1",
     "object.entries": "^1.1.2",
     "prop-types": "^15.7.2",
     "prop-types-exact": "^1.2.0",
-    "react-is": "^16.13.1"
+    "react-is": "^16.13.1 || ^17.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
-    "@babel/register": "^7.11.5",
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/register": "^7.12.1",
     "airbnb-browser-shims": "^3.3.0",
     "babel-plugin-istanbul": "^5.2.0",
     "babel-plugin-transform-replace-object-assign": "^2.0.0",
@@ -26,23 +26,23 @@
     "chai": "^4.2.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-helper": "^1.3.9",
-    "eslint": "^7.8.1",
+    "eslint": "^7.12.0",
     "eslint-config-airbnb": "^18.2.0",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
     "mocha": "^3.5.3",
     "mock-env": "^0.2.0",
     "nyc": "^10.3.2",
     "object-inspect": "^1.8.0",
     "object.values": "^1.1.1",
-    "react": "^0.14 || ^15.0.0 || ^16.0.0-alpha",
+    "react": "^0.14 || ^15.0.0 || ^16.0.0-alpha || ^17",
     "reflect.ownkeys": "^1.0.1",
     "rimraf": "^2.7.1",
     "safe-publish-latest": "^1.1.4"
   },
   "peerDependencies": {
-    "react": "^0.14 || ^15.0.0 || ^16.0.0-alpha"
+    "react": "^0.14 || ^15.0.0 || ^16.0.0-alpha || ^17"
   },
   "scripts": {
     "pretest": "npm run lint",
