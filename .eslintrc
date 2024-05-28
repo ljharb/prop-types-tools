@@ -1,14 +1,36 @@
 {
   "root": true,
-  "extends": "airbnb",
+
+  "extends": "@ljharb",
+
   "rules": {
+    "eqeqeq": [2, "allow-null"],
+    "func-name-matching": "off",
+    "func-style": "warn",
+    "id-length": 0,
     "import/no-import-module-exports": 1,
+    "max-lines-per-function": 1,
+    "max-params": 0,
+    "no-invalid-this": 0,
     "no-restricted-globals": 1,
     "react/forbid-prop-types": 0,
+    "sort-keys": 0,
+    "spaced-comment": 0,
   },
+
+  "ignorePatterns": [
+    "build-test",
+  ],
+
   "overrides": [
     {
-      "files": "test/**/*.jsx",
+      "files": [
+        "test/**/*.js{,x}",
+      ],
+      "extends": "airbnb",
+      "parserOptions": {
+        "allowReserved": false,
+      },
       "rules": {
         "react/jsx-no-useless-fragment": 0,
         "react/no-unknown-property": 0,

@@ -29,7 +29,6 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: |
-            build/
             build-test/
           key: build-output-${{ github.workflow }}-${{ github.action }}-${{ github.run_id }}
 
@@ -60,15 +59,12 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: |
-            build/
             build-test/
           key: build-output-${{ github.workflow }}-${{ github.action }}-${{ github.run_id }}
       - run: npm run react
         name: 'install react ${{ matrix.react }}'
         env:
           REACT: ${{ matrix.react }}
-      - run: npm run cover:clean
-      - run: npm run cover:run
       - uses: codecov/codecov-action@v3.1.5
 
   node:

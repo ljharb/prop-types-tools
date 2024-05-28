@@ -4,7 +4,6 @@
   "sourceMap": false,
   "reporter": "html",
   "exclude": [
-    "build",
     "build-test",
     "test"
   ]
