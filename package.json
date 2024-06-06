@@ -19,7 +19,6 @@
   "devDependencies": {
     "@babel/cli": "^7.24.6",
     "@babel/core": "^7.24.6",
-    "@babel/register": "^7.24.6",
     "@ljharb/eslint-config": "^21.1.1",
     "airbnb-browser-shims": "^3.3.0",
     "aud": "^2.0.4",
