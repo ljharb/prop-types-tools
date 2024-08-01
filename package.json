@@ -13,7 +13,7 @@
     "object.assign": "^4.1.5",
     "object.entries": "^1.1.8",
     "prop-types": "^15.8.1",
-    "prop-types-exact": "^1.2.4",
+    "prop-types-exact": "^1.2.5",
     "react-is": "^16.13.1 || ^17.0.1"
   },
   "devDependencies": {
